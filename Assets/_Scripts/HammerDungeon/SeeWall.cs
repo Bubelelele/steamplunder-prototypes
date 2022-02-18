@@ -1,0 +1,15 @@
+using UnityEngine;
+
+public class SeeWall : MonoBehaviour
+{
+    public GameObject player;
+    public GameObject transparentWall;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == GameManager.instance.player.gameObject)
+        {
+            transparentWall.GetComponent<MeshRenderer>().enabled = true;
+        }
+    }
+}

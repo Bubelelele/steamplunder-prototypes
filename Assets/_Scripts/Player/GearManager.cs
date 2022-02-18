@@ -9,7 +9,7 @@ public class GearManager : MonoBehaviour {
     private GrappleController _grappleController;
 
     public bool ActionOngoing { get; private set; }
-    
+    public bool no;
     private void Start() {
         _axeController = GetComponent<AxeController>();
         _axeController.onAttackFinished += ActionFinished;
@@ -54,7 +54,7 @@ public class GearManager : MonoBehaviour {
     }
 
     private void InvokeHammerAction() {
-        if (ActionOngoing || !_hammerController.CanAttack) return;
+        if (ActionOngoing || !_hammerController.CanAttack || !no) return;
         ActionOngoing = true;
         _axeController.SetObjectActive(false);
         _hammerController.Smash();
