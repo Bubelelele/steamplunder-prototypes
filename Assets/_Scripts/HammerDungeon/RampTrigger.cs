@@ -7,7 +7,6 @@ public class RampTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "MovingBox")
         {
-            Debug.Log("Yes");
             other.transform.position = transform.position;
             other.transform.parent = transform;
 
