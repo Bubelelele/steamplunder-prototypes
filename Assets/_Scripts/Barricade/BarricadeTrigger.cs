@@ -15,30 +15,32 @@ public class BarricadeTrigger : MonoBehaviour
     {
         if (other.gameObject == GameManager.instance.player.gameObject)
         {
-            if (Input.GetKey(KeyCode.Mouse0) && localCanAttack)
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                localCanAttack = false;
-
-                if (hitCounter == 0)
-                {
-                    splinter.transform.position = barricade[0].transform.position;
-                    splinter.Play();
-                    Destroy(barricade[0]);
-                    hitCounter++;
-                }
-                else if (hitCounter == 1)
-                {
-                    splinter.transform.position = barricade[1].transform.position;
-                    splinter.Play();
-                    Destroy(barricade[1]);
-                    hitCounter++;
-                }
-                else if (hitCounter == 2)
+                
+                if (hitCounter == 2 && localCanAttack)
                 {
                     splinter.transform.position = barricade[2].transform.position;
                     splinter.Play();
                     Destroy(barricade[2]);
                     Invoke("HideObject", 0.5f);
+                    localCanAttack = false;
+                }
+                else if (hitCounter == 1 && localCanAttack)
+                {
+                    splinter.transform.position = barricade[1].transform.position;
+                    splinter.Play();
+                    Destroy(barricade[1]);
+                    hitCounter++;
+                    localCanAttack = false;
+                }
+                else if (hitCounter == 0 && localCanAttack)
+                {
+                    splinter.transform.position = barricade[0].transform.position;
+                    splinter.Play();
+                    Destroy(barricade[0]);
+                    hitCounter++;
+                    localCanAttack = false;
                 }
             }
         }
