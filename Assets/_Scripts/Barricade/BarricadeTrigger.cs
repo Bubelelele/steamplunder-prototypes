@@ -8,27 +8,17 @@ public class BarricadeTrigger : MonoBehaviour
     public ParticleSystem splinter;
 
     private int hitCounter = 0;
-    private bool hasEntered = false;
-    private void OnTriggerEnter(Collider other)
+    private bool localCanAttack = false;
+
+
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject == GameManager.instance.player.gameObject)
         {
-            hasEntered = true;                        
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject == GameManager.instance.player.gameObject)
-        {
-            hasEntered = false;
-        }
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && GameManager.instance.player.gameObject.GetComponent<AxeController>().CanAttack && hasEntered)
-        {
+            if (Input.GetKey(KeyCode.Mouse0) && localCanAttack)
             {
-                
+                localCanAttack = false;
+
                 if (hitCounter == 0)
                 {
                     splinter.transform.position = barricade[0].transform.position;
@@ -51,6 +41,13 @@ public class BarricadeTrigger : MonoBehaviour
                     Invoke("HideObject", 0.5f);
                 }
             }
+        }
+    }
+    private void Update()
+    {
+        if (GameManager.instance.player.gameObject.GetComponent<AxeController>().CanAttack)
+        {
+            localCanAttack = true;
         }
     }
     private void HideObject()
