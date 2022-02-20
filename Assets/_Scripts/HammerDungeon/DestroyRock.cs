@@ -9,7 +9,7 @@ public class DestroyRock : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         
-        if (other.gameObject == GameManager.instance.player.gameObject && Input.GetKey(KeyCode.F))
+        if (other.gameObject == GameManager.instance.player.gameObject && Input.GetKey(KeyCode.F) && GameManager.instance.player.GetComponent<GearManager>().no)
         {
             Invoke("HideRock", 0.3f);
             Invoke("TurnOffRock", 0.7f);
