@@ -15,32 +15,29 @@ public class BarricadeTrigger : MonoBehaviour
     {
         if (other.gameObject == GameManager.instance.player.gameObject)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0) && localCanAttack)
             {
-                
-                if (hitCounter == 2 && localCanAttack)
+                localCanAttack = false;
+                if (hitCounter == 2)
                 {
                     splinter.transform.position = barricade[2].transform.position;
                     splinter.Play();
                     Destroy(barricade[2]);
                     Invoke("HideObject", 0.5f);
-                    localCanAttack = false;
                 }
-                else if (hitCounter == 1 && localCanAttack)
+                else if (hitCounter == 1)
                 {
                     splinter.transform.position = barricade[1].transform.position;
                     splinter.Play();
                     Destroy(barricade[1]);
                     hitCounter++;
-                    localCanAttack = false;
                 }
-                else if (hitCounter == 0 && localCanAttack)
+                else if (hitCounter == 0)
                 {
                     splinter.transform.position = barricade[0].transform.position;
                     splinter.Play();
                     Destroy(barricade[0]);
                     hitCounter++;
-                    localCanAttack = false;
                 }
             }
         }
@@ -51,9 +48,12 @@ public class BarricadeTrigger : MonoBehaviour
         {
             localCanAttack = true;
         }
+
     }
     private void HideObject()
     {
         wholePrefab.gameObject.SetActive(false);
     }
+    
+
 }
