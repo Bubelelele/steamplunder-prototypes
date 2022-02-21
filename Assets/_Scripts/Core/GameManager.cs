@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     
     public GameState state;
     public static event Action<GameState> OnGameStateChanged;
-    public Transform player;
+    [HideInInspector] public Transform player;
     
     private void Start() {
         UpdateGameState(GameState.Default);

@@ -2,10 +2,13 @@ using System.Collections;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour, IDamageable {
-    
+
+    [Header("Health")]
     [SerializeField] private int maxHealth = 50;
     [SerializeField] private Healthbar healthbar;
-    
+
+    public int Cogs { get; private set; }
+
     private int _health;
 
     private void Start() {
@@ -17,6 +20,11 @@ public class PlayerStats : MonoBehaviour, IDamageable {
         if (_health <= 0) Die();
         
         healthbar.UpdateHealthbar(_health, maxHealth);
+    }
+
+    public void AddCogs(int amount) {
+        Cogs += amount;
+        UIManager.instance.cogCounter?.UpdateCogUI(Cogs);
     }
 
     private void Die() {
