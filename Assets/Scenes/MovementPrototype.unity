@@ -11108,7 +11108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1315489890
 Transform:
   m_ObjectHideFlags: 0
@@ -13003,6 +13003,93 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee82e0cdb1a4545f191db93ad009f94b, type: 3}
+--- !u!1001 &1679403221
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2101854913}
+    m_Modifications:
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800602, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: m_Name
+      value: MeleeBandit (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647494762843800605, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2090548740}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+--- !u!4 &1679403222 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1647494762843800592, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+  m_PrefabInstance: {fileID: 1679403221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1679403223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1647494762843800602, guid: 297cfb5395ff0e24191f8eb9995cd1de, type: 3}
+  m_PrefabInstance: {fileID: 1679403221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1679403224
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679403223}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1001 &1686486928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17507,6 +17594,7 @@ Transform:
   - {fileID: 1075124473}
   - {fileID: 700532160}
   - {fileID: 280946560}
+  - {fileID: 1679403222}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
