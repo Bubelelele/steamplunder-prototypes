@@ -283,8 +283,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.5, y: 0}
-  m_SizeDelta: {x: -5, y: 0}
+  m_AnchoredPosition: {x: 2.5, y: -2.5}
+  m_SizeDelta: {x: -5, y: -5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &22944288
 MonoBehaviour:
@@ -306,9 +306,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '-Try every ability
-
-    -Use them on enemies
+  m_text: '-Killing an enemy drops a cog pickup
 
 
     Press K to reload scene'
@@ -2418,7 +2416,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459131345}
-  m_LocalRotation: {x: 0.4520157, y: -7.6731534e-16, z: -5.472295e-16, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: 0.000000026583972, z: -0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -19.75, y: 19.5, z: -23.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7921,7 +7919,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.4520157, y: -7.6731534e-16, z: -5.472295e-16, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: 0.000000026583972, z: -0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -19.75, y: 19.5, z: -23.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -14480,7 +14478,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 165.888, y: -119.885}
-  m_SizeDelta: {x: 331.777, y: 358.668}
+  m_SizeDelta: {x: 331.777, y: 161.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1814985639
 MonoBehaviour:
