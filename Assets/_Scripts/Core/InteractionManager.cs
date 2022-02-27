@@ -7,12 +7,17 @@ public class InteractionManager : MonoBehaviour {
     private void Awake() => instance = this;
 
     [SerializeField] private GameObject interactionUI;
+
+    public bool CanInteract { get; private set; } = true;
     
     private IInteractable _currentInteraction;
     
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.instance.state == GameState.Interaction) 
+        if (Input.GetKeyDown(InputManager.instance.InteractBtn) && GameManager.instance.state == GameState.Interaction) {
             _currentInteraction?.StopInteract();
+            CanInteract = false;
+            StartCoroutine(CanInteractDelay());
+        }
     }
     
     public void InteractionStarted() {
@@ -26,5 +31,10 @@ public class InteractionManager : MonoBehaviour {
     }
 
     public void SetCurrentInteraction(IInteractable interactable) => _currentInteraction = interactable;
+
+    private IEnumerator CanInteractDelay() {
+        yield return new WaitForSeconds(.5f);
+        CanInteract = true;
+    }
 
 }

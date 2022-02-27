@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour {
             case GameState.NoMove:
                 HandleNoMove();
                 break;
+            case GameState.Paused:
+                HandlePaused();
+                break;
             default:
                 Debug.LogWarning("No state of type " + newState);
                 break;
@@ -55,6 +58,11 @@ public class GameManager : MonoBehaviour {
         Debug.Log("NoMove State");
         Time.timeScale = 1f;
     }
+
+    private void HandlePaused() {
+        Debug.Log("Paused State");
+        Time.timeScale = 0f;
+    }
     
     public void LoadScene(int buildIndex) {
         Time.timeScale = 1f;
@@ -74,5 +82,6 @@ public class GameManager : MonoBehaviour {
 public enum GameState {
     Default,
     Interaction,
-    NoMove
+    NoMove,
+    Paused
 }

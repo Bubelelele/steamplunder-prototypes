@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour {
     // - Misc
     public KeyCode InteractBtn => KeyCode.E;
     public KeyCode ReloadBtn => KeyCode.K;
+    public KeyCode PauseBtn => KeyCode.Escape;
     // -----
     
     public Vector2 InputDir { get; private set; }
