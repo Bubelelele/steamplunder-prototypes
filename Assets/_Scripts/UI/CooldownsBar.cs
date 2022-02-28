@@ -50,5 +50,11 @@ public class CooldownsBar : MonoBehaviour {
         _steamerDelta = 1 / time;
         steamerCooldownUI.fillAmount = 1f;
     }
+
+    public void ToggleAxeUI(bool active) => axeCooldownUI.transform.parent.gameObject.SetActive(active);
+    public void ToggleHammerUI(bool active) => hammerCooldownUI.transform.parent.gameObject.SetActive(active);
+    public void ToggleGunUI(bool active) => gunCooldownUI.transform.parent.gameObject.SetActive(active);
+    public void ToggleSteamerUI(bool active) => steamerCooldownUI.transform.parent.gameObject.SetActive(active);
+    public void ToggleGrappleUI(bool active) => grappleCooldownUI.transform.parent.gameObject.SetActive(active);
     
 }
