@@ -5,6 +5,7 @@ public class SteamTrigger : MonoBehaviour
     public ParticleSystem heatParticle;
     public ParticleSystem steamParticle;
     public Animator DoorAnim;
+    public AudioSource doorAudioSource;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "MovingBox")
@@ -14,6 +15,7 @@ public class SteamTrigger : MonoBehaviour
             heatParticle.Stop();
             steamParticle.Stop();
             DoorAnim.SetBool("OpenDoor", true);
+            doorAudioSource.Play();
         }
     }
 }

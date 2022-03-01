@@ -9,12 +9,13 @@ public class WoodenBox : MonoBehaviour, IInteractable
     public Transform left;
     public Transform right;
     public Transform targetTransform;
+    public AudioSource woodBoxAudioSource;
 
-/*    [HideInInspector]*/ public int moveDirection = 0;
-/*    [HideInInspector]*/ public bool topEdge = false;
-/*    [HideInInspector]*/ public bool bottomEdge = false;
-/*    [HideInInspector]*/ public bool leftEdge = false;
-    /*[HideInInspector]*/ public bool rightEdge = false;
+    [HideInInspector] public int moveDirection = 0;
+    [HideInInspector] public bool topEdge = false;
+    [HideInInspector] public bool bottomEdge = false;
+    [HideInInspector] public bool leftEdge = false;
+    [HideInInspector] public bool rightEdge = false;
 
 
     //The movement
@@ -33,18 +34,22 @@ public class WoodenBox : MonoBehaviour, IInteractable
             if (moveDirection == 1 && !topEdge)
             {
                 MoveUp();
+                woodBoxAudioSource.Play();
             }
             else if (moveDirection == 2 && !bottomEdge)
             {
                 MoveDown();
+                woodBoxAudioSource.Play();
             }
             else if (moveDirection == 3 && !leftEdge)
             {
                 MoveLeft();
+                woodBoxAudioSource.Play();   
             }
             else if (moveDirection == 4 && !rightEdge)
             {
                 MoveRight();
+                woodBoxAudioSource.Play();
             }
 
     }

@@ -6,6 +6,8 @@ public class BarricadeTrigger : MonoBehaviour
     public GameObject invisibleBarricade;
     public GameObject wholePrefab;
     public ParticleSystem splinter;
+    public AudioSource barricadeAudioSource;
+    public AudioClip destroyAudioClip;
 
     private int hitCounter = 0;
     private bool localCanAttack = false;
@@ -22,13 +24,17 @@ public class BarricadeTrigger : MonoBehaviour
                 {
                     splinter.transform.position = barricade[2].transform.position;
                     splinter.Play();
+                    barricadeAudioSource.clip = destroyAudioClip;
+                    barricadeAudioSource.Play();
                     Destroy(barricade[2]);
                     Invoke("HideObject", 0.5f);
+                    hitCounter++;
                 }
                 else if (hitCounter == 1)
                 {
                     splinter.transform.position = barricade[1].transform.position;
                     splinter.Play();
+                    barricadeAudioSource.Play();
                     Destroy(barricade[1]);
                     hitCounter++;
                 }
@@ -36,6 +42,7 @@ public class BarricadeTrigger : MonoBehaviour
                 {
                     splinter.transform.position = barricade[0].transform.position;
                     splinter.Play();
+                    barricadeAudioSource.Play();
                     Destroy(barricade[0]);
                     hitCounter++;
                 }
