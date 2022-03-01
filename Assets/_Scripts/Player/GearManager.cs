@@ -1,13 +1,19 @@
 using UnityEngine;
 
 public class GearManager : MonoBehaviour {
+
+    [SerializeField] private bool axeActiveOnStart = true;
+    [SerializeField] private bool hammerActiveOnStart = true;
+    [SerializeField] private bool gunActiveOnStart = true;
+    [SerializeField] private bool steamerActiveOnStart = true;
+    [SerializeField] private bool grappleActiveOnStart = true;
     
     public bool ActionOngoing { get; private set; }
-    public bool AxeActive { get; private set; } = true;
-    public bool HammerActive { get; private set; } = true;
-    public bool GunActive { get; private set; } = true;
-    public bool SteamerActive { get; private set; } = true;
-    public bool GrappleActive { get; private set; } = true;
+    public bool AxeActive { get; private set; }
+    public bool HammerActive { get; private set; }
+    public bool GunActive { get; private set; }
+    public bool SteamerActive { get; private set; }
+    public bool GrappleActive { get; private set; }
 
     private AxeController _axeController;
     private HammerController _hammerController;
@@ -16,6 +22,7 @@ public class GearManager : MonoBehaviour {
     private GrappleController _grappleController;
 
     private void Start() {
+        //Set up events and cache components
         _axeController = GetComponent<AxeController>();
         _axeController.onAttackFinished += ActionFinished;
         
@@ -30,6 +37,13 @@ public class GearManager : MonoBehaviour {
         
         _grappleController = GetComponent<GrappleController>();
         _grappleController.onAttackFinished += ActionFinished;
+        
+        //Toggle active on startup
+        ToggleAxe(axeActiveOnStart);
+        ToggleHammer(hammerActiveOnStart);
+        ToggleGun(gunActiveOnStart);
+        ToggleSteamer(steamerActiveOnStart);
+        ToggleGrapple(grappleActiveOnStart);
     }
 
     private void Update() {
