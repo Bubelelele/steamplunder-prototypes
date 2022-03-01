@@ -25,7 +25,7 @@ public class MetalBox : MonoBehaviour
     //The movement
     private void Update()
     {
-        if (GameManager.instance.player.gameObject.GetComponent<HammerController>().CanAttack && GameManager.instance.player.GetComponent<GearManager>().no)
+        if (GameManager.instance.player.gameObject.GetComponent<HammerController>().CanAttack && GameManager.instance.player.GetComponent<GearManager>().HammerActive)
         {
             attackStarted = false;
         }
@@ -33,7 +33,7 @@ public class MetalBox : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, Time.deltaTime * timeToMove);
 
-        if (!attackStarted && Input.GetKeyDown(KeyCode.F) && canSlide && GameManager.instance.player.GetComponent<GearManager>().no)
+        if (!attackStarted && Input.GetKeyDown(KeyCode.F) && canSlide && GameManager.instance.player.GetComponent<GearManager>().HammerActive)
         {
             attackStarted = true;
 

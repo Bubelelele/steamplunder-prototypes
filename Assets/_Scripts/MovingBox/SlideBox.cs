@@ -91,7 +91,7 @@ public class SlideBox : MonoBehaviour
 
 
         //Checks if you are trying to move the box
-        if (canSlide && Input.GetKeyDown(KeyCode.F) && !attackStarted && GameManager.instance.player.GetComponent<GearManager>().no)
+        if (canSlide && Input.GetKeyDown(KeyCode.F) && !attackStarted && GameManager.instance.player.GetComponent<GearManager>().HammerActive)
         {
             attackStarted = true;
             if (!gameObject.GetComponent<WoodenBox>().topEdge && gameObject.GetComponent<WoodenBox>().moveDirection == 1)

@@ -5,5 +5,6 @@ public class UIManager : MonoBehaviour {
     private void Awake() => instance = this;
 
     public CooldownsBar cooldownsBar;
-    
+    public CogCounter cogCounter;
+
 }

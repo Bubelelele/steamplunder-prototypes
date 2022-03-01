@@ -23,7 +23,9 @@ public class EnemyStats : MonoBehaviour, IDamageable {
     }
 
     private void Die() {
-        EffectManager.instance.DeathEffect(transform.position);
+        var position = transform.position;
+        EffectManager.instance.DeathEffect(position);
         Destroy(gameObject);
+        EffectManager.instance.CogPickup(position);
     }
 }

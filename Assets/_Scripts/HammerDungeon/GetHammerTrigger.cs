@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GetHammerTrigger : MonoBehaviour
 {
-    public GameObject pos;
     public GameObject hammer;
     public ParticleSystem fog;
     public ParticleSystem explotion;
@@ -12,8 +11,7 @@ public class GetHammerTrigger : MonoBehaviour
     {
         if (other.gameObject == GameManager.instance.player.gameObject)
         {
-            GameManager.instance.player.GetComponent<GearManager>().no = true;
-            pos.SetActive(false);
+            GameManager.instance.player.GetComponent<GearManager>().ToggleHammer(true);
             hammer.SetActive(false);
             fog.Stop();
             explotion.Play();

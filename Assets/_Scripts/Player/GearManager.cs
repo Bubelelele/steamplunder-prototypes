@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class GearManager : MonoBehaviour {
 
+    [SerializeField] private bool axeActiveOnStart = true;
+    [SerializeField] private bool hammerActiveOnStart = true;
+    [SerializeField] private bool gunActiveOnStart = true;
+    [SerializeField] private bool steamerActiveOnStart = true;
+    [SerializeField] private bool grappleActiveOnStart = true;
+    
+    public bool ActionOngoing { get; private set; }
+    public bool AxeActive { get; private set; }
+    public bool HammerActive { get; private set; }
+    public bool GunActive { get; private set; }
+    public bool SteamerActive { get; private set; }
+    public bool GrappleActive { get; private set; }
+
     private AxeController _axeController;
     private HammerController _hammerController;
     private GunController _gunController;
     private SteamerController _steamerController;
     private GrappleController _grappleController;
 
-    public bool ActionOngoing { get; private set; }
-    public bool no;
     private void Start() {
+        //Set up events and cache components
         _axeController = GetComponent<AxeController>();
         _axeController.onAttackFinished += ActionFinished;
         
@@ -25,14 +37,29 @@ public class GearManager : MonoBehaviour {
         
         _grappleController = GetComponent<GrappleController>();
         _grappleController.onAttackFinished += ActionFinished;
+        
+        //Toggle active on startup
+        ToggleAxe(axeActiveOnStart);
+        ToggleHammer(hammerActiveOnStart);
+        ToggleGun(gunActiveOnStart);
+        ToggleSteamer(steamerActiveOnStart);
+        ToggleGrapple(grappleActiveOnStart);
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn)) InvokeAxeAction();
-        else if (Input.GetMouseButtonDown(InputManager.instance.GunMouseBtn)) InvokeGunAction();
-        else if (Input.GetKeyDown(InputManager.instance.HammerBtn)) InvokeHammerAction();
-        else if (Input.GetKeyDown(InputManager.instance.SteamerBtn)) InvokeSteamerAction();
-        else if (Input.GetKeyDown(InputManager.instance.GrappleBtn)) InvokeGrappleAction();
+        if (GameManager.instance.state != GameState.Default) return;
+        
+        if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn) && AxeActive) InvokeAxeAction();
+        else if (Input.GetMouseButtonDown(InputManager.instance.GunMouseBtn) && GunActive) InvokeGunAction();
+        else if (Input.GetKeyDown(InputManager.instance.HammerBtn) && HammerActive) InvokeHammerAction();
+        else if (Input.GetKeyDown(InputManager.instance.SteamerBtn) && SteamerActive) InvokeSteamerAction();
+        else if (Input.GetKeyDown(InputManager.instance.GrappleBtn) && GrappleActive) InvokeGrappleAction();
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ToggleAxe(!AxeActive);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ToggleHammer(!HammerActive);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) ToggleGun(!GunActive);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) ToggleSteamer(!SteamerActive);
+        if (Input.GetKeyDown(KeyCode.Alpha5)) ToggleGrapple(!GrappleActive);
     }
     
 
@@ -54,7 +81,7 @@ public class GearManager : MonoBehaviour {
     }
 
     private void InvokeHammerAction() {
-        if (ActionOngoing || !_hammerController.CanAttack || !no) return;
+        if (ActionOngoing || !_hammerController.CanAttack) return;
         ActionOngoing = true;
         _axeController.SetObjectActive(false);
         _hammerController.Smash();
@@ -72,6 +99,31 @@ public class GearManager : MonoBehaviour {
         ActionOngoing = true;
         _axeController.SetObjectActive(false);
         _grappleController.Extend();
+    }
+
+    public void ToggleAxe(bool active) {
+        AxeActive = active;
+        UIManager.instance.cooldownsBar.ToggleAxeUI(active);
+    }
+    
+    public void ToggleHammer(bool active) {
+        HammerActive = active;
+        UIManager.instance.cooldownsBar.ToggleHammerUI(active);
+    }
+    
+    public void ToggleGun(bool active) {
+        GunActive = active;
+        UIManager.instance.cooldownsBar.ToggleGunUI(active);
+    }
+    
+    public void ToggleSteamer(bool active) {
+        SteamerActive = active;
+        UIManager.instance.cooldownsBar.ToggleSteamerUI(active);
+    }
+    
+    public void ToggleGrapple(bool active) {
+        GrappleActive = active;
+        UIManager.instance.cooldownsBar.ToggleGrappleUI(active);
     }
     
 }

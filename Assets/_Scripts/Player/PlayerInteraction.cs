@@ -25,7 +25,7 @@ public class PlayerInteraction : MonoBehaviour {
                 interactionText.text = interactable.GetDescription();
                 interactionIndicatorUI.transform.position = mainCam.WorldToScreenPoint(hit.collider.transform.position);
 
-                if (Input.GetKeyDown(InputManager.instance.InteractBtn)) {
+                if (Input.GetKeyDown(InputManager.instance.InteractBtn) && InteractionManager.instance.CanInteract) {
                     interactable.Interact();
                     interactionIndicatorUI.SetActive(false);
                     InteractionManager.instance.SetCurrentInteraction(interactable);
