@@ -5,18 +5,25 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
+  - MovingBox
+  - BottomEdge
+  - TopEdge
+  - LeftEdge
+  - Grid
+  - RightEdge
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Post Processing
   - Water
   - UI
-  - 
-  - 
-  - Lighting
   - Ground
-  - Postprocessing
+  - MouseArea
+  - Interactable
+  - Player
+  - 
   - 
   - 
   - 
