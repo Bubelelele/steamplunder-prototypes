@@ -11,6 +11,7 @@ public class MetalBox : MonoBehaviour
     public Transform left;
     public Transform right;
     public Transform targetTransform;
+    public AudioSource metalBoxAudioSource;
 
     [HideInInspector] public int moveDirection = 0;
     [HideInInspector] public bool topEdge = false;
@@ -82,18 +83,22 @@ public class MetalBox : MonoBehaviour
     private void HammerAnimationUp()
     {
         targetTransform.position = up.position;
+        metalBoxAudioSource.Play();
     }
     private void HammerAnimationDown()
     {
         targetTransform.position = down.position;
+        metalBoxAudioSource.Play();
     }
     private void HammerAnimationLeft()
     {
         targetTransform.position = left.position;
+        metalBoxAudioSource.Play();
     }
     private void HammerAnimationRight()
     {
         targetTransform.position = right.position;
+        metalBoxAudioSource.Play();
     }
 
 }
