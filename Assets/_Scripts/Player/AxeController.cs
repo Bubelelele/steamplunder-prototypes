@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AxeController : MonoBehaviour {
 
@@ -27,6 +28,8 @@ public class AxeController : MonoBehaviour {
         //Attack visuals
         _animator.SetTrigger("axe");
         trailRenderer.enabled = true;
+
+        AudioManager.instance.Play("swing");
         
         //Attack cooldown
         CanAttack = false;
@@ -40,6 +43,20 @@ public class AxeController : MonoBehaviour {
             if (damageable != null) {
                 damageable.Damage(attackDamage);
                 EffectManager.instance.BloodSplat(_attackHitboxResults[i].ClosestPointOnBounds(axeObject.transform.position));
+                
+                int soundNumber = Random.Range(0,3);
+                if (soundNumber == 0)
+                {
+                    AudioManager.instance.Play("blood1");
+                }
+                else if(soundNumber == 1)
+                {
+                    AudioManager.instance.Play("blood2");
+                }
+                else
+                {
+                    AudioManager.instance.Play("blood3");
+                }
             }
         }
     }

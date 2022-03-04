@@ -29,7 +29,7 @@ public class HammerController : MonoBehaviour {
         //Attack visuals
         _animator.SetTrigger("hammer");
         SetObjectActive(true);
-        
+        AudioManager.instance.Play("hammer");
         //Attack cooldown
         CanAttack = false;
         StartCoroutine(nameof(AttackCooldown));
@@ -40,6 +40,8 @@ public class HammerController : MonoBehaviour {
         var t = transform;
         Vector3 impactPosition = t.position + t.forward * 1.5f + t.right * .5f + t.up * -1f;
         EffectManager.instance.AOE(impactPosition, impactRadius); //Spawn hit effect
+
+        
 
         int numberHit = Physics.OverlapSphereNonAlloc(impactPosition, impactRadius, _attackHitboxResults, interactableLayer);
         for (int i = 0; i < numberHit; i++) {
