@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour {
     private void Move(Vector3 movementVector) {
         float speed = moveSpeed * Time.deltaTime;
         Vector3 targetPosition = transform.position + movementVector * speed;
-        
         transform.position = targetPosition;
     }
 
