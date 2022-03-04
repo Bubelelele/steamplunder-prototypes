@@ -7,6 +7,7 @@ public class GetHammerTrigger : MonoBehaviour
     public ParticleSystem explotion;
     public GameObject hammerMessage;
     public Animator hammerAnim;
+    public AudioSource artifactPickupAudioSource;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == GameManager.instance.player.gameObject)
@@ -19,6 +20,7 @@ public class GetHammerTrigger : MonoBehaviour
             hammerMessage.SetActive(true);
             hammerMessage.GetComponent<Animator>().SetBool("ShowMessage", true);
             hammerAnim.SetBool("HammerTaken", true);
+            artifactPickupAudioSource.Play();
         }
     }
     private void Used()
