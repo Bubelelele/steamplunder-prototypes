@@ -10,7 +10,9 @@ public class BossStats : MonoBehaviour, IDamageable
     [SerializeField] private DamageFlash damageFlash;
     [SerializeField] private GameObject healtbarImage;
 
+
     private int _health;
+    [HideInInspector] public bool canBeHarmed = true;
 
     private void Start()
     {
@@ -20,11 +22,26 @@ public class BossStats : MonoBehaviour, IDamageable
 
     public void Damage(int amount)
     {
-        _health -= amount;
-        if (_health <= 0) Die();
+        if (canBeHarmed)
+        {
+            _health -= amount;
+            if (_health <= 0)
+            {
+                Die();
+            }
+            else if (_health <= maxHealth / 3 * 2 && !gameObject.GetComponent<BossMovement>().secondStage)
+            {
+                gameObject.GetComponent<BossMovement>().Stage2();
+            }
+            else if (_health <= maxHealth / 3 && !gameObject.GetComponent<BossMovement>().thirdStage)
+            {
+                gameObject.GetComponent<BossMovement>().Stage3();
+            }
 
-        damageFlash?.Flash();
-        healthbar.UpdateHealthbar(_health, maxHealth);
+
+            damageFlash?.Flash();
+            healthbar.UpdateHealthbar(_health, maxHealth);
+        }
     }
 
     private void Die()
@@ -34,5 +51,20 @@ public class BossStats : MonoBehaviour, IDamageable
         Destroy(gameObject);
         Destroy(healtbarImage);
         EffectManager.instance.CogPickup(position);
+    }
+
+    public void ActivateBoss()
+    {
+        canBeHarmed = true;
+        healtbarImage.SetActive(true);
+    }
+    public void DeactivateBoss()
+    {
+        canBeHarmed = false;
+        Invoke("HideHealth", 1f);
+    }
+    private void HideHealth()
+    {
+        healtbarImage.SetActive(false);
     }
 }
