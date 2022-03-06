@@ -20,4 +20,14 @@ public class AnimationScript : MonoBehaviour
     {
         bossAnim.SetBool("Slash", false);
     }
+    public void Shield()
+    {
+        gameObject.GetComponent<BossStats>().CannotBeHarmed();
+    }
+    public void NoShield()
+    {
+        gameObject.GetComponent<BossStats>().CanBeHarmed();
+    }
+
+
 }

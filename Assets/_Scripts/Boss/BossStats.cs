@@ -7,11 +7,14 @@ public class BossStats : MonoBehaviour, IDamageable
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DamageFlash damageFlash;
     [SerializeField] private GameObject healtbarImage;
+    [SerializeField] private GameObject bossCart;
+    [SerializeField] private ParticleSystem spark;
 
 
     private int _health;
 
     [HideInInspector] public bool isActive = true;
+    [HideInInspector] public bool canBeHarmed = true;
 
     private bool firstDone = false;
     private bool secondDone = false;
@@ -24,7 +27,7 @@ public class BossStats : MonoBehaviour, IDamageable
 
     public void Damage(int amount)
     {
-        if (isActive)
+        if (canBeHarmed)
         {
             _health -= amount;
             if (_health <= 0)
@@ -33,18 +36,22 @@ public class BossStats : MonoBehaviour, IDamageable
             }
             else if (_health <= maxHealth / 3 * 2 && !firstDone)
             {
-                gameObject.GetComponent<BossStages>().Stage2();
+                bossCart.GetComponent<BossStages>().Stage2();
                 firstDone = true;
             }
             else if (_health <= maxHealth / 3 && !secondDone)
             {
-                gameObject.GetComponent<BossStages>().Stage3();
+                bossCart.GetComponent<BossStages>().Stage3();
                 secondDone = true;
             }
 
 
             damageFlash?.Flash();
             healthbar.UpdateHealthbar(_health, maxHealth);
+        }
+        else
+        {
+            spark.Play();            
         }
     }
 
@@ -60,15 +67,26 @@ public class BossStats : MonoBehaviour, IDamageable
     public void ActivateBoss()
     {
         isActive = true;
+        CanBeHarmed();
         healtbarImage.SetActive(true);
     }
     public void DeactivateBoss()
     {
         isActive = false;
+        CannotBeHarmed();
         Invoke("HideHealth", 0.2f);
     }
     private void HideHealth()
     {
         healtbarImage.SetActive(false);
     }
+    public void CanBeHarmed()
+    {
+        canBeHarmed = true;
+    }
+    public void CannotBeHarmed()
+    {
+        canBeHarmed = false;
+    }
+
 }

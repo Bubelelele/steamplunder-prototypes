@@ -12,6 +12,7 @@ public class EffectManager : MonoBehaviour {
     [SerializeField] private GameObject deathEffectPrefab;
     [SerializeField] private GameObject pickupEffectPrefab;
     [SerializeField] private GameObject cogPickupPrefab;
+    [SerializeField] private GameObject sparkPrefab;
 
     public void AOE(Vector3 position, float diameter) {
         GameObject aoeEffect = Instantiate(hammerAoePrefab, position, Quaternion.identity);

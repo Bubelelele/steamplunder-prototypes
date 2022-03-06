@@ -5,30 +5,33 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 3f;
 
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject boss;
     [SerializeField] private GameObject detectionTrigger;
-    [SerializeField] private GameObject animationController;
 
     void Update()
     {
-        if(gameObject.GetComponent<BossStats>().isActive == true)
+        if(boss.GetComponent<BossStats>().isActive == true)
         {
-            transform.LookAt(player.transform);
+            transform.LookAt(new Vector3(player.transform.position.x, boss.transform.position.y, player.transform.position.z));
             if (!detectionTrigger.GetComponent<BossDetectionTrigger>().canAttack)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z), movementSpeed * Time.deltaTime);
-                animationController.GetComponent<AnimationScript>().Block();
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, boss.transform.position.y, player.transform.position.z), movementSpeed * Time.deltaTime);
             }
             else
             {
-                animationController.GetComponent<AnimationScript>().Slash();
+                boss.GetComponent<AnimationScript>().Block();
+                Invoke("DelayedAttack", 1f);
             }
         }
-        if (gameObject.GetComponent<BossStats>().isActive == false)
+        if (boss.GetComponent<BossStats>().isActive == false)
         {
             Debug.Log("Leave player");
         }
     }
-
+    private void DelayedAttack()
+    {
+        boss.GetComponent<AnimationScript>().Slash();
+    }
 
 
 }
