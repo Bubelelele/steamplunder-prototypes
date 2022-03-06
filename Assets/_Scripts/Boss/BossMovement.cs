@@ -1,25 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-
-    [HideInInspector] public bool secondStage = false;
-    [HideInInspector] public bool thirdStage = false;
-
-    [SerializeField] private Transform[] bossLocation;
-
-    public void Stage2()
+    // Start is called before the first frame update
+    void Start()
     {
-        NewStage(bossLocation[0]);
-        secondStage = true;
+        
     }
-    public void Stage3()
+
+    // Update is called once per frame
+    void Update()
     {
-        NewStage(bossLocation[1]);
-        thirdStage = true;
-    }
-    private void NewStage(Transform location)
-    {
-        gameObject.transform.position = location.position;
+        
     }
 }

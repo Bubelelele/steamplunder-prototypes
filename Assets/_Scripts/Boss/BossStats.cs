@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossStats : MonoBehaviour, IDamageable
@@ -13,6 +11,9 @@ public class BossStats : MonoBehaviour, IDamageable
 
     private int _health;
     [HideInInspector] public bool canBeHarmed = true;
+
+    private bool firstDone = false;
+    private bool secondDone = false;
 
     private void Start()
     {
@@ -29,13 +30,15 @@ public class BossStats : MonoBehaviour, IDamageable
             {
                 Die();
             }
-            else if (_health <= maxHealth / 3 * 2 && !gameObject.GetComponent<BossMovement>().secondStage)
+            else if (_health <= maxHealth / 3 * 2 && !firstDone)
             {
-                gameObject.GetComponent<BossMovement>().Stage2();
+                gameObject.GetComponent<BossStages>().Stage2();
+                firstDone = true;
             }
-            else if (_health <= maxHealth / 3 && !gameObject.GetComponent<BossMovement>().thirdStage)
+            else if (_health <= maxHealth / 3 && !secondDone)
             {
-                gameObject.GetComponent<BossMovement>().Stage3();
+                gameObject.GetComponent<BossStages>().Stage3();
+                secondDone = true;
             }
 
 
@@ -61,7 +64,7 @@ public class BossStats : MonoBehaviour, IDamageable
     public void DeactivateBoss()
     {
         canBeHarmed = false;
-        Invoke("HideHealth", 1f);
+        Invoke("HideHealth", 0.2f);
     }
     private void HideHealth()
     {

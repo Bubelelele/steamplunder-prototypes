@@ -11,6 +11,7 @@ public class BossTrigger : MonoBehaviour
         {
             boss.GetComponent<BossStats>().ActivateBoss();
             gate.SetBool("Entered", true);
+            Destroy(gameObject);
         }
     }
 }
