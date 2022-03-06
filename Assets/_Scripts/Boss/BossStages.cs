@@ -8,7 +8,7 @@ public class BossStages : MonoBehaviour
 
     [SerializeField] private Transform[] bossLocation;
     [SerializeField] private Transform targetLocation;
-    [SerializeField] private float timeForBossToMove = 20;
+    [SerializeField] private float timeForBossToMove = 20f;
 
     public void Stage2()
     {

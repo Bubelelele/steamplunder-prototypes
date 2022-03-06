@@ -10,7 +10,8 @@ public class BossStats : MonoBehaviour, IDamageable
 
 
     private int _health;
-    [HideInInspector] public bool canBeHarmed = true;
+
+    [HideInInspector] public bool isActive = true;
 
     private bool firstDone = false;
     private bool secondDone = false;
@@ -23,7 +24,7 @@ public class BossStats : MonoBehaviour, IDamageable
 
     public void Damage(int amount)
     {
-        if (canBeHarmed)
+        if (isActive)
         {
             _health -= amount;
             if (_health <= 0)
@@ -58,12 +59,12 @@ public class BossStats : MonoBehaviour, IDamageable
 
     public void ActivateBoss()
     {
-        canBeHarmed = true;
+        isActive = true;
         healtbarImage.SetActive(true);
     }
     public void DeactivateBoss()
     {
-        canBeHarmed = false;
+        isActive = false;
         Invoke("HideHealth", 0.2f);
     }
     private void HideHealth()
