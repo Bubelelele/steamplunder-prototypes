@@ -3,10 +3,13 @@ using Random = UnityEngine.Random;
 
 public class AttackScript : MonoBehaviour
 {
+    [HideInInspector] public int attackDamage;
+    [HideInInspector] public bool leathal = false;
+
     //Gun
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform muzzleTrans;
-    [SerializeField] private int attackDamage = 50;
+
 
     [SerializeField] private GameObject detectionTrigger;
     [SerializeField] private GameObject bossCart;
@@ -39,18 +42,22 @@ public class AttackScript : MonoBehaviour
                 if (whichAttack == 0)
                 {
                     SlashSpree();
+                    attackDamage = 7;
                 }
                 else if (whichAttack == 1)
                 {
                     Block();
+                    attackDamage = 15;
                 }
                 else if (whichAttack == 2)
                 {
                     Punch();
+                    attackDamage = 4;
                 }
                 else if (whichAttack == 3)
                 {
                     SingleSlash();
+                    attackDamage = 5;
                 }
                 animationIsPlaying = true;
             }
@@ -63,7 +70,7 @@ public class AttackScript : MonoBehaviour
     public void Block()
     {
         bossAnim.SetBool("Block", true);
-        Invoke("Slash", Random.Range(2, 4f)*0.8f);
+        Invoke("Slash", Random.Range(30, 40f)*0.1f);
     }
     public void Slash()
     {
@@ -127,6 +134,14 @@ public class AttackScript : MonoBehaviour
         bossAnim.SetBool("Stunned", false);
         bossAnim.SetInteger("PunchInt", 0);
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
+    }
+    public void IsLeathal()
+    {
+        leathal = true;
+    }
+    public void NotLeathal()
+    {
+        leathal = false;
     }
 
 }
