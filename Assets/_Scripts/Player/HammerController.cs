@@ -14,6 +14,8 @@ public class HammerController : MonoBehaviour {
     
     [Header("References")]
     [SerializeField] private GameObject hammerObject;
+    [SerializeField] private GameObject boss;
+
 
     private Animator _animator;
     private readonly Collider[] _attackHitboxResults = new Collider[5];
@@ -44,8 +46,14 @@ public class HammerController : MonoBehaviour {
         int numberHit = Physics.OverlapSphereNonAlloc(impactPosition, impactRadius, _attackHitboxResults, interactableLayer);
         for (int i = 0; i < numberHit; i++) {
             var damageable = _attackHitboxResults[i].transform.GetComponent<IDamageable>();
-            damageable?.Damage(attackDamage);
-            
+            if (_attackHitboxResults[i].gameObject.tag == "Boss")
+            {
+                boss.GetComponent<AttackScript>().Stunned();
+            }
+            else
+            {
+                damageable?.Damage(attackDamage);
+            }
             //Add knockback if entity has a rigidbody
             var rb = _attackHitboxResults[i].transform.GetComponent<Rigidbody>();
             if (rb != null) {

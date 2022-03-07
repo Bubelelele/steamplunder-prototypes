@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class BossDetectionTrigger : MonoBehaviour
 {
-    [HideInInspector] public bool canAttack;
+    [HideInInspector] public bool attackRange;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == GameManager.instance.player.gameObject)
         {
-            canAttack = true;
-            Debug.Log("AttackNow");
+            attackRange = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == GameManager.instance.player.gameObject)
         {
-            canAttack = false;
-            Debug.Log("FollowPlayer");
+            attackRange = false;
         }
     }
 }
