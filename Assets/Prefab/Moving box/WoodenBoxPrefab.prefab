@@ -330,6 +330,7 @@ MonoBehaviour:
   right: {fileID: 2155814173836815943}
   targetTransform: {fileID: 2155814175099246499}
   woodBoxAudioSource: {fileID: 8046677923670729238}
+  pushAudioClip: {fileID: 8300000, guid: 69f4fabdac7aa084ca9a8fe5d68c98b3, type: 3}
   moveDirection: 0
   topEdge: 0
   bottomEdge: 0
@@ -370,6 +371,8 @@ MonoBehaviour:
   right: {fileID: 2155814173836815943}
   gridPosition: {fileID: 2155814173498921826}
   hitBoxTransform: {fileID: 5774760792138056383}
+  woodBoxAudioSource: {fileID: 8046677923670729238}
+  slidingAudioClip: {fileID: 8300000, guid: f9ff3d4ed66859949ad6bbc82ddc1729, type: 3}
   slidingUp: 0
   slidingDown: 0
   slidingLeft: 0
@@ -483,7 +486,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: beb0360bb58877a4bb4c7091567d8399, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 69f4fabdac7aa084ca9a8fe5d68c98b3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.793
   m_Pitch: 1

@@ -10,6 +10,8 @@ public class SlideBox : MonoBehaviour
     public Transform right;
     public Transform gridPosition;
     public Transform hitBoxTransform;
+    public AudioSource woodBoxAudioSource;
+    public AudioClip slidingAudioClip;
 
     [HideInInspector] public bool slidingUp;
     [HideInInspector] public bool slidingDown;
@@ -117,6 +119,13 @@ public class SlideBox : MonoBehaviour
         }
 
     }
+    
+    //Audio
+    public void SlideAudio()
+    {
+        woodBoxAudioSource.clip = slidingAudioClip;
+        woodBoxAudioSource.Play();
+    }
     public void CanSlide() { canSlide = true; }
     public void CannotSlide() { canSlide = false; }
 
@@ -128,6 +137,7 @@ public class SlideBox : MonoBehaviour
         doneSlidng2 = false;
         isSliding = true;
         slidingUp = true;
+        SlideAudio();
     }
     private void HammerAnimationDown()
     {
@@ -135,6 +145,7 @@ public class SlideBox : MonoBehaviour
         doneSlidng2 = false;
         isSliding = true;
         slidingDown = true;
+        SlideAudio();
     }
     private void HammerAnimationLeft()
     {
@@ -142,6 +153,7 @@ public class SlideBox : MonoBehaviour
         doneSlidng2 = false;
         isSliding = true;
         slidingLeft = true;
+        SlideAudio();
     }
     private void HammerAnimationRight()
     {
@@ -149,5 +161,6 @@ public class SlideBox : MonoBehaviour
         doneSlidng2 = false;
         isSliding = true;
         slidingRight = true;
+        SlideAudio();
     }
 }
