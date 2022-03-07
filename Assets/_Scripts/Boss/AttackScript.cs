@@ -21,6 +21,7 @@ public class AttackScript : MonoBehaviour
 
     private void Update()
     {
+        //Shooting
         float dist = Vector3.Distance(transform.position, GameManager.instance.player.gameObject.transform.position);
         
         if(dist > 6f && !animationIsPlaying && gameObject.GetComponent<BossStats>().isActive && canShoot)
@@ -30,6 +31,7 @@ public class AttackScript : MonoBehaviour
             Invoke("ShootCoolDown", 3f);
         }
 
+        //If within the range of the player
         if (detectionTrigger.GetComponent<BossDetectionTrigger>().attackRange)
         {
             canShoot = true;
@@ -42,7 +44,7 @@ public class AttackScript : MonoBehaviour
                 if (whichAttack == 0)
                 {
                     SlashSpree();
-                    attackDamage = 7;
+                    attackDamage = 5;
                 }
                 else if (whichAttack == 1)
                 {
@@ -52,7 +54,7 @@ public class AttackScript : MonoBehaviour
                 else if (whichAttack == 2)
                 {
                     Punch();
-                    attackDamage = 4;
+                    attackDamage = 8;
                 }
                 else if (whichAttack == 3)
                 {
@@ -109,6 +111,7 @@ public class AttackScript : MonoBehaviour
     public void Stunned()
     {
         bossAnim.SetBool("Stunned", true);
+        bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
     }
     public void InstanciateProjectile()
     {
@@ -126,6 +129,15 @@ public class AttackScript : MonoBehaviour
         gameObject.GetComponent<BossStats>().CanBeHarmed();
         
     }
+
+    public void IsLeathal()
+    {
+        leathal = true;
+    }
+    public void NotLeathal()
+    {
+        leathal = false;
+    }
     public void ActionOver()
     {
 
@@ -134,14 +146,7 @@ public class AttackScript : MonoBehaviour
         bossAnim.SetBool("Stunned", false);
         bossAnim.SetInteger("PunchInt", 0);
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
-    }
-    public void IsLeathal()
-    {
-        leathal = true;
-    }
-    public void NotLeathal()
-    {
-        leathal = false;
+        bossCart.GetComponent<BossMovement>().LookAtPlayer();
     }
 
 }
