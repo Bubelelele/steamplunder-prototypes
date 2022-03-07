@@ -102,6 +102,7 @@ public class AttackScript : MonoBehaviour
     public void Shoot()
     {
         canShoot = false;
+        AudioManager.instance.Play("gun");
         bossAnim.SetTrigger("Shoot");
     }
     public void ShootCoolDown()
@@ -133,6 +134,7 @@ public class AttackScript : MonoBehaviour
     public void IsLeathal()
     {
         leathal = true;
+        AudioManager.instance.Play("swing");
     }
     public void NotLeathal()
     {

@@ -51,7 +51,8 @@ public class BossStats : MonoBehaviour, IDamageable
         }
         else
         {
-            spark.Play();            
+            spark.Play();
+            AudioManager.instance.Play("hitshield");
         }
     }
 

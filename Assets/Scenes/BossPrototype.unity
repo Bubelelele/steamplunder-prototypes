@@ -1797,6 +1797,124 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514571088}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &517099888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 517099890}
+  - component: {fileID: 517099889}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &517099889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517099888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11837767d38831c47a5b9b52bffb0100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muted: 0
+  mixerGroup: {fileID: 24300002, guid: 001650986dc686f40b61c3fc7ea38221, type: 2}
+  sounds:
+  - name: ambience
+    clip: {fileID: 8300000, guid: c1d2099f07457e943bb014fa8148e442, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: swing
+    clip: {fileID: 8300000, guid: 6940f641efcf2f14ca674fc37b1c80b8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: hammer
+    clip: {fileID: 8300000, guid: 75b1b4cf95af85248815873ade9ebe83, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: blood1
+    clip: {fileID: 8300000, guid: 4ffe807cccb0fcb4683af78852da6955, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: blood2
+    clip: {fileID: 8300000, guid: 02e4418ce801e434792d1cd0bcde3bd7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: blood3
+    clip: {fileID: 8300000, guid: 4ddf66be75673464d9261946f738986e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: cogpickup
+    clip: {fileID: 8300000, guid: ca6ee7e7db7847e4cb37b3b61928e684, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: walking
+    clip: {fileID: 8300000, guid: 8478969dc985659498db0d876ab99dca, type: 3}
+    volume: 0.454
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: grapplehook
+    clip: {fileID: 8300000, guid: 0170f43dddb5b9945a3d07bd4c153268, type: 3}
+    volume: 0.454
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: steamer
+    clip: {fileID: 8300000, guid: 6317c1656a7e4834583f3baa7a663483, type: 3}
+    volume: 0.454
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: gun
+    clip: {fileID: 8300000, guid: 98ed7fd4beeecd240a1d39ec6c1543aa, type: 3}
+    volume: 0.454
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: hitshield
+    clip: {fileID: 8300000, guid: ca6ee7e7db7847e4cb37b3b61928e684, type: 3}
+    volume: 0.594
+    pitch: 0.73
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &517099890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517099888}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &533341310
 GameObject:
   m_ObjectHideFlags: 0
@@ -9277,7 +9395,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194607005687693347}
-  m_LocalRotation: {x: 0.45201567, y: -0.000000026583972, z: 0.0000000134711176, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: 0.000000026583972, z: -0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -18.299438, y: 15.4275, z: -16.868057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -10633,7 +10751,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194607006191821955}
-  m_LocalRotation: {x: 0.45201567, y: -0.000000026583972, z: 0.0000000134711176, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: 0.000000026583972, z: -0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -18.299438, y: 15.4275, z: -16.868057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
