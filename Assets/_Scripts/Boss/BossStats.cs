@@ -75,6 +75,7 @@ public class BossStats : MonoBehaviour, IDamageable
     {
         isActive = false;
         CannotBeHarmed();
+        gameObject.GetComponent<AttackScript>().ActionOver();
         Invoke("HideHealth", 0.2f);
     }
     private void HideHealth()
