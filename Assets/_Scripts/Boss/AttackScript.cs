@@ -17,24 +17,40 @@ public class AttackScript : MonoBehaviour
 
 
     private bool animationIsPlaying = false;
-    private bool canShoot;
+    private bool canShoot = true;
+    private bool isCharging = false;
+
 
     private void Update()
     {
+        if (!animationIsPlaying)
+        {
+
+        }
+
         //Shooting
         float dist = Vector3.Distance(transform.position, GameManager.instance.player.gameObject.transform.position);
         
         if(dist > 6f && !animationIsPlaying && gameObject.GetComponent<BossStats>().isActive && canShoot)
         {
             bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
+            animationIsPlaying = true;
             Shoot();
-            Invoke("ShootCoolDown", 3f);
+            Invoke("ShootCoolDown", 5f);
         }
+
 
         //If within the range of the player
         if (detectionTrigger.GetComponent<BossDetectionTrigger>().attackRange)
         {
-            canShoot = true;
+            if (isCharging)
+            {
+                attackDamage = 20;
+                bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
+                bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
+                bossAnim.SetBool("Charge", false);
+            }
+
             if (!animationIsPlaying)
             {
                 bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
@@ -44,22 +60,22 @@ public class AttackScript : MonoBehaviour
                 if (whichAttack == 0)
                 {
                     SlashSpree();
-                    attackDamage = 5;
+                    attackDamage = 7;
                 }
                 else if (whichAttack == 1)
                 {
-                    Block();
-                    attackDamage = 15;
+                    Punch();
+                    attackDamage = 12;
                 }
                 else if (whichAttack == 2)
                 {
-                    Punch();
+                    SingleSlash();
                     attackDamage = 8;
                 }
-                else if (whichAttack == 3)
+                else
                 {
-                    SingleSlash();
-                    attackDamage = 5;
+                    Block();
+                    attackDamage = 20;
                 }
                 animationIsPlaying = true;
             }
@@ -76,7 +92,7 @@ public class AttackScript : MonoBehaviour
     }
     public void Slash()
     {
-        bossAnim.SetTrigger("Slash");
+        bossAnim.SetBool("Block", false);
     }
     public void Punch()
     {
@@ -101,13 +117,23 @@ public class AttackScript : MonoBehaviour
     }
     public void Shoot()
     {
+        bossAnim.SetBool("Charge", true);
         canShoot = false;
-        AudioManager.instance.Play("gun");
         bossAnim.SetTrigger("Shoot");
+    }
+    public void ShootAudio()
+    {
+        AudioManager.instance.Play("gun");
     }
     public void ShootCoolDown()
     {
         canShoot = true;
+    }
+    public void ChargeSpeed()
+    {
+        isCharging = true;
+        bossCart.GetComponent<BossMovement>().WalkToPlayer();
+        bossCart.GetComponent<BossMovement>().ChargeSpeed();
     }
     public void Stunned()
     {
@@ -144,11 +170,13 @@ public class AttackScript : MonoBehaviour
     {
 
         animationIsPlaying = false;
+        isCharging = false;
         bossAnim.SetBool("Block", false);
         bossAnim.SetBool("Stunned", false);
         bossAnim.SetInteger("PunchInt", 0);
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
         bossCart.GetComponent<BossMovement>().LookAtPlayer();
+        bossCart.GetComponent<BossMovement>().NormalSpeed();
     }
 
 }

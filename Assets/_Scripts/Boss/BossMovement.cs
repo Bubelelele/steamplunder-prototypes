@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    public float movementSpeed = 4f;
+    public float movementSpeed = 7f;
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject boss;
@@ -44,6 +44,14 @@ public class BossMovement : MonoBehaviour
     public void DontLookAtPlayer()
     {
         lookAtPlayer = false;
+    }
+    public void NormalSpeed()
+    {
+        movementSpeed = 7f;
+    }
+    public void ChargeSpeed()
+    {
+        movementSpeed = 14f;
     }
 }
 
