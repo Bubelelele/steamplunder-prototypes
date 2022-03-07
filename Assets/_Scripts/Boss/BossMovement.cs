@@ -49,6 +49,10 @@ public class BossMovement : MonoBehaviour
     {
         movementSpeed = 7f;
     }
+    public void SwordSwingSpeed()
+    {
+        movementSpeed = 1.5f;
+    }
     public void ChargeSpeed()
     {
         movementSpeed = 14f;

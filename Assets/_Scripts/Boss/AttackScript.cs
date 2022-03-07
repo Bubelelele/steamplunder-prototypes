@@ -53,7 +53,7 @@ public class AttackScript : MonoBehaviour
 
             if (!animationIsPlaying)
             {
-                bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
+                
 
                 int whichAttack = Random.Range(0, 4);
 
@@ -64,6 +64,7 @@ public class AttackScript : MonoBehaviour
                 }
                 else if (whichAttack == 1)
                 {
+                    bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
                     Punch();
                     attackDamage = 12;
                 }
@@ -83,6 +84,7 @@ public class AttackScript : MonoBehaviour
     }
     public void SlashSpree()
     {
+        bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
         bossAnim.SetTrigger("SlashSpree");
     }
     public void Block()
@@ -92,6 +94,7 @@ public class AttackScript : MonoBehaviour
     }
     public void Slash()
     {
+        bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
         bossAnim.SetBool("Block", false);
     }
     public void Punch()
@@ -113,6 +116,7 @@ public class AttackScript : MonoBehaviour
     }
     public void SingleSlash()
     {
+        bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
         bossAnim.SetTrigger("SingleSlash");
     }
     public void Shoot()
