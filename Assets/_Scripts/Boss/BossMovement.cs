@@ -16,11 +16,11 @@ public class BossMovement : MonoBehaviour
     {
         if(boss.GetComponent<BossStats>().isActive)
         {
-            transform.LookAt(new Vector3(player.transform.position.x, boss.transform.position.y, player.transform.position.z));
+            transform.LookAt(new Vector3(player.transform.position.x,transform.position.y, player.transform.position.z));
             if (!detectionTrigger.GetComponent<BossDetectionTrigger>().attackRange && walkToPlayer)
             {
                 //Moving towards the player
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, boss.transform.position.y, player.transform.position.z), movementSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movementSpeed * Time.deltaTime);
             }
         }
     }
