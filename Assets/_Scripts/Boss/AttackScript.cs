@@ -27,6 +27,7 @@ public class AttackScript : MonoBehaviour
     private bool animationIsPlaying = false;
     private bool canShoot = true;
     private bool isCharging = false;
+    private bool canBeStunned = false;
 
 
 
@@ -111,6 +112,7 @@ public class AttackScript : MonoBehaviour
                     {
                         if (!lastStage) // Block
                         {
+                            canBeStunned = true;
                             bossAnim.SetBool("Block", true);
                             Invoke("Slash", Random.Range(30, 40f) * 0.1f);
                             attackDamage = 10;
@@ -163,8 +165,12 @@ public class AttackScript : MonoBehaviour
     public void LastStage() { lastStage = true; }
     public void Stunned()
     {
-        bossAnim.SetBool("Stunned", true);
-        bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
+        if (canBeStunned)
+        {
+            bossAnim.SetBool("Stunned", true);
+            bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
+        }
+
     }
 
 
@@ -205,6 +211,7 @@ public class AttackScript : MonoBehaviour
 
         Invoke("AnimationDelay", 1f);
         isCharging = false;
+        canBeStunned = false;
         bossAnim.SetBool("Block", false);
         bossAnim.SetBool("Stunned", false);
         bossAnim.SetInteger("PunchInt", 0);
