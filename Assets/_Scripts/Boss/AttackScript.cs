@@ -10,7 +10,9 @@ public class AttackScript : MonoBehaviour
     //Gun
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject gearBoomerang;
+    [SerializeField] private GameObject frontOffset;
     [SerializeField] private Transform muzzleTrans;
+    
 
     [SerializeField] private GameObject gauntlet;
     [SerializeField] private GameObject gearGauntlet;
@@ -58,7 +60,7 @@ public class AttackScript : MonoBehaviour
                     //Shoot gear
                     bossAnim.SetTrigger("ShootGear");
                     bossAnim.SetBool("Charge", true);
-                    attackDamage = 20;
+                    attackDamage = 7;
                 }
             }
 
@@ -69,7 +71,7 @@ public class AttackScript : MonoBehaviour
                 if (isCharging)
                 {
                     //Charge at the player
-                    attackDamage = 20;
+                    attackDamage = 10;
                     bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
                     bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
                     bossAnim.SetBool("Charge", false);
@@ -89,19 +91,19 @@ public class AttackScript : MonoBehaviour
                     {
                         bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
                         bossAnim.SetTrigger("SingleSlash");
-                        attackDamage = 8;
+                        attackDamage = 7;
                     }
                     else if (whichAttack == 2 || whichAttack == 3) 
                     {
                         if (!lastStage) // Punch
                         {
                             Punch();
-                            attackDamage = 12;
+                            attackDamage = 5;
                         }
                         else // Gearpunch
                         {
                             GearPunch();
-                            attackDamage = 16;
+                            attackDamage = 7;
                         }        
                         bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
                     }
@@ -111,12 +113,12 @@ public class AttackScript : MonoBehaviour
                         {
                             bossAnim.SetBool("Block", true);
                             Invoke("Slash", Random.Range(30, 40f) * 0.1f);
-                            attackDamage = 20;
+                            attackDamage = 10;
                         }
                         else // Gearattack
                         {
                             bossAnim.SetTrigger("GearAttack");
-                            attackDamage = 20;
+                            attackDamage = 13;
                             bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
                         }
                         
@@ -173,6 +175,7 @@ public class AttackScript : MonoBehaviour
     {
         bossAnim.SetBool("Block", false);
         gameObject.GetComponent<BossStats>().CanBeHarmed();
+        frontOffset.SetActive(false);
 
     }
     public void NotLeathal() { leathal = false; }
@@ -200,7 +203,7 @@ public class AttackScript : MonoBehaviour
     public void ActionOver()
     {
 
-        animationIsPlaying = false;
+        Invoke("AnimationDelay", 1f);
         isCharging = false;
         bossAnim.SetBool("Block", false);
         bossAnim.SetBool("Stunned", false);
@@ -210,6 +213,11 @@ public class AttackScript : MonoBehaviour
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
         bossCart.GetComponent<BossMovement>().LookAtPlayer();
         bossCart.GetComponent<BossMovement>().NormalSpeed();
+        frontOffset.SetActive(true);
+    }
+    public void AnimationDelay()
+    {
+        animationIsPlaying = false;
     }
 
 }

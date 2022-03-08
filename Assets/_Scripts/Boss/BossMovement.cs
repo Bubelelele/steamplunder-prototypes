@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    public float movementSpeed = 7f;
+    public float movementSpeed = 4f;
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject boss;
@@ -47,7 +47,7 @@ public class BossMovement : MonoBehaviour
     }
     public void NormalSpeed()
     {
-        movementSpeed = 7f;
+        movementSpeed = 4f;
     }
     public void SwordSwingSpeed()
     {

@@ -21,7 +21,7 @@ public class ProjectileFromBoss : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerStats>().Damage(30);         
+            other.GetComponent<PlayerStats>().Damage(5);         
         }
         
         _particles.Play();
