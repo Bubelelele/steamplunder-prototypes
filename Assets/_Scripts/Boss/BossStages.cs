@@ -45,6 +45,7 @@ public class BossStages : MonoBehaviour
             if (Vector3.Distance(transform.position, targetLocation.position) < 1)
             {
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                boss.GetComponent<AttackScript>().LastStage();
                 thirdStage = false;
             }
         }

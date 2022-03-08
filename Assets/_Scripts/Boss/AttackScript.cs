@@ -5,10 +5,16 @@ public class AttackScript : MonoBehaviour
 {
     [HideInInspector] public int attackDamage;
     [HideInInspector] public bool leathal = false;
+    [HideInInspector] public bool lastStage = false;
 
     //Gun
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject gearBoomerang;
     [SerializeField] private Transform muzzleTrans;
+
+    [SerializeField] private GameObject gauntlet;
+    [SerializeField] private GameObject gearGauntlet;
+    [SerializeField] private GameObject boomerangStuff;
 
 
     [SerializeField] private GameObject detectionTrigger;
@@ -21,117 +27,159 @@ public class AttackScript : MonoBehaviour
     private bool isCharging = false;
 
 
+
     private void Update()
     {
-        if (!animationIsPlaying)
+        if (gameObject.GetComponent<BossStats>().isActive)
         {
-
-        }
-
-        //Shooting
-        float dist = Vector3.Distance(transform.position, GameManager.instance.player.gameObject.transform.position);
-        
-        if(dist > 6f && !animationIsPlaying && gameObject.GetComponent<BossStats>().isActive && canShoot)
-        {
-            bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
-            animationIsPlaying = true;
-            Shoot();
-            Invoke("ShootCoolDown", 5f);
-        }
-
-
-        //If within the range of the player
-        if (detectionTrigger.GetComponent<BossDetectionTrigger>().attackRange)
-        {
-            if (isCharging)
+            if (lastStage)
             {
-                attackDamage = 20;
-                bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
-                bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
-                bossAnim.SetBool("Charge", false);
+                gauntlet.SetActive(false);
+                gearGauntlet.SetActive(true);
+                boomerangStuff.SetActive(true);
             }
+            //Shooting and charging
+            float dist = Vector3.Distance(transform.position, GameManager.instance.player.gameObject.transform.position);
 
-            if (!animationIsPlaying)
+            if (dist > 6f && !animationIsPlaying && canShoot)
             {
-                
-
-                int whichAttack = Random.Range(0, 4);
-
-                if (whichAttack == 0)
+                bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
+                animationIsPlaying = true;
+                if (!lastStage)
                 {
-                    SlashSpree();
-                    attackDamage = 7;
-                }
-                else if (whichAttack == 1)
-                {
-                    bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
-                    Punch();
-                    attackDamage = 12;
-                }
-                else if (whichAttack == 2)
-                {
-                    SingleSlash();
-                    attackDamage = 8;
+                    //Shooting
+                    canShoot = false;
+                    bossAnim.SetBool("Charge", true);
+                    bossAnim.SetTrigger("Shoot");
+                    Invoke("ShootCoolDown", 5f);
                 }
                 else
                 {
-                    Block();
+                    //Shoot gear
+                    bossAnim.SetTrigger("ShootGear");
+                    bossAnim.SetBool("Charge", true);
                     attackDamage = 20;
                 }
-                animationIsPlaying = true;
+            }
+
+
+            //If within the range of the player
+            if (detectionTrigger.GetComponent<BossDetectionTrigger>().attackRange)
+            {
+                if (isCharging)
+                {
+                    //Charge at the player
+                    attackDamage = 20;
+                    bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
+                    bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
+                    bossAnim.SetBool("Charge", false);
+                }
+
+                if (!animationIsPlaying)
+                {
+                    int whichAttack = Random.Range(0, 6);
+
+                    if (whichAttack == 0) //Slash three times
+                    {
+                        bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
+                        bossAnim.SetTrigger("SlashSpree");
+                        attackDamage = 7;
+                    }
+                    else if (whichAttack == 1) //Single slash
+                    {
+                        bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
+                        bossAnim.SetTrigger("SingleSlash");
+                        attackDamage = 8;
+                    }
+                    else if (whichAttack == 2 || whichAttack == 3) 
+                    {
+                        if (!lastStage) // Punch
+                        {
+                            Punch();
+                            attackDamage = 12;
+                        }
+                        else // Gearpunch
+                        {
+                            GearPunch();
+                            attackDamage = 16;
+                        }        
+                        bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
+                    }
+                    else
+                    {
+                        if (!lastStage) // Block
+                        {
+                            bossAnim.SetBool("Block", true);
+                            Invoke("Slash", Random.Range(30, 40f) * 0.1f);
+                            attackDamage = 20;
+                        }
+                        else // Gearattack
+                        {
+                            bossAnim.SetTrigger("GearAttack");
+                            attackDamage = 20;
+                            bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
+                        }
+                        
+                    }
+                    animationIsPlaying = true;
+                }
             }
         }
+        
     }
-    public void SlashSpree()
-    {
-        bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
-        bossAnim.SetTrigger("SlashSpree");
-    }
-    public void Block()
-    {
-        bossAnim.SetBool("Block", true);
-        Invoke("Slash", Random.Range(30, 40f)*0.1f);
-    }
-    public void Slash()
+
+    //Functions called from this script
+    private void ShootCoolDown() { canShoot = true; }
+    private void Slash()
     {
         bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
         bossAnim.SetBool("Block", false);
     }
-    public void Punch()
+    private void Punch()
     {
+        //Randomize amount of punches
         int punchChance = Random.Range(0,3);
 
-        if(punchChance == 0)
-        {
-            bossAnim.SetInteger("PunchInt", 1);
-        }
-        else if (punchChance == 1)
-        {
-            bossAnim.SetInteger("PunchInt", 2);
-        }
-        else
-        {
-            bossAnim.SetInteger("PunchInt", 3);
-        }
+        if(punchChance == 0){   bossAnim.SetInteger("PunchInt", 1);}
+        else if (punchChance == 1){    bossAnim.SetInteger("PunchInt", 2);}
+        else{   bossAnim.SetInteger("PunchInt", 3);}
     }
-    public void SingleSlash()
+    private void GearPunch()
     {
-        bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
-        bossAnim.SetTrigger("SingleSlash");
+        //Randomize amount of punches
+        int punchChance = Random.Range(0, 3);
+
+        if (punchChance == 0) { bossAnim.SetInteger("GearPunchInt", 1); }
+        else if (punchChance == 1) { bossAnim.SetInteger("GearPunchInt", 2); }
+        else { bossAnim.SetInteger("GearPunchInt", 3); }
     }
-    public void Shoot()
+
+
+
+    //Functions called from other scripts
+    public void Abort() { bossAnim.SetTrigger("Abort"); }
+    public void LastStage() { lastStage = true; }
+    public void Stunned()
     {
-        bossAnim.SetBool("Charge", true);
-        canShoot = false;
-        bossAnim.SetTrigger("Shoot");
+        bossAnim.SetBool("Stunned", true);
+        bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
     }
-    public void ShootAudio()
+
+
+    //Functions called from animations
+    public void ShootAudio(){   AudioManager.instance.Play("gun");}
+    public void Shield() { gameObject.GetComponent<BossStats>().CannotBeHarmed(); }
+    public void NoShield()
     {
-        AudioManager.instance.Play("gun");
+        bossAnim.SetBool("Block", false);
+        gameObject.GetComponent<BossStats>().CanBeHarmed();
+
     }
-    public void ShootCoolDown()
+    public void NotLeathal() { leathal = false; }
+    public void IsLeathal()
     {
-        canShoot = true;
+        leathal = true;
+        AudioManager.instance.Play("swing");
     }
     public void ChargeSpeed()
     {
@@ -139,36 +187,15 @@ public class AttackScript : MonoBehaviour
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
         bossCart.GetComponent<BossMovement>().ChargeSpeed();
     }
-    public void Stunned()
-    {
-        bossAnim.SetBool("Stunned", true);
-        bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
-    }
     public void InstanciateProjectile()
     {
         Quaternion projectileRotation = Quaternion.Euler(0f, muzzleTrans.rotation.eulerAngles.y, 0f);
         ProjectileFromBoss projectile = Instantiate(projectilePrefab, muzzleTrans.position, projectileRotation).GetComponent<ProjectileFromBoss>();
         projectile.damageAmount = attackDamage;
     }
-    public void Shield()
+    public void ShootGear()
     {
-        gameObject.GetComponent<BossStats>().CannotBeHarmed();
-    }
-    public void NoShield()
-    {
-        bossAnim.SetBool("Block", false);
-        gameObject.GetComponent<BossStats>().CanBeHarmed();
-        
-    }
-
-    public void IsLeathal()
-    {
-        leathal = true;
-        AudioManager.instance.Play("swing");
-    }
-    public void NotLeathal()
-    {
-        leathal = false;
+        gearBoomerang.GetComponent<GearBoomerang>().ActivateBoomerang();
     }
     public void ActionOver()
     {
@@ -178,6 +205,7 @@ public class AttackScript : MonoBehaviour
         bossAnim.SetBool("Block", false);
         bossAnim.SetBool("Stunned", false);
         bossAnim.SetInteger("PunchInt", 0);
+        bossAnim.SetInteger("GearPunchInt", 0);
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
         bossCart.GetComponent<BossMovement>().LookAtPlayer();
         bossCart.GetComponent<BossMovement>().NormalSpeed();
