@@ -26,6 +26,7 @@ public class GearBoomerang : MonoBehaviour
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
                 gearInGauntlet.SetActive(true);
                 gameObject.GetComponent<Collider>().enabled = false;
+                AudioManager.instance.Play("cogpickup");
             }
         }
 
@@ -40,5 +41,6 @@ public class GearBoomerang : MonoBehaviour
         originalRotation.rotation = center.transform.rotation;
         rotateOnce = true;
         gearInGauntlet.SetActive(false);
+        AudioManager.instance.Play("hitshield");
     }
 }
