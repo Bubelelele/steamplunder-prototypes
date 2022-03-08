@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44367138, g: 0.49300182, b: 0.57255656, a: 1}
+  m_IndirectSpecularColor: {r: 0.44367164, g: 0.49300218, b: 0.57255703, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10244,7 +10244,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194607005687693347}
-  m_LocalRotation: {x: 0.4520157, y: 7.6731534e-16, z: 5.472295e-16, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: -0.000000026583972, z: 0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -18.299438, y: 15.4275, z: -16.868057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -11600,7 +11600,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194607006191821955}
-  m_LocalRotation: {x: 0.4520157, y: 7.6731534e-16, z: 5.472295e-16, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: -0.000000026583972, z: 0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -18.299438, y: 15.4275, z: -16.868057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11968,12 +11968,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '-Try every ability
+  m_text: '-Try to kill the boss
 
-    -Use them on enemies
+    -Use the hammer when he blocks
 
 
-    Press K to reload scene'
+    Press
+    K to reload scene'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
