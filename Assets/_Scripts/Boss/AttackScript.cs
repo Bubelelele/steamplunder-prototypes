@@ -112,7 +112,6 @@ public class AttackScript : MonoBehaviour
                     {
                         if (!lastStage) // Block
                         {
-                            canBeStunned = true;
                             bossAnim.SetBool("Block", true);
                             Invoke("Slash", Random.Range(30, 40f) * 0.1f);
                             attackDamage = 10;
@@ -176,7 +175,11 @@ public class AttackScript : MonoBehaviour
 
     //Functions called from animations
     public void ShootAudio(){   AudioManager.instance.Play("gun");}
-    public void Shield() { gameObject.GetComponent<BossStats>().CannotBeHarmed(); }
+    public void Shield() 
+    {
+        canBeStunned = true;
+        gameObject.GetComponent<BossStats>().CannotBeHarmed(); 
+    }
     public void NoShield()
     {
         bossAnim.SetBool("Block", false);
