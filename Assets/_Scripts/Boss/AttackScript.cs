@@ -157,7 +157,7 @@ public class AttackScript : MonoBehaviour
 
 
     //Functions called from other scripts
-    public void Abort() { bossAnim.SetTrigger("Abort"); }
+    public void Abort() { bossAnim.SetBool("Abort", true); }
     public void LastStage() { lastStage = true; }
     public void Stunned()
     {
@@ -206,6 +206,7 @@ public class AttackScript : MonoBehaviour
         bossAnim.SetBool("Stunned", false);
         bossAnim.SetInteger("PunchInt", 0);
         bossAnim.SetInteger("GearPunchInt", 0);
+        bossAnim.SetBool("Abort", false);
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
         bossCart.GetComponent<BossMovement>().LookAtPlayer();
         bossCart.GetComponent<BossMovement>().NormalSpeed();
