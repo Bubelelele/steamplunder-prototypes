@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
-    private void Awake() => instance = this;
-    
-    public GameState state;
+	private void Awake()
+	{
+		instance = this;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+	}
+
+	public GameState state;
     public static event Action<GameState> OnGameStateChanged;
     [HideInInspector] public Transform player;
     

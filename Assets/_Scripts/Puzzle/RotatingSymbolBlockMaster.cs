@@ -4,6 +4,7 @@ public class RotatingSymbolBlockMaster : MonoBehaviour {
 
     [SerializeField] private int[] solution;
     [SerializeField] private RotatingSymbolBlock[] blocks;
+    public GameObject image;
 
     private void Start() {
         if (solution.Length != blocks.Length) Debug.LogWarning("Rotating block puzzle solution length error");
@@ -18,6 +19,6 @@ public class RotatingSymbolBlockMaster : MonoBehaviour {
             if (blocks[i].CurrentSymbol != solution[i]) return;
         }
 
-        Debug.Log("gj");
+        image.SetActive(true);
     }
 }
