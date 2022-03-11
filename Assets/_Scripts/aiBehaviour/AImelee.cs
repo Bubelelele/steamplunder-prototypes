@@ -18,6 +18,7 @@ public class AImelee: EnemyClass
         attackAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         nma = GetComponent<NavMeshAgent>();
+        player = GameManager.instance.player;
     }
 
     public override void Idle()
