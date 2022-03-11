@@ -26,7 +26,7 @@ public class GunController : MonoBehaviour {
 
     public void Aim() {
 
-        AudioManager.instance.Play("gun");
+        AudioManager.instance?.Play("gun");
 
         //Attack visuals
         _animator.SetTrigger("shoot");

@@ -46,7 +46,7 @@ public class GrappleController : MonoBehaviour {
         GameManager.instance.UpdateGameState(GameState.NoMove);
         SetObjectActive(true);
 
-        AudioManager.instance.Play("grapplehook");
+        AudioManager.instance?.Play("grapplehook");
         
         //Attack cooldown
         CanAttack = false;

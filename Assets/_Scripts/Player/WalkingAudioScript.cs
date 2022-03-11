@@ -9,7 +9,7 @@ public class WalkingAudioScript : MonoBehaviour
         {
             if (!audioPlaying)
             {
-                AudioManager.instance.Play("walking");
+                AudioManager.instance?.Play("walking");
                 audioPlaying = true;
             }
         }
@@ -17,7 +17,7 @@ public class WalkingAudioScript : MonoBehaviour
         {
             if (audioPlaying)
             {
-                AudioManager.instance.Stop("walking");
+                AudioManager.instance?.Stop("walking");
                 audioPlaying = false;
             }
         }

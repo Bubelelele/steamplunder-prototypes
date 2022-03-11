@@ -38,7 +38,7 @@ public class HammerController : MonoBehaviour {
 
     public void PlayHammerSound()
     {
-        AudioManager.instance.Play("hammer");
+        AudioManager.instance?.Play("hammer");
     }
 
     //Triggers when the hammer impacts the ground

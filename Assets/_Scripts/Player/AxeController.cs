@@ -29,7 +29,7 @@ public class AxeController : MonoBehaviour {
         _animator.SetTrigger("axe");
         trailRenderer.enabled = true;
 
-        AudioManager.instance.Play("swing");
+        AudioManager.instance?.Play("swing");
         
         //Attack cooldown
         CanAttack = false;
@@ -47,15 +47,15 @@ public class AxeController : MonoBehaviour {
                 int soundNumber = Random.Range(0,3);
                 if (soundNumber == 0)
                 {
-                    AudioManager.instance.Play("blood1");
+                    AudioManager.instance?.Play("blood1");
                 }
                 else if(soundNumber == 1)
                 {
-                    AudioManager.instance.Play("blood2");
+                    AudioManager.instance?.Play("blood2");
                 }
                 else
                 {
-                    AudioManager.instance.Play("blood3");
+                    AudioManager.instance?.Play("blood3");
                 }
             }
         }
