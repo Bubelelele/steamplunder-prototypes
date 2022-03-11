@@ -35,6 +35,8 @@ public class SteamerController : MonoBehaviour {
     //Called in the animation
     private void Blow() {
         //Check hitbox and act accordingly
+        AudioManager.instance.Play("steamer");
+
         var t = transform;
         int numberHit = Physics.OverlapCapsuleNonAlloc(t.position + t.forward * 1.7f + t.right * .4f, t.position + t.forward * 3.4f + t.right * .4f, .75f, _attackHitboxResults, interactableLayer);
         for (int i = 0; i < numberHit; i++) {

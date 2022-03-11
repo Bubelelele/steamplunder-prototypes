@@ -285,7 +285,7 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInAttackRange: 0
   aiState: 0
-  attackDamage: 5
+  attackDamage: 2
   attackParameter: Attack
 --- !u!95 &3321607921415721585
 Animator:
@@ -528,7 +528,8 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: adcd8e0f993d343d8bd27434f15383b1, type: 3}
 --- !u!4 &170242293756625148 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4324605478751090, guid: adcd8e0f993d343d8bd27434f15383b1, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4324605478751090, guid: adcd8e0f993d343d8bd27434f15383b1,
+    type: 3}
   m_PrefabInstance: {fileID: 167635126791326606}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &628069814228582054
