@@ -54,12 +54,6 @@ public class GearManager : MonoBehaviour {
         else if (Input.GetKeyDown(InputManager.instance.HammerBtn) && HammerActive) InvokeHammerAction();
         else if (Input.GetKeyDown(InputManager.instance.SteamerBtn) && SteamerActive) InvokeSteamerAction();
         else if (Input.GetKeyDown(InputManager.instance.GrappleBtn) && GrappleActive) InvokeGrappleAction();
-        
-        if (Input.GetKeyDown(KeyCode.Alpha1)) ToggleAxe(!AxeActive);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) ToggleHammer(!HammerActive);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) ToggleGun(!GunActive);
-        if (Input.GetKeyDown(KeyCode.Alpha4)) ToggleSteamer(!SteamerActive);
-        if (Input.GetKeyDown(KeyCode.Alpha5)) ToggleGrapple(!GrappleActive);
     }
     
 

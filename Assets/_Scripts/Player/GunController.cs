@@ -25,6 +25,9 @@ public class GunController : MonoBehaviour {
     }
 
     public void Aim() {
+
+        AudioManager.instance.Play("gun");
+
         //Attack visuals
         _animator.SetTrigger("shoot");
         
@@ -34,6 +37,7 @@ public class GunController : MonoBehaviour {
     }
 
     private void Shoot() {
+
         //Spawn projectile
         Quaternion projectileRotation = Quaternion.Euler(0f, muzzleTrans.rotation.eulerAngles.y, 0f);
         Projectile projectile = Instantiate(projectilePrefab, muzzleTrans.position, projectileRotation).GetComponent<Projectile>();

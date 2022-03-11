@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     private void Start() {
-        //Play("ambience");
+        Play("ambience");
     }
 
     public void Play(string name) {
@@ -48,5 +48,19 @@ public class AudioManager : MonoBehaviour {
         }
         sound.source.Play();
     }
-    
+    public void Stop(string name)
+    {
+        if (muted) return;
+
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+
+        if (sound == null)
+        {
+            //Rather do normal check instead of null conditional in order to log the name
+            Debug.LogWarning($"Sound: {name} not found!");
+            return;
+        }
+        sound.source.Stop();
+    }
+
 }
