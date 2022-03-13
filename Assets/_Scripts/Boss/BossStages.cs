@@ -10,6 +10,7 @@ public class BossStages : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform[] bossLocation;
     [SerializeField] private Transform targetLocation;
+    [SerializeField] private Animator exitDoorAnimator;
 
     public void Stage2()
     {
@@ -23,9 +24,9 @@ public class BossStages : MonoBehaviour
         {
             targetLocation.position = bossLocation[0].position;
             agent.SetDestination(targetLocation.position);
-            
+            exitDoorAnimator.SetBool("OpenDoor", true);
 
-            if(Vector3.Distance(transform.position, targetLocation.position) < 1)
+            if (Vector3.Distance(transform.position, targetLocation.position) < 1)
             {
                 secondStage = false;
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
