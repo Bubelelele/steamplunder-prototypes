@@ -6,6 +6,7 @@ public class AttackScript : MonoBehaviour
     [HideInInspector] public int attackDamage;
     [HideInInspector] public bool leathal = false;
     [HideInInspector] public bool lastStage = false;
+    [HideInInspector] public bool pushBack = false;
 
     //Gun
     [SerializeField] private GameObject projectilePrefab;
@@ -44,7 +45,7 @@ public class AttackScript : MonoBehaviour
             //Shooting and charging
             float dist = Vector3.Distance(transform.position, GameManager.instance.player.gameObject.transform.position);
 
-            if (dist > 6f && !animationIsPlaying && canShoot)
+            if (dist > 8f && !animationIsPlaying && canShoot)
             {
                 bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
                 animationIsPlaying = true;
@@ -62,6 +63,7 @@ public class AttackScript : MonoBehaviour
                     bossAnim.SetTrigger("ShootGear");
                     bossAnim.SetBool("Charge", true);
                     attackDamage = 7;
+                    pushBack = false;
                 }
             }
 
@@ -76,6 +78,7 @@ public class AttackScript : MonoBehaviour
                     bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
                     bossCart.GetComponent<BossMovement>().DontLookAtPlayer();
                     bossAnim.SetBool("Charge", false);
+                    pushBack = true;
                 }
 
                 if (!animationIsPlaying)
@@ -87,12 +90,14 @@ public class AttackScript : MonoBehaviour
                         bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
                         bossAnim.SetTrigger("SlashSpree");
                         attackDamage = 7;
+                        pushBack = true;
                     }
                     else if (whichAttack == 1) //Single slash
                     {
                         bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
                         bossAnim.SetTrigger("SingleSlash");
                         attackDamage = 7;
+                        pushBack = true;
                     }
                     else if (whichAttack == 2 || whichAttack == 3) 
                     {
@@ -100,10 +105,12 @@ public class AttackScript : MonoBehaviour
                         {
                             Punch();
                             attackDamage = 5;
+                            pushBack = false;
                         }
                         else // Gearpunch
                         {
                             GearPunch();
+                            pushBack = false;
                             attackDamage = 7;
                         }        
                         bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
@@ -115,11 +122,13 @@ public class AttackScript : MonoBehaviour
                             bossAnim.SetBool("Block", true);
                             Invoke("Slash", Random.Range(30, 40f) * 0.1f);
                             attackDamage = 10;
+                            
                         }
                         else // Gearattack
                         {
                             bossAnim.SetTrigger("GearAttack");
                             attackDamage = 13;
+                            pushBack = true;
                             bossCart.GetComponent<BossMovement>().DontWalkToPlayer();
                         }
                         
@@ -137,6 +146,7 @@ public class AttackScript : MonoBehaviour
     {
         bossCart.GetComponent<BossMovement>().SwordSwingSpeed();
         bossAnim.SetBool("Block", false);
+        pushBack = true;
     }
     private void Punch()
     {
@@ -211,19 +221,19 @@ public class AttackScript : MonoBehaviour
     }
     public void ActionOver()
     {
-
-        Invoke("AnimationDelay", 1f);
+        Invoke("AnimationDelay", 0f);
+        bossAnim.SetInteger("PunchInt", 0);
+        bossAnim.SetInteger("GearPunchInt", 0);
         isCharging = false;
         canBeStunned = false;
         bossAnim.SetBool("Block", false);
         bossAnim.SetBool("Stunned", false);
-        bossAnim.SetInteger("PunchInt", 0);
-        bossAnim.SetInteger("GearPunchInt", 0);
         bossAnim.SetBool("Abort", false);
         bossCart.GetComponent<BossMovement>().WalkToPlayer();
         bossCart.GetComponent<BossMovement>().LookAtPlayer();
         bossCart.GetComponent<BossMovement>().NormalSpeed();
         frontOffset.SetActive(true);
+        pushBack = false;
     }
     public void AnimationDelay()
     {

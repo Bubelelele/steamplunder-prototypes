@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProjectileFromBoss : MonoBehaviour {
 
     public int damageAmount;
-    
+
     private ParticleSystem _particles;
     
     private void Start() {
@@ -15,13 +15,13 @@ public class ProjectileFromBoss : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        transform.position += transform.forward * .6f;
+        transform.position += transform.forward * 0.3f;
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerStats>().Damage(5);         
+            other.GetComponent<PlayerStats>().Damage(5);
         }
         
         _particles.Play();

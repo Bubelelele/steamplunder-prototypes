@@ -17,12 +17,6 @@ public class BossStages : MonoBehaviour
         gameObject.GetComponent<NavMeshAgent>().enabled = true;
         boss.GetComponent<BossStats>().DeactivateBoss();
     }
-    public void Stage3()
-    {
-        thirdStage = true;
-        gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        boss.GetComponent<BossStats>().DeactivateBoss();
-    }
     private void Update()
     {
         if (secondStage)
@@ -35,18 +29,7 @@ public class BossStages : MonoBehaviour
             {
                 secondStage = false;
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            }
-        }
-        if (thirdStage)
-        {
-            targetLocation.position = bossLocation[1].position;
-            agent.SetDestination(targetLocation.position);
-
-            if (Vector3.Distance(transform.position, targetLocation.position) < 1)
-            {
-                gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 boss.GetComponent<AttackScript>().LastStage();
-                thirdStage = false;
             }
         }
     }
