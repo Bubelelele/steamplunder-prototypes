@@ -16,7 +16,7 @@ public class BossMovement : MonoBehaviour
 
     void Update()
     {
-        if(boss.GetComponent<BossStats>().isActive && lookAtPlayer)
+        if(boss != null && boss.GetComponent<BossStats>().isActive && lookAtPlayer)
         {
 
             var targetRotation = Quaternion.LookRotation(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position);
