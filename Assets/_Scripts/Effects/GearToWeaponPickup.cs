@@ -14,7 +14,7 @@ public class GearToWeaponPickup : MonoBehaviour {
         if (collision.gameObject.CompareTag("Player")) {
             EffectManager.instance.PickupEffect(transform.position);
             AudioManager.instance?.Play("cogpickup");
-            gearTimeline.GetComponent<PlayableDirector>().Play();
+            gearTimeline.GetComponent<StartCutscene>().FadeOut();
             Destroy(gameObject);
         }
     }

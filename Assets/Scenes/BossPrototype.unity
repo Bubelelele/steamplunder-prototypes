@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44367138, g: 0.49300182, b: 0.57255656, a: 1}
+  m_IndirectSpecularColor: {r: 0.44367164, g: 0.49300218, b: 0.57255703, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -569,6 +569,12 @@ Transform:
   m_Father: {fileID: 2018354417}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &192546339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 247694639588532152, guid: 86919d86710357742935d9784c4a9846,
+    type: 3}
+  m_PrefabInstance: {fileID: 2776276427465513675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &192735924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,6 +1877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512951599}
   - component: {fileID: 512951598}
+  - component: {fileID: 512951600}
   m_Layer: 0
   m_Name: TimeLine
   m_TagString: BossTimeline
@@ -1885,7 +1892,7 @@ PlayableDirector:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512951597}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
   m_InitialState: 1
@@ -1936,6 +1943,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &512951600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512951597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb84e17bcbc52d43b62df3d64237b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCanvas: {fileID: 9194607005546524365}
+  cameraFadeAnim: {fileID: 789160549}
+  axeLv1: {fileID: 192546339}
+  axeLv2: {fileID: 1793259970}
 --- !u!1 &514571088
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,7 +3531,7 @@ Animator:
   m_GameObject: {fileID: 789160544}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ff7dc61df1b7e54f9064463edefe91d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6476,10 +6499,10 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 58.38
-  m_Range: 10
-  m_SpotAngle: 30
+  m_Color: {r: 1, g: 0.8502705, b: 0.48584908, a: 1}
+  m_Intensity: 4.06
+  m_Range: 21.17
+  m_SpotAngle: 84.1
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -6541,6 +6564,12 @@ Transform:
   m_Father: {fileID: 512951599}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 175.47, y: 16.322998, z: -19.636993}
+--- !u!1 &1793259970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4167108774704592638, guid: 86919d86710357742935d9784c4a9846,
+    type: 3}
+  m_PrefabInstance: {fileID: 2776276427465513675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1837419188
 PrefabInstance:
   m_ObjectHideFlags: 0
