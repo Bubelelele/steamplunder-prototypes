@@ -5,7 +5,6 @@ using UnityEngine;
 public class PuzzleManager0 : MonoBehaviour
 {
     public static PuzzleManager0 Instance;
-    public GatePressurePlate gatePressurePlate;
     public bool boxInside;
 
     private Animator animator;
