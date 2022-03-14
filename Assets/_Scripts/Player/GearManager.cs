@@ -21,6 +21,8 @@ public class GearManager : MonoBehaviour {
     private SteamerController _steamerController;
     private GrappleController _grappleController;
 
+    [HideInInspector] public bool hammerActiveOverridden;
+
     private void Start() {
         //Set up events and cache components
         _axeController = GetComponent<AxeController>();
@@ -40,7 +42,7 @@ public class GearManager : MonoBehaviour {
         
         //Toggle active on startup
         ToggleAxe(axeActiveOnStart);
-        ToggleHammer(hammerActiveOnStart);
+        if (!hammerActiveOverridden) ToggleHammer(hammerActiveOnStart);
         ToggleGun(gunActiveOnStart);
         ToggleSteamer(steamerActiveOnStart);
         ToggleGrapple(grappleActiveOnStart);
@@ -48,6 +50,8 @@ public class GearManager : MonoBehaviour {
 
     private void Update() {
         if (GameManager.instance.state != GameState.Default) return;
+        
+        if (Input.GetKeyDown(KeyCode.Alpha4)) ToggleHammer(!HammerActive);
         
         if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn) && AxeActive) InvokeAxeAction();
         else if (Input.GetMouseButtonDown(InputManager.instance.GunMouseBtn) && GunActive) InvokeGunAction();

@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour, IDamageable {
     private float _saturationTarget;
 
     private void Start() {
-        _health = maxHealth;
+        if (_health == 0) _health = maxHealth;
         ppVolume.profile.TryGetSettings(out _vignette);
         ppVolume.profile.TryGetSettings(out _colorGrading);
     }
@@ -42,13 +42,19 @@ public class PlayerStats : MonoBehaviour, IDamageable {
         if (_health <= 0) Die();
         
         healthbar.UpdateHealthbar(_health, maxHealth);
+        LowHealthFX();
+    }
+
+    public void SetHealth(int num) {
+        _health = num;
         
+        healthbar.UpdateHealthbar(_health, maxHealth);
         LowHealthFX();
     }
 
     public void AddCogs(int amount) {
         Cogs += amount;
-        UIManager.instance.cogCounter?.UpdateCogUI(Cogs);
+        UIManager.instance?.cogCounter.UpdateCogUI(Cogs);
     }
 
     private void Die() {
@@ -56,8 +62,6 @@ public class PlayerStats : MonoBehaviour, IDamageable {
         EffectManager.instance.DeathEffect(transform.position);
         GameManager.instance.WaitReloadScene(1f);
         gameObject.SetActive(false);
-        
-        
     }
 
     private void LowHealthFX() {
@@ -72,6 +76,17 @@ public class PlayerStats : MonoBehaviour, IDamageable {
             _saturationTarget = 0f;
             if (lowHealthAnim.isPlaying) lowHealthAnim.Stop();
         }
+    }
+    
+    public void SavePlayerState() {
+        var sceneTransfer = SceneTransfer.instance;
+        var gearManager = GetComponent<GearManager>();
+        if (sceneTransfer == null || gearManager == null) {
+            Debug.LogWarning("Player State Save failed!");
+            return;
+        }
+        
+        sceneTransfer.WritePlayerState(_health, gearManager.HammerActive);
     }
     
 }
