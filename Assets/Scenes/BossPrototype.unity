@@ -1873,7 +1873,7 @@ GameObject:
   - component: {fileID: 512951598}
   m_Layer: 0
   m_Name: TimeLine
-  m_TagString: Untagged
+  m_TagString: BossTimeline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1888,19 +1888,13 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
+  m_InitialState: 1
+  m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -6537149424045046865, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
-    value: {fileID: 789160549}
-  - key: {fileID: -7411051711235506200, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
-    value: {fileID: 9194607005546524366}
   - key: {fileID: 58390949312039437, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
     value: {fileID: 543567255}
-  - key: {fileID: 9172850652184768559, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
-    value: {fileID: 9194607005687693347}
   - key: {fileID: -43279622610678619, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
     value: {fileID: 1303123069}
   - key: {fileID: 1883107189698690867, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
@@ -1909,8 +1903,6 @@ PlayableDirector:
     value: {fileID: 1009386014}
   - key: {fileID: 3553844197799736615, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
     value: {fileID: 561396546}
-  - key: {fileID: -7489822816421384486, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
-    value: {fileID: 9194607005903445963}
   - key: {fileID: -5745132609718169583, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
     value: {fileID: 1779173082}
   - key: {fileID: -5714078339120420228, guid: f4a14480ea6684244bf253fe047adc92, type: 2}
@@ -4498,7 +4490,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh60164
+  m_Name: pb_Mesh32644
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5099,7 +5091,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh60456
+  m_Name: pb_Mesh32936
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7611,7 +7603,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh60120
+  m_Name: pb_Mesh32600
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8186,7 +8178,7 @@ MonoBehaviour:
     type: 3}
   cogPickupPrefab: {fileID: 3222380295588398034, guid: 04695490b07123d49af30ebabe3ca6f1,
     type: 3}
-  sparkPrefab: {fileID: 8369871894813963967, guid: e9bf049871c22d54aa0a29d616c72b4c,
+  gearToWeaponPrefab: {fileID: 3222380295588398034, guid: 15f6c84e37f6a2943baa56fdaf474768,
     type: 3}
 --- !u!1 &9194607004756050129
 GameObject:
@@ -10204,7 +10196,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194607005687693347}
-  m_LocalRotation: {x: 0.4520157, y: -7.6731534e-16, z: -5.472295e-16, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: -0.000000026583972, z: 0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -18.299438, y: 15.4275, z: -16.868057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -11560,7 +11552,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194607006191821955}
-  m_LocalRotation: {x: 0.4520157, y: -7.6731534e-16, z: -5.472295e-16, w: 0.89201003}
+  m_LocalRotation: {x: 0.45201567, y: -0.000000026583972, z: 0.0000000134711176, w: 0.89201003}
   m_LocalPosition: {x: -18.299438, y: 15.4275, z: -16.868057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
