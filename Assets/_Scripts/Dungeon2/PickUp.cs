@@ -8,6 +8,7 @@ public class PickUp : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            gameObject.SetActive(false);
             ReplaceCog.Instance.haveCog = true;
         }
     }

@@ -8,6 +8,7 @@ public class ReplaceCog : MonoBehaviour, IInteractable
 
     public GameObject cog;
     public bool haveCog;
+    public Animator door;
 
     private void Awake()
     {
@@ -19,6 +20,8 @@ public class ReplaceCog : MonoBehaviour, IInteractable
         if (haveCog)
         {
             cog.gameObject.SetActive(true);
+            door.SetBool("OpenDoor", true);
+            haveCog = false;
         }
     }
 
