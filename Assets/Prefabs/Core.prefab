@@ -3033,6 +3033,7 @@ GameObject:
   - component: {fileID: 3816176358129248905}
   - component: {fileID: 3816176358129248907}
   - component: {fileID: 3816176358129248906}
+  - component: {fileID: 8406195803191398342}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -3098,6 +3099,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &8406195803191398342
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816176358129248904}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ce77b2b74a709ce4ba8443e129c4c5f4, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ce77b2b74a709ce4ba8443e129c4c5f4, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3816176358131807982
 GameObject:
   m_ObjectHideFlags: 0
@@ -3286,6 +3303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muted: 0
   mixerGroup: {fileID: 24300002, guid: 001650986dc686f40b61c3fc7ea38221, type: 2}
+  backgroundSoundToPlay: ambience
   sounds:
   - name: ambience
     clip: {fileID: 8300000, guid: c1d2099f07457e943bb014fa8148e442, type: 3}
@@ -5062,7 +5080,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3816176359022198145}
-  m_LocalRotation: {x: 0.42259866, y: -0.007345278, z: 0.003425107, w: 0.90628076}
+  m_LocalRotation: {x: 0.40278062, y: -0.27437663, z: 0.1279419, w: 0.8637802}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5375,6 +5393,11 @@ PrefabInstance:
       objectReference: {fileID: 3816176358701589099}
     - target: {fileID: 2508163945023151155, guid: 86919d86710357742935d9784c4a9846,
         type: 3}
+      propertyPath: ppVolume
+      value: 
+      objectReference: {fileID: 3816176357314842772}
+    - target: {fileID: 2508163945023151155, guid: 86919d86710357742935d9784c4a9846,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 3816176358129248906}
@@ -5383,6 +5406,11 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 3816176359133164638}
+    - target: {fileID: 2508163945023151155, guid: 86919d86710357742935d9784c4a9846,
+        type: 3}
+      propertyPath: lowHealthAnim
+      value: 
+      objectReference: {fileID: 8406195803191398342}
     - target: {fileID: 4958706421009914040, guid: 86919d86710357742935d9784c4a9846,
         type: 3}
       propertyPath: mainCam

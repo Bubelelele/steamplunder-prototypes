@@ -11,8 +11,9 @@ public class Healthbar : MonoBehaviour {
     private float _target = 1;
     
     public void UpdateHealthbar(int currentHealth, int maxHealth) {
-        _target = (float) currentHealth / maxHealth;
-        if (healthText != null) healthText.text = currentHealth + "/" + maxHealth;
+        int currentHealthToDisplay = (currentHealth < 0) ? 0 : currentHealth;
+        _target = (float) currentHealthToDisplay / maxHealth;
+        if (healthText != null) healthText.text = currentHealthToDisplay + "/" + maxHealth;
     }
 
     private void Update() {

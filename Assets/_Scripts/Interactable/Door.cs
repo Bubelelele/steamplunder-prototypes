@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable {
-    [SerializeField] private int index = 0;
-    [SerializeField] private string bruh;
+    [SerializeField] private int buildIndex;
+    [SerializeField] private string descriptionText;
     
     public void Interact() {
-        GameManager.instance.LoadScene(index);
+        GameManager.instance.LoadScene(buildIndex);
     }
 
     public void StopInteract() {
@@ -15,6 +13,6 @@ public class Door : MonoBehaviour, IInteractable {
     }
 
     public string GetDescription() {
-        return bruh;
+        return descriptionText;
     }
 }

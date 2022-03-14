@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour {
     public bool muted;
     
     [SerializeField] private AudioMixerGroup mixerGroup;
+    [SerializeField] private string backgroundSoundToPlay = "ambience";
     
     public Sound[] sounds;
 
@@ -20,7 +21,7 @@ public class AudioManager : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject); //Might not be needed in this project
         
         foreach (Sound sound in sounds) {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -33,7 +34,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     private void Start() {
-        Play("ambience");
+        Play(backgroundSoundToPlay);
     }
 
     public void Play(string name) {
