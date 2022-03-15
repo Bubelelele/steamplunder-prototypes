@@ -47,6 +47,7 @@ public class HeavyEnemyStats : MonoBehaviour, IDamageable
         EffectManager.instance.DeathEffect(position);
         Destroy(heavyBanditCart);
         EffectManager.instance.CogPickup(position);
+        
     }
     public void CanBeHarmed(){ 
         canBeHarmed = true;

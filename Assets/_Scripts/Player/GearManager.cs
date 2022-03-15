@@ -51,8 +51,6 @@ public class GearManager : MonoBehaviour {
     private void Update() {
         if (GameManager.instance.state != GameState.Default) return;
         
-        if (Input.GetKeyDown(KeyCode.Alpha4)) ToggleHammer(!HammerActive);
-        
         if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn) && AxeActive) InvokeAxeAction();
         else if (Input.GetMouseButtonDown(InputManager.instance.GunMouseBtn) && GunActive) InvokeGunAction();
         else if (Input.GetKeyDown(InputManager.instance.HammerBtn) && HammerActive) InvokeHammerAction();

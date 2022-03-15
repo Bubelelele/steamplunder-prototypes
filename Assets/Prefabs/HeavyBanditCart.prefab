@@ -524,6 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leathal: 0
+  raisedUp: 1
   maxHealth: 100
   healthbar: {fileID: 4843906751353414547}
   damageFlash: {fileID: 8180433252393940393}
@@ -947,6 +948,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29595362ddeaec545a8e9a29276a4357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookAtPlayer: 0
+  damping: 20
 --- !u!1 &6181711330373190186
 GameObject:
   m_ObjectHideFlags: 0
