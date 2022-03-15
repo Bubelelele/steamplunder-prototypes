@@ -3,6 +3,7 @@ using UnityEngine;
 public class DestroyRock : MonoBehaviour
 {
     public GameObject Rock;
+    public GameObject RockMesh;
     public GameObject player;
     public ParticleSystem rockDebrees;
     public ParticleSystem dustWave;
@@ -18,7 +19,7 @@ public class DestroyRock : MonoBehaviour
     }
     private void HideRock()
     {
-        Rock.GetComponent<MeshRenderer>().enabled = false;
+        RockMesh.GetComponent<MeshRenderer>().enabled = false;
         rockDebrees.Play();
         dustWave.Play();
         destroyRockAudioSource.Play();
