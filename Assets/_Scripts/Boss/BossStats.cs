@@ -17,7 +17,6 @@ public class BossStats : MonoBehaviour, IDamageable
     [HideInInspector] public bool canBeHarmed = true;
 
     private bool firstDone = false;
-    private bool secondDone = false;
 
     private void Start()
     {
@@ -34,15 +33,10 @@ public class BossStats : MonoBehaviour, IDamageable
             {
                 Die();
             }
-            else if (_health <= maxHealth / 3 * 2 && !firstDone)
+            else if (_health <= maxHealth / 2 && !firstDone)
             {
                 bossCart.GetComponent<BossStages>().Stage2();
                 firstDone = true;
-            }
-            else if (_health <= maxHealth / 3 && !secondDone)
-            {
-                bossCart.GetComponent<BossStages>().Stage3();
-                secondDone = true;
             }
 
 
@@ -62,7 +56,7 @@ public class BossStats : MonoBehaviour, IDamageable
         EffectManager.instance.DeathEffect(position);
         Destroy(gameObject);
         Destroy(healtbarImage);
-        EffectManager.instance.CogPickup(position);
+        EffectManager.instance.GearToWeaponPickup(position);
     }
 
     public void ActivateBoss()

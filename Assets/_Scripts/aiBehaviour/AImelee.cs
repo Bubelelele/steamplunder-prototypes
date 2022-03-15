@@ -32,7 +32,6 @@ public class AImelee: EnemyClass
     public override void ChasePlayer()
     {
         agent.SetDestination(player.position);
-
         if (playerInSightRange && playerInAttackRange)
             aiState = EnemyStates.attack;
     }

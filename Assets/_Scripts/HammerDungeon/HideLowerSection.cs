@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class HideLowerSection : MonoBehaviour
 {
-    public GameObject player;
     public GameObject lowerSection;
     public GameObject transparentWall;
     private void OnTriggerEnter(Collider other)
