@@ -15,7 +15,8 @@ public class SyringeUI : MonoBehaviour {
     [SerializeField] private GameObject canHealText;
     [SerializeField] private GameObject cantHealText;
     [SerializeField] private Image radialProgressImage;
-    
+    [SerializeField] private Animator syringeAnimator;
+
     private bool _healReady;
     private float _radialTarget;
 
@@ -58,6 +59,7 @@ public class SyringeUI : MonoBehaviour {
         SetHealReady(false);
         Cogs = 0;
         SetCogCount(Cogs);
+        syringeAnimator.Play("SyringeFade");
     }
     
     private void SetCogCount(int cogs) {
