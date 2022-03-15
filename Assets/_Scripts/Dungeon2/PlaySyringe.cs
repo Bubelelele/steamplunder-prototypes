@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlaySyringe : MonoBehaviour
 {
-    private void Start()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            transform.GetComponent<Animator>().SetTrigger("Heal");
+        }
     }
 }
