@@ -11,11 +11,14 @@ public class RotatingSymbolBlock : MonoBehaviour, IInteractable {
     
     [SerializeField] private float rotateDelay = .01f;
     [SerializeField] private Transform blockTransform;
-
+    [SerializeField] private bool balls;
+    
+    
     private bool _isRotating;
 
     private void Start() {
         //Random start symbol
+        if (balls) return;
         CurrentSymbol = Random.Range(1, 5);
         blockTransform.Rotate(new Vector3(0, (CurrentSymbol-1)*90f));
     }
