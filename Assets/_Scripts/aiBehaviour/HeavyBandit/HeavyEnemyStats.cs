@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class HeavyEnemyStats : MonoBehaviour, IDamageable
 {
     [HideInInspector] public bool leathal = false;
+    [HideInInspector] public bool raisedUp = true;
 
 
     [SerializeField] private int maxHealth = 100;
@@ -61,4 +62,6 @@ public class HeavyEnemyStats : MonoBehaviour, IDamageable
         leathal = true;
         AudioManager.instance.Play("swing");
     }
+    public void NotRaisedUp(){  raisedUp = false;}
+    public void RaisedUp(){  raisedUp = true;}
 }

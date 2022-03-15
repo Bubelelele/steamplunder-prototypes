@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,6 +26,7 @@ public class AIHeavy: EnemyClass
     public override void Idle()
     {
         agent.SetDestination(homePoint);
+        gameObject.GetComponent<RotateToPlayer>().DontLookAtPlayer();
 
         if (playerInSightRange && !playerInAttackRange)
             aiState = EnemyStates.chase;
@@ -34,10 +34,15 @@ public class AIHeavy: EnemyClass
 
     public override void ChasePlayer()
     {
-        agent.SetDestination(player.position);
-        attackAnim.SetBool("Block", true);
-        if (playerInSightRange && playerInAttackRange)
-            aiState = EnemyStates.attack;
+        if (heavyBandit.GetComponent<HeavyEnemyStats>().raisedUp)
+        {
+            gameObject.GetComponent<RotateToPlayer>().LookAtPlayer();
+            agent.SetDestination(player.position);
+            attackAnim.SetBool("Block", true);
+            if (playerInSightRange && playerInAttackRange)
+                aiState = EnemyStates.attack;
+        }
+
     }
 
     public override void AttackPlayer()
@@ -58,7 +63,6 @@ public class AIHeavy: EnemyClass
 
     public override void ResetAttack()
     {
-        transform.LookAt(player);
         alreadyAttacked = false;
     }
 
@@ -71,6 +75,7 @@ public class AIHeavy: EnemyClass
     public void Stunned()
     {
         attackAnim.SetTrigger("Stunned");
+        gameObject.GetComponent<RotateToPlayer>().DontLookAtPlayer();
     }
 
     private IEnumerator StunCooldown() {
