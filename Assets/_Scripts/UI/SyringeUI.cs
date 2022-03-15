@@ -31,8 +31,6 @@ public class SyringeUI : MonoBehaviour {
         if (Input.GetKeyDown(InputManager.instance.HealBtn)) {
             Heal();
         }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha3)) AddCogs(1);
     }
 
     public void AddCogs(int amount) {
@@ -55,6 +53,7 @@ public class SyringeUI : MonoBehaviour {
     private void Heal() {
         if (!_healReady) return;
         
+        AudioManager.instance.Play("healing");
         GameManager.instance.player.GetComponent<PlayerStats>().AddHealth(healAmount);
         SetHealReady(false);
         Cogs = 0;

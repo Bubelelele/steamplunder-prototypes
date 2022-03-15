@@ -3137,7 +3137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muted: 0
   mixerGroup: {fileID: 24300002, guid: 001650986dc686f40b61c3fc7ea38221, type: 2}
-  backgroundSoundToPlay: ambience
+  backgroundSoundToPlay: 
   sounds:
   - name: ambience
     clip: {fileID: 8300000, guid: c1d2099f07457e943bb014fa8148e442, type: 3}
@@ -3201,6 +3201,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: gun
     clip: {fileID: 8300000, guid: 98ed7fd4beeecd240a1d39ec6c1543aa, type: 3}
+    volume: 0.454
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: playerdeath
+    clip: {fileID: 8300000, guid: 62142579115448145bf492e907bc99b6, type: 3}
+    volume: 0.454
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: healing
+    clip: {fileID: 8300000, guid: dc53ab91ed5126d43981cc01cb6d84b9, type: 3}
     volume: 0.454
     pitch: 1
     loop: 0
