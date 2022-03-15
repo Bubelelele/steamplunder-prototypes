@@ -32,7 +32,7 @@ public class AImelee: EnemyClass
     public override void ChasePlayer()
     {
         agent.SetDestination(player.position);
-
+        attackAnim.SetBool("Block", true);
         if (playerInSightRange && playerInAttackRange)
             aiState = EnemyStates.attack;
     }

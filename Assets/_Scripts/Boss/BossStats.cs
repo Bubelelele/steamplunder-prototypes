@@ -56,7 +56,7 @@ public class BossStats : MonoBehaviour, IDamageable
         EffectManager.instance.DeathEffect(position);
         Destroy(gameObject);
         Destroy(healtbarImage);
-        EffectManager.instance.CogPickup(position);
+        EffectManager.instance.GearToWeaponPickup(position);
     }
 
     public void ActivateBoss()
