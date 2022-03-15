@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour {
         UpdateGameState(GameState.Default);
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(InputManager.instance.ReloadBtn)) ReloadScene();
-    }
+    // private void Update() {
+    //     if (Input.GetKeyDown(InputManager.instance.ReloadBtn)) ReloadScene();
+    // }
 
     public void UpdateGameState(GameState newState) {
         if (state == newState) return;
