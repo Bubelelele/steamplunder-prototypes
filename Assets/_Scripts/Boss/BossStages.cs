@@ -29,12 +29,10 @@ public class BossStages : MonoBehaviour
             exitDoorAnimator.SetBool("OpenDoor", true);
             stage2DoorAnimator.SetBool("OpenDoor", true);
 
-            if (Vector3.Distance(transform.position, targetLocation.position) < 1)
+            if (Vector3.Distance(transform.position, targetLocation.position) < 2)
             {
-                boss.GetComponent<Animator>().SetTrigger("SecondStage");
                 secondStage = false;
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
-                stage2DoorAnimator.SetBool("OpenDoor", false);
                 boss.GetComponent<AttackScript>().LastStage();
             }
         }
