@@ -34,8 +34,6 @@ public class AIHeavy: EnemyClass
     {
         agent.SetDestination(player.position);
         attackAnim.SetBool("Block", true);
-        IsBlocking();
-        heavyBandit.GetComponent<HeavyEnemyStats>().CannotBeHarmed();
         if (playerInSightRange && playerInAttackRange)
             aiState = EnemyStates.attack;
     }
@@ -70,8 +68,6 @@ public class AIHeavy: EnemyClass
     }
     public void Stunned()
     {
-        NotBlocking();
-        heavyBandit.GetComponent<HeavyEnemyStats>().CanBeHarmed();
         attackAnim.SetTrigger("Stunned");
     }
 
@@ -81,9 +77,4 @@ public class AIHeavy: EnemyClass
         nma.enabled = true;
         rb.isKinematic = true;
     }
-
-    public void IsBlocking() { heavyBandit.tag = "IsBlocking"; }
-    public void NotBlocking() { heavyBandit.tag = "NotBlocking"; }
-
-
 }

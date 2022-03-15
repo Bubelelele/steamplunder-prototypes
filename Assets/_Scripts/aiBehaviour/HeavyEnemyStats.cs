@@ -44,6 +44,12 @@ public class HeavyEnemyStats : MonoBehaviour, IDamageable
         Destroy(gameObject);
         EffectManager.instance.CogPickup(position);
     }
-    public void CanBeHarmed(){  canBeHarmed = true;}
-    public void CannotBeHarmed(){   canBeHarmed = false;}
+    public void CanBeHarmed(){ 
+        canBeHarmed = true;
+        gameObject.tag = "NotBlocking";
+    }
+    public void CannotBeHarmed(){  
+        canBeHarmed = false;
+        gameObject.tag = "IsBlocking";
+    }
 }
