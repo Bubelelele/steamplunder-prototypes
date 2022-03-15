@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44367164, g: 0.49300218, b: 0.57255703, a: 1}
+  m_IndirectSpecularColor: {r: 0.44367138, g: 0.49300182, b: 0.57255656, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -740,6 +740,8 @@ MonoBehaviour:
   bossLocation:
   - {fileID: 1980110454}
   targetLocation: {fileID: 2118362065}
+  exitDoorAnimator: {fileID: 0}
+  stage2DoorAnimator: {fileID: 0}
 --- !u!195 &321086508
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2072,6 +2074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muted: 0
   mixerGroup: {fileID: 24300002, guid: 001650986dc686f40b61c3fc7ea38221, type: 2}
+  backgroundSoundToPlay: ambience
   sounds:
   - name: ambience
     clip: {fileID: 8300000, guid: c1d2099f07457e943bb014fa8148e442, type: 3}
@@ -4781,6 +4784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 752245091}
   gate: {fileID: 418282348}
+  secondStageDoor: {fileID: 0}
 --- !u!1 &1252685427
 GameObject:
   m_ObjectHideFlags: 0
@@ -6877,6 +6881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 752245091}
   gate: {fileID: 1731019143}
+  secondStageDoor: {fileID: 0}
 --- !u!65 &1892080534
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7957,7 +7962,7 @@ PrefabInstance:
     - target: {fileID: 4651469889869125054, guid: 86919d86710357742935d9784c4a9846,
         type: 3}
       propertyPath: attackDamage
-      value: 20
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4958706421009914040, guid: 86919d86710357742935d9784c4a9846,
         type: 3}
@@ -9840,7 +9845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownsBar: {fileID: 9194607005352022386}
-  cogCounter: {fileID: 0}
+  syringeUI: {fileID: 0}
 --- !u!222 &9194607005565487106
 CanvasRenderer:
   m_ObjectHideFlags: 0
