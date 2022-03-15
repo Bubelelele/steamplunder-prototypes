@@ -28,6 +28,7 @@ public class BossStages : MonoBehaviour
 
             exitDoorAnimator.SetBool("OpenDoor", true);
             stage2DoorAnimator.SetBool("OpenDoor", true);
+            stage2DoorAnimator.SetBool("OpenDoor", false);
 
             if (Vector3.Distance(transform.position, targetLocation.position) < 2)
             {

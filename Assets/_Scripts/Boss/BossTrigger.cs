@@ -10,7 +10,6 @@ public class BossTrigger : MonoBehaviour
     {
         if(other.gameObject == GameManager.instance.player.gameObject)
         {
-            Debug.Log("hey");
             boss.GetComponent<BossStats>().ActivateBoss();
             gate.SetBool("Entered", true);
             Destroy(gameObject);
@@ -18,8 +17,7 @@ public class BossTrigger : MonoBehaviour
 
         if (other.gameObject == boss)
         {
-            Debug.Log("activate");
-            secondStageDoor.SetBool("OpenDoor", false);
+            secondStageDoor.SetTrigger("CloseDoor");
         }
     }
 }
