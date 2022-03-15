@@ -7,7 +7,7 @@ public class Door : MonoBehaviour, IInteractable {
     [SerializeField] private int sceneBuildIndex;
     [SerializeField] private string descriptionText;
 
-    private void Awake() {
+    private void Start() {
         if (SceneTransfer.instance != null)
             if (SceneTransfer.instance.doorId == doorId) 
                 SceneTransfer.instance.Setup(positionToPutPlayer);

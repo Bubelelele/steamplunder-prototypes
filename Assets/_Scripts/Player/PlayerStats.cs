@@ -13,9 +13,7 @@ public class PlayerStats : MonoBehaviour, IDamageable {
     [SerializeField] private PostProcessVolume ppVolume;
     [SerializeField] private int lowHealthAt = 30;
     [SerializeField] private Animation lowHealthAnim;
-
-    public int Cogs { get; private set; }
-
+    
     private int _health;
     private Vignette _vignette;
     private ColorGrading _colorGrading;
@@ -52,9 +50,12 @@ public class PlayerStats : MonoBehaviour, IDamageable {
         LowHealthFX();
     }
 
-    public void AddCogs(int amount) {
-        Cogs += amount;
-        UIManager.instance?.cogCounter.UpdateCogUI(Cogs);
+    public void AddHealth(int amount) {
+        _health += amount;
+        if (_health > maxHealth) _health = maxHealth;
+        
+        healthbar.UpdateHealthbar(_health, maxHealth);
+        LowHealthFX();
     }
 
     private void Die() {
@@ -86,7 +87,7 @@ public class PlayerStats : MonoBehaviour, IDamageable {
             return;
         }
         
-        sceneTransfer.WritePlayerState(_health, gearManager.HammerActive);
+        sceneTransfer.WritePlayerState(_health, gearManager.HammerActive, UIManager.instance.syringeUI.Cogs);
     }
     
 }
