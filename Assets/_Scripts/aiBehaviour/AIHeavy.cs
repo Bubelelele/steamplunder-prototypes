@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AImelee: EnemyClass
+public class AIHeavy: EnemyClass
 {
     [SerializeField] private int attackDamage;
+    [SerializeField] GameObject heavyBandit;
     
     private Animator attackAnim;
     private Rigidbody rb;
@@ -15,8 +16,8 @@ public class AImelee: EnemyClass
     private readonly Collider[] _attackHitboxResults = new Collider[5];
     private void Start()
     {
-        attackAnim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
+        attackAnim = heavyBandit.GetComponent<Animator>();
+        rb = heavyBandit.GetComponent<Rigidbody>();
         nma = GetComponent<NavMeshAgent>();
         player = GameManager.instance.player;
     }
@@ -33,6 +34,8 @@ public class AImelee: EnemyClass
     {
         agent.SetDestination(player.position);
         attackAnim.SetBool("Block", true);
+        IsBlocking();
+        heavyBandit.GetComponent<HeavyEnemyStats>().CannotBeHarmed();
         if (playerInSightRange && playerInAttackRange)
             aiState = EnemyStates.attack;
     }
@@ -44,29 +47,14 @@ public class AImelee: EnemyClass
         if (!alreadyAttacked)
         {
             attackAnim.SetTrigger(attackParameter);
-
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-
-            StartCoroutine(AttackHitRegDelay());
         }
 
         if (playerInSightRange && !playerInAttackRange)
             aiState = EnemyStates.chase;
     }
 
-    IEnumerator AttackHitRegDelay() {
-        yield return new WaitForSeconds(.3f);
-        //Check hitbox and act accordingly
-        var t = transform;
-        int numberHit = Physics.OverlapCapsuleNonAlloc(t.position + t.forward + t.right * .5f, t.position + t.forward + t.right * -.5f, .7f, _attackHitboxResults, playerLayer);
-        for (int i = 0; i < numberHit; i++) {
-            if (_attackHitboxResults[i].transform.CompareTag("Player")) {
-                _attackHitboxResults[i].GetComponent<PlayerStats>().Damage(attackDamage);
-                EffectManager.instance.BloodSplat(_attackHitboxResults[i].ClosestPointOnBounds(transform.position));
-            }
-        }
-    }
 
     public override void ResetAttack()
     {
@@ -80,6 +68,12 @@ public class AImelee: EnemyClass
         rb.isKinematic = false;
         StartCoroutine(StunCooldown());
     }
+    public void Stunned()
+    {
+        NotBlocking();
+        heavyBandit.GetComponent<HeavyEnemyStats>().CanBeHarmed();
+        attackAnim.SetTrigger("Stunned");
+    }
 
     private IEnumerator StunCooldown() {
         yield return new WaitForSeconds(1f);
@@ -87,6 +81,9 @@ public class AImelee: EnemyClass
         nma.enabled = true;
         rb.isKinematic = true;
     }
+
+    public void IsBlocking() { heavyBandit.tag = "IsBlocking"; }
+    public void NotBlocking() { heavyBandit.tag = "NotBlocking"; }
 
 
 }

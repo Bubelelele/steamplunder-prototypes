@@ -56,6 +56,10 @@ public class HammerController : MonoBehaviour {
             {
                 boss.GetComponent<AttackScript>().Stunned();
             }
+            else if(_attackHitboxResults[i].gameObject.tag == "IsBlocking")
+            {
+                _attackHitboxResults[i].gameObject.transform.parent.GetComponent<AIHeavy>().Stunned();
+            }
             else
             {
                 damageable?.Damage(attackDamage);
