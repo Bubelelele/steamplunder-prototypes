@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour {
     // - Misc
     public KeyCode InteractBtn => KeyCode.E;
     public KeyCode ReloadBtn => KeyCode.K;
-    public KeyCode HealBtn => KeyCode.T;
+    public KeyCode HealBtn => KeyCode.X;
     public KeyCode PauseBtn => KeyCode.Escape;
     // -----
     

@@ -5739,7 +5739,8 @@ MonoBehaviour:
   maxHealth: 100
   healthbar: {fileID: 0}
   ppVolume: {fileID: 0}
-  lowHealthAt: 30
+  lowHealthAt: 50
+  lowHealthAnim: {fileID: 0}
 --- !u!114 &2090548735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5795,6 +5796,7 @@ MonoBehaviour:
   gunActiveOnStart: 1
   steamerActiveOnStart: 1
   grappleActiveOnStart: 1
+  hammerActiveOverridden: 0
 --- !u!114 &4651469889869125054
 MonoBehaviour:
   m_ObjectHideFlags: 0

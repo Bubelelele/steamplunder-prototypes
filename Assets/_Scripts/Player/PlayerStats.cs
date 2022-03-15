@@ -69,8 +69,8 @@ public class PlayerStats : MonoBehaviour, IDamageable {
         if (_health <= lowHealthAt) {
             float fraction = 1 - (float) _health / lowHealthAt;
             
-            _vignetteTarget = .6f * fraction;
-            _saturationTarget = -60f * fraction;
+            _vignetteTarget = .1f + .5f * fraction;
+            _saturationTarget = -50f * fraction - 10f;
             lowHealthAnim.Play();
         } else {
             _vignetteTarget = 0f;

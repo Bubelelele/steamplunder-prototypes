@@ -20,7 +20,7 @@ public class SyringeUI : MonoBehaviour {
     private float _radialTarget;
 
     private void Start() {
-        SetHealReady(false);
+        if (Cogs < cogsForSyringe) SetHealReady(false);
         SetCogCount(Cogs);
     }
 
