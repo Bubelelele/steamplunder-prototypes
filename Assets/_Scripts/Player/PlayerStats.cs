@@ -27,8 +27,6 @@ public class PlayerStats : MonoBehaviour, IDamageable {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha5)) Damage(25);
-
         _vignette.intensity.value = 
             Mathf.MoveTowards(_vignette.intensity.value, _vignetteTarget, Time.deltaTime/2);
         _colorGrading.saturation.value = 
@@ -61,8 +59,9 @@ public class PlayerStats : MonoBehaviour, IDamageable {
     private void Die() {
         GameManager.instance.UpdateGameState(GameState.NoMove);
         EffectManager.instance.DeathEffect(transform.position);
-        GameManager.instance.WaitReloadScene(1f);
+        GameManager.instance.WaitReloadScene(2f);
         gameObject.SetActive(false);
+        AudioManager.instance.Play("playerdeath");
     }
 
     private void LowHealthFX() {
