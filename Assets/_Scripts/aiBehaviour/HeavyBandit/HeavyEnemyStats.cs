@@ -3,11 +3,14 @@ using UnityEngine.UI;
 
 public class HeavyEnemyStats : MonoBehaviour, IDamageable
 {
+    [HideInInspector] public bool leathal = false;
+
 
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DamageFlash damageFlash;
     [SerializeField] private ParticleSystem spark;
+    [SerializeField] private GameObject heavyBanditCart;
 
     private bool canBeHarmed = true;
 
@@ -41,7 +44,7 @@ public class HeavyEnemyStats : MonoBehaviour, IDamageable
     {
         var position = transform.position;
         EffectManager.instance.DeathEffect(position);
-        Destroy(gameObject);
+        Destroy(heavyBanditCart);
         EffectManager.instance.CogPickup(position);
     }
     public void CanBeHarmed(){ 
@@ -51,5 +54,11 @@ public class HeavyEnemyStats : MonoBehaviour, IDamageable
     public void CannotBeHarmed(){  
         canBeHarmed = false;
         gameObject.tag = "IsBlocking";
+    }
+    public void NotLeathal() { leathal = false; }
+    public void IsLeathal()
+    {
+        leathal = true;
+        AudioManager.instance.Play("swing");
     }
 }

@@ -5,14 +5,16 @@ using UnityEngine.AI;
 
 public class AIHeavy: EnemyClass
 {
-    [SerializeField] private int attackDamage;
+    public int attackDamage;
+    [HideInInspector] public string attackParameter = "Attack";
+
     [SerializeField] GameObject heavyBandit;
     
     private Animator attackAnim;
     private Rigidbody rb;
     private NavMeshAgent nma;
-    [HideInInspector]
-    public string attackParameter = "Attack";
+
+
     private readonly Collider[] _attackHitboxResults = new Collider[5];
     private void Start()
     {
@@ -42,7 +44,7 @@ public class AIHeavy: EnemyClass
     {
         agent.SetDestination(transform.position);
 
-        if (!alreadyAttacked)
+        if (attackAnim != null && !alreadyAttacked)
         {
             attackAnim.SetTrigger(attackParameter);
             alreadyAttacked = true;

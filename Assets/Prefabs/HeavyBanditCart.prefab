@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 7992071011901276415}
   - component: {fileID: 6264811351723465751}
   - component: {fileID: 2300048288995844031}
+  - component: {fileID: 3279426271786350260}
   m_Layer: 0
   m_Name: AttackGauntlet
   m_TagString: Untagged
@@ -260,8 +261,22 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1814942, y: 1.0933362, z: 1}
-  m_Center: {x: 0.09074776, y: -0.04666825, z: -0.00031143537}
+  m_Size: {x: 2.2731035, y: 1.4703695, z: 1}
+  m_Center: {x: 0.090741195, y: -0.23518044, z: -0.00092076627}
+--- !u!114 &3279426271786350260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955153818746640134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5064263f3ee57d04f9e5b7df5649ef81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heavyEnemyCart: {fileID: 5651392726888766519}
+  heavyEnemy: {fileID: 2006646761591120694}
 --- !u!1 &1563905355049157593
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,10 +523,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144e54b71c83d53498b299498e806936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leathal: 0
   maxHealth: 100
   healthbar: {fileID: 4843906751353414547}
   damageFlash: {fileID: 8180433252393940393}
   spark: {fileID: 3178511278322707855}
+  heavyBanditCart: {fileID: 5651392726888766519}
 --- !u!1 &2674660282213655400
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,8 +932,8 @@ MonoBehaviour:
   playerInAttackRange: 0
   aiState: 0
   attackDamage: 4
-  heavyBandit: {fileID: 2006646761591120694}
   attackParameter: Attack
+  heavyBandit: {fileID: 2006646761591120694}
 --- !u!1 &6181711330373190186
 GameObject:
   m_ObjectHideFlags: 0
