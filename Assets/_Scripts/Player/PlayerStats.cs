@@ -59,6 +59,8 @@ public class PlayerStats : MonoBehaviour, IDamageable {
     private void Die() {
         GameManager.instance.UpdateGameState(GameState.NoMove);
         EffectManager.instance.DeathEffect(transform.position);
+        SceneTransfer.instance.loaded = false;
+        SceneTransfer.instance._savedHealth = maxHealth;
         GameManager.instance.WaitReloadScene(2f);
         gameObject.SetActive(false);
         AudioManager.instance.Play("playerdeath");
