@@ -8,7 +8,7 @@ public class SceneTransfer : MonoBehaviour {
     [HideInInspector] public int doorId;
     [HideInInspector] public bool loaded;
     
-    private int _savedHealth;
+    [HideInInspector] public int _savedHealth; //painful ducttape fix
     private bool _savedHammerActive;
     private int _savedCogs;
 
