@@ -63,7 +63,7 @@ public class PistonPipe : MonoBehaviour
     {
         if (!_animator.GetBool("Retract"))
         {
-            PistonPuzzleManager.instance.counter = 0;
+            PistonPuzzleManager.instance.counter--;
         }
     }
 }
