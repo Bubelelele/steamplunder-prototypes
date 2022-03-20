@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class LiftTriggerSteam : MonoBehaviour
 {
-    public GameObject player;
     public GameObject lift;
 
     private void OnTriggerEnter(Collider other)
