@@ -11,6 +11,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Finished
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: SA1
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3505620832501345533}
   m_Solo: 0
@@ -33,6 +36,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: SA1
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: SA2
+    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Finished
     m_EventTreshold: 0
@@ -80,7 +89,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FinalRoomAnimations
-  m_Speed: 1
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2843541136027860958}
@@ -111,6 +120,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Finished
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: SA1
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: SA2
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4712259984077320603}
   m_Solo: 0
@@ -133,7 +148,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FinalRoomAnimations Back
-  m_Speed: -1
+  m_Speed: -0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 935328612567352912}
@@ -166,19 +181,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: SA2
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Finished
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -202,6 +217,12 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: Finished
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: SA1
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SA2
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3102866915081830629}
@@ -228,6 +249,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Finished
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: SA1
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3505620832501345533}
   m_Solo: 0
@@ -252,6 +276,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: Finished
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SA1
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2619948296700585097}
@@ -278,6 +305,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Finished
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SA1
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3052307608431831416}
   m_Solo: 0
@@ -300,7 +330,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FinalRoomAnimations2 Back 0
-  m_Speed: 1
+  m_Speed: -0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 9000523710343910766}
@@ -327,7 +357,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FinalRoomAnimations2 Back
-  m_Speed: 1
+  m_Speed: -0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5704207001739901345}
@@ -391,7 +421,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FinalRoomAnimations2
-  m_Speed: 1
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 734683761286996492}

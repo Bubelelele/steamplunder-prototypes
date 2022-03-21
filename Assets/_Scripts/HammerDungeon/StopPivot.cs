@@ -9,6 +9,7 @@ public class StopPivot : MonoBehaviour
     public AudioSource steamAudioSource;
     public AudioClip steamShutAudioClip;
     [SerializeField] private Animator pivotAnim;
+    [SerializeField] private Animator someOtherAnimationsAnim;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "MovingBox")
@@ -20,6 +21,7 @@ public class StopPivot : MonoBehaviour
             steamParticle.Stop();
             DoorAnim.SetBool("OpenDoor", true);
             pivotAnim.SetBool("Finished", true);
+            someOtherAnimationsAnim.SetBool("Finished", true);
             doorAudioSource.Play();
             steamAudioSource.Stop();
             steamAudioSource.clip = steamShutAudioClip;
