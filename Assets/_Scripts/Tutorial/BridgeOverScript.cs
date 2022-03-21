@@ -6,7 +6,6 @@ public class BridgeOverScript : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(numberOfPlatesSteppedOn);
 
         if (numberOfPlatesSteppedOn == 1)
         {
