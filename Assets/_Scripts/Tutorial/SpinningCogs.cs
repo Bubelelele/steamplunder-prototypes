@@ -8,7 +8,7 @@ public class SpinningCogs : MonoBehaviour
     {
         if (Spin)
         {
-            transform.Rotate(new Vector3(0f, 100f * Time.deltaTime, 0f), Space.Self);
+            transform.Rotate(new Vector3(0f, -100f * Time.deltaTime, 0f), Space.Self);
         }
     }
 }
