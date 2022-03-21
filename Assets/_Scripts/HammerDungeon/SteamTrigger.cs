@@ -14,6 +14,7 @@ public class SteamTrigger : MonoBehaviour
         {
             other.transform.position = transform.position;
             other.gameObject.GetComponent<MetalBox>().enabled = false;
+            other.transform.parent.transform.parent = transform;
             heatParticle.Stop();
             steamParticle.Stop();
             DoorAnim.SetBool("OpenDoor", true);
