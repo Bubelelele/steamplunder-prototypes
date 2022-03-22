@@ -74,10 +74,10 @@ public class WoodenBox : MonoBehaviour, IInteractable
     }
 
     //Move in a direction
-    public void MoveUp() { targetTransform.position = new Vector3(transform.position.x,transform.position.y, transform.position.z + transform.localScale.z); }
-    public void MoveDown() { targetTransform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - transform.localScale.z); }
-    public void MoveLeft() { targetTransform.position = new Vector3(transform.position.x - transform.localScale.x, transform.position.y, transform.position.z); }
-    public void MoveRight() { targetTransform.position = new Vector3(transform.position.x + transform.localScale.x, transform.position.y, transform.position.z); }
+    public void MoveUp() { targetTransform.position = new Vector3(up.position.x, transform.position.y, up.position.z); }
+    public void MoveDown() { targetTransform.position = new Vector3(down.position.x, transform.position.y, down.position.z); }
+    public void MoveLeft() { targetTransform.position = new Vector3(left.position.x, transform.position.y, left.position.z); }
+    public void MoveRight() { targetTransform.position = new Vector3(right.position.x, transform.position.y, right.position.z); }
 
     //Functions to see if you've reached and edge
     public void TopEdge() { topEdge = true; }
