@@ -51,7 +51,7 @@ public class BarricadeTrigger : MonoBehaviour
     }
     private void Update()
     {
-        if (GameManager.instance.player.gameObject.GetComponent<AxeController>().CanAttack)
+        if (GameManager.instance.player.gameObject.GetComponent<AxeController>().CanAttack && GameManager.instance.player.GetComponent<GearManager>().AxeActive)
         {
             localCanAttack = true;
         }
