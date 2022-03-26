@@ -10,6 +10,7 @@ public class SceneTransfer : MonoBehaviour {
     
     [HideInInspector] public int _savedHealth; //painful ducttape fix
     private bool _savedHammerActive;
+    private bool _savedSpinActive;
     private int _savedCogs;
 
     private void Awake() {
@@ -33,14 +34,16 @@ public class SceneTransfer : MonoBehaviour {
         player.GetComponent<PlayerStats>().SetHealth(_savedHealth);
         player.GetComponent<GearManager>().hammerActiveOverridden = true;
         player.GetComponent<GearManager>().ToggleHammer(_savedHammerActive);
+        if (_savedSpinActive) player.GetComponent<GearManager>().ActivateSpin();
         player.position = spawnPos;
         UIManager.instance.syringeUI.AddCogs(_savedCogs);
         loaded = true;
     }
 
-    public void WritePlayerState(int health, bool hammerActive, int cogs) {
+    public void WritePlayerState(int health, bool hammerActive, int cogs, bool spinActive) {
         _savedHealth = health;
         _savedHammerActive = hammerActive;
+        _savedSpinActive = spinActive;
         _savedCogs = cogs;
     }
 }

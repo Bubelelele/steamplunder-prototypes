@@ -88,7 +88,7 @@ public class PlayerStats : MonoBehaviour, IDamageable {
             return;
         }
         
-        sceneTransfer.WritePlayerState(_health, gearManager.HammerActive, UIManager.instance.syringeUI.Cogs);
+        sceneTransfer.WritePlayerState(_health, gearManager.HammerActive, UIManager.instance.syringeUI.Cogs, gearManager.SpinActive);
     }
     
 }

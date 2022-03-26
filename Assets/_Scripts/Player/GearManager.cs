@@ -7,6 +7,7 @@ public class GearManager : MonoBehaviour {
     [SerializeField] private bool gunActiveOnStart = true;
     [SerializeField] private bool steamerActiveOnStart = true;
     [SerializeField] private bool grappleActiveOnStart = true;
+    [SerializeField] private bool spinActiveOnStart = true;
     
     public bool ActionOngoing { get; private set; }
     public bool AxeActive { get; private set; }
@@ -14,6 +15,7 @@ public class GearManager : MonoBehaviour {
     public bool GunActive { get; private set; }
     public bool SteamerActive { get; private set; }
     public bool GrappleActive { get; private set; }
+    public bool SpinActive { get; private set; }
 
     private AxeController _axeController;
     private HammerController _hammerController;
@@ -46,6 +48,7 @@ public class GearManager : MonoBehaviour {
         ToggleGun(gunActiveOnStart);
         ToggleSteamer(steamerActiveOnStart);
         ToggleGrapple(grappleActiveOnStart);
+        if (spinActiveOnStart) ActivateSpin();
     }
 
     private void Update() {
@@ -120,6 +123,10 @@ public class GearManager : MonoBehaviour {
     public void ToggleGrapple(bool active) {
         GrappleActive = active;
         UIManager.instance.cooldownsBar.ToggleGrappleUI(active);
+    }
+
+    public void ActivateSpin() {
+        SpinActive = true;
     }
     
 }
