@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class LiftTrigger : MonoBehaviour
 {
-    public GameObject player;
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == GameManager.instance.player.gameObject)
