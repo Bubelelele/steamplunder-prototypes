@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class OverworldPuzzle : MonoBehaviour
@@ -6,6 +7,7 @@ public class OverworldPuzzle : MonoBehaviour
     public int currentPlateToStepOn = 1;
     public GameObject[] triggers;
     public Animator energyMeterAnim;
+    public Transform exit;
 
     public void Correct()
     {
@@ -15,7 +17,7 @@ public class OverworldPuzzle : MonoBehaviour
         if (currentPlateToStepOn > 5)
         {
             done = true;
-            Debug.Log("You won!");
+            StartCoroutine(Reward());
         }
 
     }
@@ -28,5 +30,13 @@ public class OverworldPuzzle : MonoBehaviour
 
         currentPlateToStepOn = 1;
         energyMeterAnim.SetInteger("PressurePlateNumber", 0);
+    }
+    private IEnumerator Reward()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            EffectManager.instance.CogPickup(exit.position + Vector3.up * 2);
+            yield return new WaitForSeconds(.5f);
+        }
     }
 }
