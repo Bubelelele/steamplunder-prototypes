@@ -4,6 +4,7 @@ public class SC_Movement : MonoBehaviour
 {
     public float movementSpeed = 4f;
     public float FOV = 80f;
+    [HideInInspector] public bool playerOnLeftSide = false;
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject bossBody;
@@ -18,6 +19,7 @@ public class SC_Movement : MonoBehaviour
     private bool lookAtPlayer = true;
     private bool step = false;
     private bool spin = false;
+    
 
     private void Update()
     {
@@ -31,7 +33,7 @@ public class SC_Movement : MonoBehaviour
 
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) > closestDistance && walkToPlayer)
             {
-
+                LookAtPlayer();
                 if (step)
                 {
                     //Moving towards the player
@@ -39,31 +41,44 @@ public class SC_Movement : MonoBehaviour
                 }
             }
 
+            //Check if the boss should move to the player
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= closestDistance)
             {
                 DontWalkToPlayer();
+                bossBody.GetComponent<SC_AttackScript>().CanAttack();
             }
             else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance)
             {
                 WalkToPlayer();
+                bossBody.GetComponent<SC_AttackScript>().CannotAttack();
             }
+
+            //Check which side of the boss the player is on
+            if (Vector3.Angle(transform.right, player.transform.position - transform.position) > 90){ playerOnLeftSide = true;}
+
+            else{ playerOnLeftSide = false;}
+
 
             if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer)
             {
                 LookAtPlayer();
-                if(Vector3.Angle(transform.right, player.transform.position - transform.position) > 90)
+                bossBody.GetComponent<SC_AttackScript>().CannotAttack();
+                if (playerOnLeftSide)
                 {
+
                     bossAnim.SetBool("PivotLeft", true);
                     bossAnim.SetBool("PivotRight", false);
                 }
                 else
                 {
+
                     bossAnim.SetBool("PivotLeft", false);
                     bossAnim.SetBool("PivotRight", true);
                 }
             }
             else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 7 && !walkToPlayer)
             {
+                bossBody.GetComponent<SC_AttackScript>().CanAttack();
                 DontLookAtPlayer();
                 bossAnim.SetBool("PivotLeft", false);
                 bossAnim.SetBool("PivotRight", false);
@@ -75,12 +90,12 @@ public class SC_Movement : MonoBehaviour
     {
         walkToPlayer = true;
         bossAnim.SetBool("IsWalking", true);
-        LookAtPlayer();
         Spin();
     }
     public void DontWalkToPlayer()
     { 
         walkToPlayer = false;
+        NoStep();
         bossAnim.SetBool("IsWalking", false);
     }
     public void Step() { step = true; }
@@ -90,4 +105,9 @@ public class SC_Movement : MonoBehaviour
 
     public void LookAtPlayer(){ lookAtPlayer = true;}
     public void DontLookAtPlayer(){ lookAtPlayer = false;}
+
+    public void SetFOV(float newFOV)
+    {
+        FOV = newFOV;
+    }
 }

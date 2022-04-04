@@ -4,15 +4,35 @@ public class AnimationEvents : MonoBehaviour
 {
     public GameObject bossBody;
     public GameObject bossCart;
+    public GameObject bossCanvas;
 
+
+    //Boss body
     private void ActivateBoss()
     {
         bossBody.GetComponent<SC_Stats>().ActivateBoss();
+        bossCanvas.SetActive(true);
     }
     private void DeactivateBoss()
     {
         bossBody.GetComponent<SC_Stats>().DeactivateBoss();
+        bossCanvas.SetActive(false);
     }
+    private void LeftPunch()
+    {
+        bossBody.GetComponent<SC_AttackScript>().LeftPunch();
+    }
+    private void RightPunch()
+    {
+        bossBody.GetComponent<SC_AttackScript>().RightPunch();
+    }
+    private void PistonPunchDone()
+    {
+        bossBody.GetComponent<SC_AttackScript>().PistonPunchDone();
+    }
+
+
+    //Boss cart
     private void Step()
     {
         bossCart.GetComponent<SC_Movement>().Step();
@@ -29,4 +49,5 @@ public class AnimationEvents : MonoBehaviour
     {
         bossCart.GetComponent<SC_Movement>().NoSpin();
     }
+
 }
