@@ -7,6 +7,7 @@ public class SC_Stats : MonoBehaviour, IDamageable
     [SerializeField] private int maxHealth = 50;
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DmgFlash_SteampunkColossus damageFlash;
+    [SerializeField] private GameObject feet;
 
     private int _health;
     
@@ -33,6 +34,7 @@ public class SC_Stats : MonoBehaviour, IDamageable
         var position = transform.position;
         EffectManager.instance.DeathEffect(position);
         Destroy(gameObject);
+        Destroy(feet);
         EffectManager.instance.CogPickup(position);
     }
     public void ActivateBoss()
@@ -42,9 +44,5 @@ public class SC_Stats : MonoBehaviour, IDamageable
     public void DeactivateBoss()
     {
         isActive = false;
-    }
-    private void Update()
-    {
-        Debug.Log(isActive);
     }
 }
