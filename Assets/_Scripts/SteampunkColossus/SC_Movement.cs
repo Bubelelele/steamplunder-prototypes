@@ -45,9 +45,14 @@ public class SC_Movement : MonoBehaviour
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= closestDistance)
             {
                 DontWalkToPlayer();
-                bossBody.GetComponent<SC_AttackScript>().CanAttack();
+                if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 7)
+                {
+                    NoSpin();
+                    bossBody.GetComponent<SC_AttackScript>().CanAttack();
+                }
+
             }
-            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance)
+            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
             {
                 WalkToPlayer();
                 bossBody.GetComponent<SC_AttackScript>().CannotAttack();
@@ -61,19 +66,21 @@ public class SC_Movement : MonoBehaviour
 
             if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer)
             {
-                LookAtPlayer();
-                bossBody.GetComponent<SC_AttackScript>().CannotAttack();
                 if (playerOnLeftSide)
                 {
 
                     bossAnim.SetBool("PivotLeft", true);
                     bossAnim.SetBool("PivotRight", false);
+                    LookAtPlayer();
+                    bossBody.GetComponent<SC_AttackScript>().CannotAttack();
                 }
                 else
                 {
 
                     bossAnim.SetBool("PivotLeft", false);
                     bossAnim.SetBool("PivotRight", true);
+                    LookAtPlayer();
+                    bossBody.GetComponent<SC_AttackScript>().CannotAttack();
                 }
             }
             else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 7 && !walkToPlayer)

@@ -90,6 +90,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: PunchRight
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: PivotLeft
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: PivotRight
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -935413417827862896}
   m_Solo: 0
@@ -890,6 +896,12 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: PunchLeft
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: PivotRight
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: PivotLeft
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9023805459413726981}

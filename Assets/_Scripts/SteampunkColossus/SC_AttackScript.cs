@@ -3,9 +3,11 @@ using UnityEngine;
 public class SC_AttackScript : MonoBehaviour
 {
 
+    [HideInInspector] public int attackDamage;
+    [HideInInspector] public bool leathal;
+    [HideInInspector] public bool canAttack = false; 
+    [HideInInspector] public bool animationPlaying = false; 
 
-    [SerializeField] private bool canAttack = false; 
-    [SerializeField] private bool animationPlaying = false; 
     [SerializeField] private GameObject bossCart;
     [SerializeField] private Animator bossAnim;
 
@@ -24,6 +26,7 @@ public class SC_AttackScript : MonoBehaviour
 
             if (pistonPunch)
             {
+                attackDamage = 20;
                 if (bossCart.GetComponent<SC_Movement>().playerOnLeftSide && !animationPlaying)
                 {
                     animationPlaying = true;
@@ -49,15 +52,22 @@ public class SC_AttackScript : MonoBehaviour
     }
     public void CanAttack() { canAttack = true; }
     public void CannotAttack() { canAttack = false; }
+    public void NotLeathal() { leathal = false; }
+    public void IsLeathal()
+    {
+        leathal = true;
+        AudioManager.instance.Play("swing");
+    }
     public void PistonPunch()
     { 
         pistonPunch = true;
-        bossCart.GetComponent<SC_Movement>().SetFOV(180f);
+        bossCart.GetComponent<SC_Movement>().SetFOV(120f);
     }
 
     private void Punch()
     {
         bossAnim.SetTrigger("Punch");
+        bossCart.GetComponent<SC_Movement>().DontLookAtPlayer();
     }
 
     public void LeftPunch()
@@ -87,6 +97,7 @@ public class SC_AttackScript : MonoBehaviour
         rightPistonPunch.GetComponent<PistonPunch>().TurnOffPistonPunch();
         rightPistonPunch.SetActive(false);
         animationPlaying = false;
+        bossCart.GetComponent<SC_Movement>().LookAtPlayer();
     }
 
 }

@@ -18,6 +18,14 @@ public class AnimationEvents : MonoBehaviour
         bossBody.GetComponent<SC_Stats>().DeactivateBoss();
         bossCanvas.SetActive(false);
     }
+    private void Leathal()
+    {
+        bossBody.GetComponent<SC_AttackScript>().IsLeathal();
+    }
+    private void NotLeathal()
+    {
+        bossBody.GetComponent<SC_AttackScript>().NotLeathal();
+    }
     private void LeftPunch()
     {
         bossBody.GetComponent<SC_AttackScript>().LeftPunch();

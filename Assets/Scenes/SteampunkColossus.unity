@@ -1659,7 +1659,6 @@ GameObject:
   - component: {fileID: 50980619}
   - component: {fileID: 50980618}
   - component: {fileID: 50980617}
-  - component: {fileID: 50980616}
   m_Layer: 8
   m_Name: PistonEdge
   m_TagString: Untagged
@@ -1681,20 +1680,6 @@ Transform:
   m_Father: {fileID: 582904608}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -91.486, y: 0, z: 0}
---- !u!64 &50980616
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50980614}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 685402880}
 --- !u!33 &50980617
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -4424,7 +4409,7 @@ MonoBehaviour:
   bossBody: {fileID: 993708760}
   damping: 6
   closestDistance: 5
-  furthestDistance: 7
+  furthestDistance: 6
   bossAnim: {fileID: 1591281229}
 --- !u!43 &164220254
 Mesh:
@@ -24941,6 +24926,7 @@ GameObject:
   - component: {fileID: 582904612}
   - component: {fileID: 582904611}
   - component: {fileID: 582904610}
+  - component: {fileID: 582904613}
   - component: {fileID: 582904609}
   m_Layer: 8
   m_Name: Piston
@@ -24964,20 +24950,19 @@ Transform:
   m_Father: {fileID: 397549007}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -91.486, y: 0, z: 0}
---- !u!64 &582904609
-MeshCollider:
+--- !u!114 &582904609
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582904607}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1219436200}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfbf74bcdec35148851efaff8689656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossBody: {fileID: 993708760}
 --- !u!33 &582904610
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -25309,6 +25294,19 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!65 &582904613
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582904607}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0020782, y: 0.9506361, z: 1.0300812}
+  m_Center: {x: -0.0000008787834, y: -0.07348296, z: 0.0000018985875}
 --- !u!1001 &611778377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26010,6 +26008,12 @@ Mesh:
 --- !u!4 &657148147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4c1dbcbbe51b64059921ba367bc132fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 632572642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &657148148 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 4c1dbcbbe51b64059921ba367bc132fd,
     type: 3}
   m_PrefabInstance: {fileID: 632572642}
   m_PrefabAsset: {fileID: 0}
@@ -29502,6 +29506,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 611778377}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &776480169 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23533487557844426, guid: 4ac6a0c237bd244a590115cdda3fcb8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 611778377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &777562092
 GameObject:
   m_ObjectHideFlags: 0
@@ -31785,7 +31795,6 @@ GameObject:
   - component: {fileID: 885325142}
   - component: {fileID: 885325141}
   - component: {fileID: 885325140}
-  - component: {fileID: 885325139}
   m_Layer: 8
   m_Name: PistonEdge
   m_TagString: Untagged
@@ -31807,20 +31816,6 @@ Transform:
   m_Father: {fileID: 1080409088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -91.486, y: 0, z: 0}
---- !u!64 &885325139
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885325137}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1650325724}
 --- !u!33 &885325140
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -35808,6 +35803,7 @@ GameObject:
   - component: {fileID: 993708769}
   - component: {fileID: 993708767}
   - component: {fileID: 993708768}
+  - component: {fileID: 993708770}
   m_Layer: 8
   m_Name: BossBody
   m_TagString: Boss
@@ -37813,6 +37809,22 @@ MonoBehaviour:
   - {fileID: 1082458726}
   - {fileID: 1451188514}
   - {fileID: 451480346}
+  - {fileID: 1243990396}
+  - {fileID: 460425665}
+  - {fileID: 657148148}
+  - {fileID: 518643596}
+  - {fileID: 871475823}
+  - {fileID: 1477516383}
+  - {fileID: 1080409091}
+  - {fileID: 885325141}
+  - {fileID: 776480169}
+  - {fileID: 894394882}
+  - {fileID: 1500703144}
+  - {fileID: 397549010}
+  - {fileID: 894915158}
+  - {fileID: 1806243528}
+  - {fileID: 582904611}
+  - {fileID: 50980618}
 --- !u!65 &993708767
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37838,6 +37850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef886d79e98f884f87e036a52a6ecf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  leathal: 0
   canAttack: 0
   animationPlaying: 0
   bossCart: {fileID: 135560664}
@@ -37864,6 +37878,18 @@ MonoBehaviour:
   damageFlash: {fileID: 993708766}
   feet: {fileID: 1825202836}
   isActive: 0
+--- !u!114 &993708770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993708760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efb42eb5f51ad24cae739f081c15493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &998608717
 Mesh:
   m_ObjectHideFlags: 0
@@ -39454,6 +39480,7 @@ GameObject:
   - component: {fileID: 1080409092}
   - component: {fileID: 1080409091}
   - component: {fileID: 1080409090}
+  - component: {fileID: 1080409093}
   - component: {fileID: 1080409089}
   m_Layer: 8
   m_Name: Piston
@@ -39477,20 +39504,19 @@ Transform:
   m_Father: {fileID: 518643593}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -91.486, y: 0, z: 0}
---- !u!64 &1080409089
-MeshCollider:
+--- !u!114 &1080409089
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080409087}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 568266814}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfbf74bcdec35148851efaff8689656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossBody: {fileID: 993708760}
 --- !u!33 &1080409090
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -39822,6 +39848,19 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!65 &1080409093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080409087}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0783253, y: 0.97086936, z: 1.25107}
+  m_Center: {x: -0.018702768, y: -0.08359995, z: 0.0058850297}
 --- !u!1 &1082458722
 GameObject:
   m_ObjectHideFlags: 0
@@ -43152,6 +43191,12 @@ Mesh:
 --- !u!4 &1243990395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4172104551059318, guid: 4ac6a0c237bd244a590115cdda3fcb8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1072527869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1243990396 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23533487557844426, guid: 4ac6a0c237bd244a590115cdda3fcb8c,
     type: 3}
   m_PrefabInstance: {fileID: 1072527869}
   m_PrefabAsset: {fileID: 0}
@@ -51341,6 +51386,12 @@ MonoBehaviour:
 --- !u!4 &1500703143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4c1dbcbbe51b64059921ba367bc132fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 848076816}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1500703144 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 4c1dbcbbe51b64059921ba367bc132fd,
     type: 3}
   m_PrefabInstance: {fileID: 848076816}
   m_PrefabAsset: {fileID: 0}

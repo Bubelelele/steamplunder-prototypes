@@ -3637,8 +3637,15 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.4666667
-    functionName: PistonPunchDone
+  - time: 1.1666666
+    functionName: Leathal
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.25
+    functionName: NotLeathal
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
