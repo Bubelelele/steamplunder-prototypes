@@ -33,6 +33,7 @@ public class SC_Movement : MonoBehaviour
 
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) > closestDistance && walkToPlayer)
             {
+                Spin();
                 LookAtPlayer();
                 if (step)
                 {
@@ -52,7 +53,7 @@ public class SC_Movement : MonoBehaviour
                 }
 
             }
-            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
+            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance)
             {
                 WalkToPlayer();
                 bossBody.GetComponent<SC_AttackScript>().CannotAttack();
@@ -97,7 +98,6 @@ public class SC_Movement : MonoBehaviour
     {
         walkToPlayer = true;
         bossAnim.SetBool("IsWalking", true);
-        Spin();
     }
     public void DontWalkToPlayer()
     { 
