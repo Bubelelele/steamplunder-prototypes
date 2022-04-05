@@ -33,23 +33,33 @@ public class SC_Movement : MonoBehaviour
 
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) > closestDistance && walkToPlayer)
             {
-                Spin();
-                LookAtPlayer();
+                if (bossBody.GetComponent<SC_AttackScript>().animationPlaying)
+                {
+                    DontLookAtPlayer();
+                }
+                else
+                {
+                    LookAtPlayer();
+                }
+
+                
                 if (step)
                 {
                     //Moving towards the player
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), movementSpeed * Time.deltaTime);
+                    var targetRotation = Quaternion.LookRotation(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping);
                 }
             }
 
             //Check if the boss should move to the player
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= closestDistance)
             {
+                bossBody.GetComponent<SC_AttackScript>().CanAttack();
                 DontWalkToPlayer();
                 if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 7)
                 {
-                    NoSpin();
-                    bossBody.GetComponent<SC_AttackScript>().CanAttack();
+                    DontLookAtPlayer();
                 }
 
             }
@@ -64,8 +74,11 @@ public class SC_Movement : MonoBehaviour
 
             else{ playerOnLeftSide = false;}
 
-
-            if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer)
+            if (Vector3.Angle(transform.forward, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position) > 90 && Vector3.Distance(transform.position, player.transform.position) < 4f)
+            {
+                bossBody.GetComponent<SC_AttackScript>().Slam();
+            }
+            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer)
             {
                 if (playerOnLeftSide)
                 {
@@ -73,7 +86,7 @@ public class SC_Movement : MonoBehaviour
                     bossAnim.SetBool("PivotLeft", true);
                     bossAnim.SetBool("PivotRight", false);
                     LookAtPlayer();
-                    bossBody.GetComponent<SC_AttackScript>().CannotAttack();
+
                 }
                 else
                 {
@@ -81,13 +94,11 @@ public class SC_Movement : MonoBehaviour
                     bossAnim.SetBool("PivotLeft", false);
                     bossAnim.SetBool("PivotRight", true);
                     LookAtPlayer();
-                    bossBody.GetComponent<SC_AttackScript>().CannotAttack();
+
                 }
             }
-            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 7 && !walkToPlayer)
+            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 30 && !walkToPlayer)
             {
-                bossBody.GetComponent<SC_AttackScript>().CanAttack();
-                DontLookAtPlayer();
                 bossAnim.SetBool("PivotLeft", false);
                 bossAnim.SetBool("PivotRight", false);
             }
@@ -107,8 +118,16 @@ public class SC_Movement : MonoBehaviour
     }
     public void Step() { step = true; }
     public void NoStep() { step = false; }
-    public void Spin() { spin = true; }
-    public void NoSpin() { spin = false; }
+    public void Spin() 
+    { 
+        spin = true;
+        LookAtPlayer();
+    }
+    public void NoSpin() 
+    { 
+        spin = false;
+        DontLookAtPlayer();
+    }
 
     public void LookAtPlayer(){ lookAtPlayer = true;}
     public void DontLookAtPlayer(){ lookAtPlayer = false;}

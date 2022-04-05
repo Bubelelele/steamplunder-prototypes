@@ -9,10 +9,17 @@ public class SC_AttackScript : MonoBehaviour
     [HideInInspector] public bool animationPlaying = false; 
 
     [SerializeField] private GameObject bossCart;
+    [SerializeField] private GameObject player;
     [SerializeField] private Animator bossAnim;
 
+    [Header("Slam")]
+    [HideInInspector] public bool slam;
+    public int slamDamage = 6;
+
     [Header("Piston punch")]
-    public bool pistonPunch;
+    [HideInInspector] public bool pistonPunch;
+    public int punchDamage = 20;
+
     [SerializeField] private GameObject leftPistonPunch;
     [SerializeField] private GameObject leftHip;
     [SerializeField] private GameObject rightPistonPunch;
@@ -22,14 +29,35 @@ public class SC_AttackScript : MonoBehaviour
     {
         if (canAttack)
         {
-            PistonPunch();
+            if (slam)
+            {
+                
+                if (bossCart.GetComponent<SC_Movement>().playerOnLeftSide)
+                {
+                    attackDamage = slamDamage / 2;
+                    animationPlaying = true;
+                    bossAnim.SetBool("SlamLeft", true);
+                }
+                else if (!bossCart.GetComponent<SC_Movement>().playerOnLeftSide)
+                {
+                    attackDamage = slamDamage / 2;
+                    animationPlaying = true;
+                    bossAnim.SetBool("SlamRight", true);
+                }
+            }
+            else
+            {
+                PistonPunch();
+            }
+
 
             if (pistonPunch)
             {
-                attackDamage = 20;
+                
                 if (bossCart.GetComponent<SC_Movement>().playerOnLeftSide && !animationPlaying)
                 {
                     animationPlaying = true;
+                    attackDamage = punchDamage;
                     bossAnim.SetBool("PunchLeft", true);
                     bossAnim.SetBool("PunchRight", false);
                     rightPistonPunch.SetActive(false);
@@ -40,6 +68,7 @@ public class SC_AttackScript : MonoBehaviour
                 else if(!bossCart.GetComponent<SC_Movement>().playerOnLeftSide && !animationPlaying)
                 {
                     animationPlaying = true;
+                    attackDamage = punchDamage;
                     bossAnim.SetBool("PunchLeft", false);
                     bossAnim.SetBool("PunchRight", true);
                     leftPistonPunch.SetActive(false);
@@ -58,6 +87,7 @@ public class SC_AttackScript : MonoBehaviour
         leathal = true;
         AudioManager.instance.Play("swing");
     }
+    public void Slam(){ slam = true; }
     public void PistonPunch()
     { 
         pistonPunch = true;
@@ -86,8 +116,7 @@ public class SC_AttackScript : MonoBehaviour
     {
         pistonPunch = false ;
         bossCart.GetComponent<SC_Movement>().SetFOV(80f);
-        bossAnim.SetBool("PunchLeft", false);
-        bossAnim.SetBool("PunchRight", false);
+
 
         leftHip.SetActive(true);
         leftPistonPunch.GetComponent<PistonPunch>().TurnOffPistonPunch();
@@ -96,8 +125,22 @@ public class SC_AttackScript : MonoBehaviour
         rightHip.SetActive(true);
         rightPistonPunch.GetComponent<PistonPunch>().TurnOffPistonPunch();
         rightPistonPunch.SetActive(false);
-        animationPlaying = false;
+        AnimationDone();
         bossCart.GetComponent<SC_Movement>().LookAtPlayer();
+    }
+    public void AnimationDone()
+    {
+        animationPlaying = false;
+        
+        //Slam
+        bossAnim.SetBool("SlamLeft", false);
+        bossAnim.SetBool("SlamRight", false);
+        slam = false;
+
+        //Punch
+        bossAnim.SetBool("PunchLeft", false);
+        bossAnim.SetBool("PunchRight", false);
+
     }
 
 }

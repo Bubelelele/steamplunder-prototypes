@@ -38,6 +38,11 @@ public class AnimationEvents : MonoBehaviour
     {
         bossBody.GetComponent<SC_AttackScript>().PistonPunchDone();
     }
+    private void AnimationDone()
+    {
+        bossBody.GetComponent<SC_AttackScript>().AnimationDone();
+    }
+
 
 
     //Boss cart
