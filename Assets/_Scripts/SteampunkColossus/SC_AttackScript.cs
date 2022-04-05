@@ -34,13 +34,13 @@ public class SC_AttackScript : MonoBehaviour
                 
                 if (bossCart.GetComponent<SC_Movement>().playerOnLeftSide)
                 {
-                    attackDamage = slamDamage / 2;
+                    attackDamage = slamDamage;
                     animationPlaying = true;
                     bossAnim.SetBool("SlamLeft", true);
                 }
                 else if (!bossCart.GetComponent<SC_Movement>().playerOnLeftSide)
                 {
-                    attackDamage = slamDamage / 2;
+                    attackDamage = slamDamage;
                     animationPlaying = true;
                     bossAnim.SetBool("SlamRight", true);
                 }
