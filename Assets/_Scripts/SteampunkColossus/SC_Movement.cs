@@ -74,7 +74,7 @@ public class SC_Movement : MonoBehaviour
 
             else{ playerOnLeftSide = false;}
 
-            if (Vector3.Angle(transform.forward, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position) > 90 && Vector3.Distance(transform.position, player.transform.position) < 4f)
+            if (Vector3.Angle(transform.forward, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position) > 90 && Vector3.Distance(transform.position, player.transform.position) < 3.5f)
             {
                 bossBody.GetComponent<SC_AttackScript>().Slam();
             }
