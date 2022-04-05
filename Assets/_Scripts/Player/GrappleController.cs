@@ -62,6 +62,12 @@ public class GrappleController : MonoBehaviour {
 
         if (Physics.Raycast(ray, out var hit, cableRange, hittableLayers)) {
             _lerpTo = Vector3.Distance(shootPos, hit.point) * .5f;
+            if (hit.transform.GetComponent<GrappleLever>()) {
+                hit.transform.GetComponent<GrappleLever>().Pull();
+                _hitSomething = false;
+                _isExtending = true;
+                return;
+            }
             _hitSomething = true;
             //Damage potential enemy
             if (hit.transform.CompareTag("Enemy")) hit.transform.GetComponent<IDamageable>().Damage(attackDamage);
