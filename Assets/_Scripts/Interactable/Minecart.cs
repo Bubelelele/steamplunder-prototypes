@@ -23,7 +23,7 @@ public class Minecart : MonoBehaviour, IInteractable {
     }
 
     public string GetDescription() {
-        return StandStill() ? "(Cart seems to be stuck)" : "Get into mine cart";
+        return StandStill() ? "(Path ahead seems to be blocked)" : "Get into mine cart";
     }
 
     private bool StandStill() => nextCheckpoint == _currentCheckpoint;
