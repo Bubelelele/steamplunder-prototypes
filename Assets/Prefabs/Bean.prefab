@@ -5796,6 +5796,7 @@ MonoBehaviour:
   gunActiveOnStart: 1
   steamerActiveOnStart: 1
   grappleActiveOnStart: 1
+  spinActiveOnStart: 1
   hammerActiveOverridden: 0
 --- !u!114 &4651469889869125054
 MonoBehaviour:
@@ -5872,6 +5873,9 @@ MonoBehaviour:
   extendSpeed: 10
   retractSpeed: 5
   cableRange: 8
+  hittableLayers:
+    serializedVersion: 2
+    m_Bits: 1023
   grappleObject: {fileID: 5117510026292386449}
   cable: {fileID: 2591918430905085841}
 --- !u!114 &3394852588660642562

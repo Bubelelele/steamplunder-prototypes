@@ -10,6 +10,7 @@ public class GrappleController : MonoBehaviour {
     [SerializeField] private float extendSpeed = 10f;
     [SerializeField] private float retractSpeed = 5f;
     [SerializeField] private float cableRange = 8f;
+    [SerializeField] private LayerMask hittableLayers;
     
     [Header("References")]
     [SerializeField] private GameObject grappleObject;
@@ -59,7 +60,7 @@ public class GrappleController : MonoBehaviour {
         Vector3 shootPos = cable.position;
         Ray ray = new Ray(shootPos, cable.forward);
 
-        if (Physics.Raycast(ray, out var hit, cableRange)) {
+        if (Physics.Raycast(ray, out var hit, cableRange, hittableLayers)) {
             _lerpTo = Vector3.Distance(shootPos, hit.point) * .5f;
             _hitSomething = true;
             //Damage potential enemy
