@@ -12,8 +12,7 @@ public class CylinderPuzzle : MonoBehaviour
 
     private void Awake()
     {
-        _dir = clockwise ? -1 : 1;
-        
+        _dir = clockwise ? -1 : 1; 
     }
 
 	private void FixedUpdate()
@@ -28,10 +27,11 @@ public class CylinderPuzzle : MonoBehaviour
 		{
             speed = -speed;
             _dir = -_dir;
-            
         }
-           
+		if (other.gameObject.CompareTag("CorrectBox"))
+		{
+            Debug.Log("goodjob");
+        }
     }
-
 
 }
