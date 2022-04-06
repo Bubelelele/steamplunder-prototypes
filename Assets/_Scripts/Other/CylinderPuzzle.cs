@@ -9,6 +9,8 @@ public class CylinderPuzzle : MonoBehaviour
     [SerializeField] private float speed = 0f;
     private float _dir;
 
+    private bool CanCollide = true;
+
     private void Awake()
     {
         _dir = clockwise ? -1 : 1;
@@ -17,12 +19,12 @@ public class CylinderPuzzle : MonoBehaviour
 
 	private void FixedUpdate()
     {
-		if (Input.GetButton("Fire1"))
+		if (Input.GetButton("Fire2"))
 		{
             
             StartCoroutine(PuzzleStart());
         }
-		if (Input.GetButtonUp("Fire1"))
+		if (Input.GetButtonUp("Fire2"))
 		{
             speed = 2;
             _dir = clockwise ? -1 : 1;
@@ -31,8 +33,9 @@ public class CylinderPuzzle : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("MovingBox"))
+		if (other.gameObject.CompareTag("MovingBox") && CanCollide)
 		{
+            StartCoroutine(Invinsible());
             speed = -speed;
             _dir = -_dir;
         }
@@ -53,4 +56,12 @@ public class CylinderPuzzle : MonoBehaviour
         transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
         yield return new WaitForSeconds(0);
     }
+    IEnumerator Invinsible()
+	{
+        CanCollide = false;
+        yield return new WaitForSeconds(0.5f);
+
+        CanCollide = true;
+        
+	}
 }
