@@ -4,6 +4,7 @@ public class DoorOnBoss : MonoBehaviour
 {
     public GameObject bossBody;
     public GameObject DoorToDragOff;
+    public ParticleSystem explotion;
     public Canvas grappleUI;
 
     private bool draggedOff = false;
@@ -26,6 +27,7 @@ public class DoorOnBoss : MonoBehaviour
     }
     private void DragOff()
     {
+        explotion.Play();
         draggedOff = true;
         grappleUI.enabled = false;
         DoorToDragOff.transform.parent = null;
