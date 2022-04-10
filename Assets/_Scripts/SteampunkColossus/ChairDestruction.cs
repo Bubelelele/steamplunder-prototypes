@@ -13,14 +13,13 @@ public class ChairDestruction : MonoBehaviour
             chair.AddComponent<Rigidbody>();
             chair.GetComponent<Rigidbody>().isKinematic = false;
             chair.GetComponent<Rigidbody>().useGravity = true;
-            chair.GetComponent<Rigidbody>().mass = 100;
-            Vector3 recoilForceVector = (new Vector3(transform.position.x, transform.position.y + 3, transform.position.z) - other.transform.position).normalized * 1200f;
+            Vector3 recoilForceVector = (new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) - other.transform.position).normalized * 20f;
             chair.GetComponent<Rigidbody>().AddForce(recoilForceVector, ForceMode.Impulse);
             chair.GetComponent<Rigidbody>().AddTorque(recoilForceVector, ForceMode.Impulse);
         }
         else if (isHit && other.gameObject.tag != "Boss" && other.gameObject.tag != "Player")
         {
-            Destroy(chair);
+            Destroy(chair, 1f);
         }
     }
 }

@@ -8,9 +8,9 @@ public class SC_Stats : MonoBehaviour, IDamageable
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DmgFlash_SteampunkColossus damageFlash;
     [SerializeField] private GameObject feet;
+    private bool canBeHarmed = false;
 
-    private int _health;
-    
+    [HideInInspector] public int _health;
     [HideInInspector] public bool isActive;
 
     private void Start()
@@ -22,11 +22,15 @@ public class SC_Stats : MonoBehaviour, IDamageable
 
     public void Damage(int amount)
     {
-        _health -= amount;
-        if (_health <= 0) Die();
+        if (canBeHarmed)
+        {
+            _health -= amount;
+            if (_health <= 0) Die();
 
-        damageFlash?.Flash();
-        healthbar.UpdateHealthbar(_health, maxHealth);
+            damageFlash?.Flash();
+            healthbar.UpdateHealthbar(_health, maxHealth);
+        }
+
     }
 
     private void Die()
@@ -40,9 +44,11 @@ public class SC_Stats : MonoBehaviour, IDamageable
     public void ActivateBoss()
     {
         isActive = true;
+        canBeHarmed = true;
     }
     public void DeactivateBoss()
     {
         isActive = false;
+        canBeHarmed = false;
     }
 }

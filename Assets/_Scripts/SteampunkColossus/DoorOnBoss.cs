@@ -8,10 +8,11 @@ public class DoorOnBoss : MonoBehaviour
     public Canvas grappleUI;
 
     private bool draggedOff = false;
+    private bool canBeDraggedOff = false;
 
     private void OnMouseOver()
     {
-        if (!draggedOff && bossBody.GetComponent<SC_Stats>().isActive)
+        if (!draggedOff && canBeDraggedOff &&bossBody.GetComponent<SC_Stats>().isActive)
         {
             grappleUI.enabled = true;
             if (Input.GetKey(InputManager.instance.GrappleBtn))
@@ -40,5 +41,10 @@ public class DoorOnBoss : MonoBehaviour
     private void Hide()
     {
         DoorToDragOff.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void CanBeDraggedOff()
+    {
+        canBeDraggedOff = true;
     }
 }
