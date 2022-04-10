@@ -29,6 +29,7 @@ public class DoorOnBoss : MonoBehaviour
     private void DragOff()
     {
         explotion.Play();
+        bossBody.GetComponent<SC_Stats>().Damage(250);
         draggedOff = true;
         grappleUI.enabled = false;
         DoorToDragOff.transform.parent = null;
