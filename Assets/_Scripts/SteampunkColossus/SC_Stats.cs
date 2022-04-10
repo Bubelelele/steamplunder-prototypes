@@ -8,7 +8,9 @@ public class SC_Stats : MonoBehaviour, IDamageable
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DmgFlash_SteampunkColossus damageFlash;
     [SerializeField] private GameObject feet;
+    
     private bool canBeHarmed = false;
+    private int numberOfDoors = 0;
 
     [HideInInspector] public int _health;
     [HideInInspector] public bool isActive;
@@ -51,4 +53,14 @@ public class SC_Stats : MonoBehaviour, IDamageable
         isActive = false;
         canBeHarmed = false;
     }
+
+    public void DoorOff()
+    {
+        numberOfDoors++;
+        if (numberOfDoors >= 3)
+        {
+            Debug.Log("Yup");
+        } 
+    }
+
 }

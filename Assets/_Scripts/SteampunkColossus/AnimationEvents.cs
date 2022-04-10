@@ -5,6 +5,7 @@ public class AnimationEvents : MonoBehaviour
     public GameObject bossBody;
     public GameObject bossCart;
     public GameObject bossCanvas;
+    public GameObject cogThatShootsOff;
 
 
     //Boss body
@@ -42,9 +43,19 @@ public class AnimationEvents : MonoBehaviour
     {
         bossBody.GetComponent<SC_AttackScript>().AnimationDone();
     }
+    private void CogThatShootsOff()
+    {
+        cogThatShootsOff.transform.parent = null;
+        cogThatShootsOff.AddComponent<BoxCollider>();
+        cogThatShootsOff.AddComponent<Rigidbody>();
+        cogThatShootsOff.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 1f, ForceMode.Impulse);
+        Invoke("Hide", 2f);
+    }
 
-
-
+    private void Hide()
+    {
+        Destroy(cogThatShootsOff);
+    }
     //Boss cart
     private void Step()
     {
@@ -64,3 +75,7 @@ public class AnimationEvents : MonoBehaviour
     }
 
 }
+
+
+
+    
