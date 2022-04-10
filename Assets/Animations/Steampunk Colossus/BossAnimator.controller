@@ -123,6 +123,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: PivotRight
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -935413417827862896}
   m_Solo: 0
@@ -228,6 +231,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: PivotLeft
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2541253392363924019}
   m_Solo: 0
@@ -310,6 +316,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: SlamLeft
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1852180843487491138}
   m_Solo: 0
@@ -390,6 +399,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: SlamRight
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5037165941261772945}
   m_Solo: 0
@@ -414,6 +426,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: SlamRight
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7098607715990694572}
@@ -539,9 +554,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.8125
+  m_TransitionDuration: 0.022179484
+  m_TransitionOffset: 0.0048818896
+  m_ExitTime: 0.9833653
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -763,6 +778,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Swipe
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8206633704399346889}
   m_Solo: 0
@@ -872,7 +890,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
@@ -1051,6 +1069,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsWalking
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7959352742432784861}
   m_Solo: 0
@@ -1182,6 +1203,9 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: PivotLeft
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: SecondPhase
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9023805459413726981}
@@ -1421,7 +1445,7 @@ AnimatorStateMachine:
     m_Position: {x: 560, y: -110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4886173114371918480}
-    m_Position: {x: 800, y: 60, z: 0}
+    m_Position: {x: 800, y: 100, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -8,8 +8,10 @@ public class SC_Stats : MonoBehaviour, IDamageable
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DmgFlash_SteampunkColossus damageFlash;
     [SerializeField] private GameObject feet;
+    [SerializeField] private Animator bossAnim;
     
     private bool canBeHarmed = false;
+    private bool secondPhaseDone = false;
     private int numberOfDoors = 0;
 
     [HideInInspector] public int _health;
@@ -57,9 +59,10 @@ public class SC_Stats : MonoBehaviour, IDamageable
     public void DoorOff()
     {
         numberOfDoors++;
-        if (numberOfDoors >= 3)
+        if (numberOfDoors >= 3 && !secondPhaseDone)
         {
-            Debug.Log("Yup");
+            bossAnim.SetBool("SecondPhase", true);
+            secondPhaseDone = true;
         } 
     }
 

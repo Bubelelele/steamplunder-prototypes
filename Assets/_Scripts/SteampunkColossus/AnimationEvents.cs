@@ -6,6 +6,7 @@ public class AnimationEvents : MonoBehaviour
     public GameObject bossCart;
     public GameObject bossCanvas;
     public GameObject cogThatShootsOff;
+    public GameObject gun;
 
 
     //Boss body
@@ -55,6 +56,11 @@ public class AnimationEvents : MonoBehaviour
     private void Hide()
     {
         Destroy(cogThatShootsOff);
+    }
+    private void SecondPhaseOff()
+    {
+        gameObject.GetComponent<Animator>().SetBool("SecondPhase", false);
+        gun.GetComponent<Hotdog_Gun>().GunActive();
     }
     //Boss cart
     private void Step()
