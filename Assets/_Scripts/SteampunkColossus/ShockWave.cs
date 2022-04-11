@@ -8,6 +8,7 @@ public class ShockWave : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerStats>().Damage(shockwaveDamage);
+            gameObject.GetComponentInParent<PushBackPlayer>().PushBack(3);
         }
     }
 }

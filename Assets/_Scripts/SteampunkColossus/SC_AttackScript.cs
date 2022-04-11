@@ -48,11 +48,11 @@ public class SC_AttackScript : MonoBehaviour
                 {
                     attackRange = 3;
                 }
-                //if (!attackIDChecked)
-                //{
-                //    attackID = Random.Range(0, attackRange);
-                //    attackIDChecked = true;
-                //}
+                if (!attackIDChecked)
+                {
+                    attackID = Random.Range(0, attackRange);
+                    attackIDChecked = true;
+                }
 
 
                 if (attackID == 0)
