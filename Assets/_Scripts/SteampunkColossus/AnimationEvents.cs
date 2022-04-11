@@ -5,8 +5,8 @@ public class AnimationEvents : MonoBehaviour
     public GameObject bossBody;
     public GameObject bossCart;
     public GameObject bossCanvas;
-    public GameObject cogThatShootsOff;
-    public GameObject gun;
+    public GameObject projectilePrefab;
+    public Transform muzzleTrans;
 
 
     //Boss body
@@ -40,28 +40,16 @@ public class AnimationEvents : MonoBehaviour
     {
         bossBody.GetComponent<SC_AttackScript>().PistonPunchDone();
     }
+    private void Shoot()
+    {
+        Instantiate(projectilePrefab, muzzleTrans.position, muzzleTrans.rotation);
+    }
     private void AnimationDone()
     {
         bossBody.GetComponent<SC_AttackScript>().AnimationDone();
     }
-    private void CogThatShootsOff()
-    {
-        cogThatShootsOff.transform.parent = null;
-        cogThatShootsOff.AddComponent<BoxCollider>();
-        cogThatShootsOff.AddComponent<Rigidbody>();
-        cogThatShootsOff.GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * 1f, ForceMode.Impulse);
-        Invoke("Hide", 2f);
-    }
 
-    private void Hide()
-    {
-        Destroy(cogThatShootsOff);
-    }
-    private void SecondPhaseOff()
-    {
-        gameObject.GetComponent<Animator>().SetBool("SecondPhase", false);
-        gun.GetComponent<Hotdog_Gun>().GunActive();
-    }
+
     //Boss cart
     private void Step()
     {

@@ -11,9 +11,9 @@ public class SC_Stats : MonoBehaviour, IDamageable
     [SerializeField] private Animator bossAnim;
     
     private bool canBeHarmed = false;
-    private bool secondPhaseDone = false;
     private int numberOfDoors = 0;
 
+    [HideInInspector] public bool secondPhaseDone = false;
     [HideInInspector] public int _health;
     [HideInInspector] public bool isActive;
 
@@ -61,7 +61,7 @@ public class SC_Stats : MonoBehaviour, IDamageable
         numberOfDoors++;
         if (numberOfDoors >= 3 && !secondPhaseDone)
         {
-            bossAnim.SetBool("SecondPhase", true);
+            bossAnim.SetBool("Shoot", true);
             secondPhaseDone = true;
         } 
     }

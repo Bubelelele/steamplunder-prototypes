@@ -8,10 +8,6 @@ public class SC_AttackScript : MonoBehaviour
     [HideInInspector] public bool canAttack = false; 
     [HideInInspector] public bool animationPlaying = false; 
 
-    [SerializeField] private GameObject bossCart;
-    [SerializeField] private GameObject player;
-    [SerializeField] private Animator bossAnim;
-
     [Header("Swipe")]
     [HideInInspector] public bool swipe;
     public int swipeDamage = 15;
@@ -24,10 +20,16 @@ public class SC_AttackScript : MonoBehaviour
     [HideInInspector] public bool pistonPunch;
     public int punchDamage = 20;
 
+    [SerializeField] private GameObject bossCart;
+    [SerializeField] private GameObject player;
+    [SerializeField] private Animator bossAnim;
+
     [SerializeField] private GameObject leftPistonPunch;
     [SerializeField] private GameObject leftHip;
     [SerializeField] private GameObject rightPistonPunch;
     [SerializeField] private GameObject rightHip;
+
+    private bool attackIDChecked = false;
 
     private void Update()
     {
@@ -39,15 +41,31 @@ public class SC_AttackScript : MonoBehaviour
             }
             else
             {
-                int attackID = Random.Range(0, 2);
+                
+                int attackRange = 2;
+                int attackID = 10;
+                if (gameObject.GetComponent<SC_Stats>().secondPhaseDone)
+                {
+                    attackRange = 3;
+                }
+                //if (!attackIDChecked)
+                //{
+                //    attackID = Random.Range(0, attackRange);
+                //    attackIDChecked = true;
+                //}
 
-                if (attackID == 1)
+
+                if (attackID == 0)
                 {
                     PistonPunch();
                 }
-                else
+                else if(attackID == 1)
                 {
                     Swipe();
+                }
+                else
+                {
+                    Shoot();
                 }
 
             }
@@ -66,7 +84,12 @@ public class SC_AttackScript : MonoBehaviour
     {
         animationPlaying = true;
         attackDamage = swipeDamage;
-        bossAnim.SetTrigger("Swipe");
+        bossAnim.SetBool("Swipe", true);
+    }
+    public void Shoot()
+    {
+        bossAnim.SetBool("Shoot", true);
+        animationPlaying = true;
     }
     public void CanSlam(){ slam = true; }
     public void Slam()
@@ -147,14 +170,15 @@ public class SC_AttackScript : MonoBehaviour
     public void AnimationDone()
     {
         animationPlaying = false;
-        
-        //Slam
-        bossAnim.SetBool("SlamLeft", false);
+        attackIDChecked = false;
+
+        bossAnim.SetBool("Swipe", false); //Swipe
+
+        bossAnim.SetBool("SlamLeft", false); //Slam
         bossAnim.SetBool("SlamRight", false);
         slam = false;
 
-        //Punch
-        bossAnim.SetBool("PunchLeft", false);
+        bossAnim.SetBool("PunchLeft", false); //Punch
         bossAnim.SetBool("PunchRight", false);
 
     }
