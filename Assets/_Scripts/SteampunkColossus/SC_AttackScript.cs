@@ -6,7 +6,8 @@ public class SC_AttackScript : MonoBehaviour
     [HideInInspector] public int attackDamage;
     [HideInInspector] public bool leathal;
     [HideInInspector] public bool canAttack = false; 
-    [HideInInspector] public bool animationPlaying = false; 
+    [HideInInspector] public bool animationPlaying = false;
+    [HideInInspector] public int footOff = 0;
 
     [Header("Swipe")]
     [HideInInspector] public bool swipe;
@@ -30,7 +31,7 @@ public class SC_AttackScript : MonoBehaviour
     [SerializeField] private GameObject rightHip;
 
     private bool attackIDChecked = false;
-    private bool footOff = false;
+
 
     private void Update()
     {
@@ -49,9 +50,13 @@ public class SC_AttackScript : MonoBehaviour
                 {
                     attackRange = 4;
                 }
-                if (footOff)
+                if (footOff == 1)
                 {
                     bottom = 2;
+                }
+                else if (footOff == 2)
+                {
+                    canAttack = false;
                 }
                 if (!attackIDChecked)
                 {
@@ -80,7 +85,7 @@ public class SC_AttackScript : MonoBehaviour
     public void CanAttack() { canAttack = true; }
     public void CannotAttack() { canAttack = false; }
     public void NotLeathal() { leathal = false; }
-    public void FootOff() { footOff = true; }
+    public void FootOff() { footOff++; }
     public void IsLeathal()
     {
         leathal = true;

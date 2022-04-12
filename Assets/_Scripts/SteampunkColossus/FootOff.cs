@@ -10,6 +10,7 @@ public class FootOff : MonoBehaviour, IInteractable
     public ParticleSystem explotion;
 
     private bool isOff = false;
+    
     public string GetDescription()
     {
         return "Detach foot";

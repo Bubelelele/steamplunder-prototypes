@@ -61,7 +61,11 @@ public class AnimationEvents : MonoBehaviour
     {
         r_dragOffFoot.SetActive(false);
         l_dragOffFoot.SetActive(false);
-        gameObject.GetComponent<Animator>().SetBool("IsDown", false);
+        if (bossBody.GetComponent<SC_AttackScript>().footOff < 2)
+        {
+            gameObject.GetComponent<Animator>().SetBool("IsDown", false);
+        }
+        
     }
 
 
