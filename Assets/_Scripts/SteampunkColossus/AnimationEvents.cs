@@ -4,7 +4,7 @@ public class AnimationEvents : MonoBehaviour
 {
     public GameObject bossBody;
     public GameObject bossCart;
-    public GameObject bossCanvas;
+
     public GameObject projectilePrefab;
     public Transform muzzleTrans;
 
@@ -13,12 +13,12 @@ public class AnimationEvents : MonoBehaviour
     private void ActivateBoss()
     {
         bossBody.GetComponent<SC_Stats>().ActivateBoss();
-        bossCanvas.SetActive(true);
+
     }
     private void DeactivateBoss()
     {
         bossBody.GetComponent<SC_Stats>().DeactivateBoss();
-        bossCanvas.SetActive(false);
+
     }
     private void Leathal()
     {
@@ -47,6 +47,13 @@ public class AnimationEvents : MonoBehaviour
     private void AnimationDone()
     {
         bossBody.GetComponent<SC_AttackScript>().AnimationDone();
+    }
+    private void InvokeRaiseUp()
+    {
+        Invoke("RaiseUp", 3);
+    }private void RaiseUp()
+    {
+        gameObject.GetComponent<Animator>().SetBool("IsDown", false);
     }
 
 

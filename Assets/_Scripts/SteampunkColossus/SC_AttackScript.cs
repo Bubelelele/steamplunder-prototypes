@@ -43,10 +43,10 @@ public class SC_AttackScript : MonoBehaviour
             {
                 
                 int attackRange = 2;
-                int attackID = 10;
+                int attackID = 2;
                 if (gameObject.GetComponent<SC_Stats>().secondPhaseDone)
                 {
-                    attackRange = 3;
+                    attackRange = 4;
                 }
                 if (!attackIDChecked)
                 {
@@ -63,7 +63,7 @@ public class SC_AttackScript : MonoBehaviour
                 {
                     Swipe();
                 }
-                else
+                else if (attackID == 2 || attackID == 3)
                 {
                     Shoot();
                 }

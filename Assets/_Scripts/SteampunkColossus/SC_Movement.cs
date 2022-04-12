@@ -63,7 +63,7 @@ public class SC_Movement : MonoBehaviour
                 }
 
             }
-            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance)
+            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
             {
                 WalkToPlayer();
                 bossBody.GetComponent<SC_AttackScript>().CannotAttack();
@@ -78,7 +78,7 @@ public class SC_Movement : MonoBehaviour
             {
                 bossBody.GetComponent<SC_AttackScript>().CanSlam();
             }
-            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer)
+            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
             {
                 if (playerOnLeftSide)
                 {

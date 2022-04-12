@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grappleUI: {fileID: 975549475381672603}
+  rotatePelletParent: {fileID: 0}
+  rotationSpeed: 100
 --- !u!1 &3633704665787202477
 GameObject:
   m_ObjectHideFlags: 0
@@ -6102,6 +6104,7 @@ MonoBehaviour:
   shockwave: {fileID: 8739507324992521178}
   shockSpeed: 10
   shockRadius: 25
+  hit: 0
 --- !u!54 &7436995052531578802
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6156,6 +6159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grappleUI: {fileID: 975549475381672603}
+  rotatePelletParent: {fileID: 0}
+  rotationSpeed: 300
 --- !u!1 &7686176270812958901
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class SC_Stats : MonoBehaviour, IDamageable
     [HideInInspector] public bool secondPhaseDone = false;
     [HideInInspector] public int _health;
     [HideInInspector] public bool isActive;
+    public GameObject bossCanvas;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class SC_Stats : MonoBehaviour, IDamageable
     {
         var position = transform.position;
         EffectManager.instance.DeathEffect(position);
+        bossCanvas.SetActive(false);
         Destroy(gameObject);
         Destroy(feet);
         EffectManager.instance.CogPickup(position);
@@ -49,6 +51,7 @@ public class SC_Stats : MonoBehaviour, IDamageable
     {
         isActive = true;
         canBeHarmed = true;
+        bossCanvas.SetActive(true);
     }
     public void DeactivateBoss()
     {
@@ -65,5 +68,8 @@ public class SC_Stats : MonoBehaviour, IDamageable
             secondPhaseDone = true;
         } 
     }
-
+    private void Update()
+    {
+        Debug.Log(_health);
+    }
 }
