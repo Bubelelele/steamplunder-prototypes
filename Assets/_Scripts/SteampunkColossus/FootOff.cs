@@ -7,10 +7,11 @@ public class FootOff : MonoBehaviour, IInteractable
 
     public GameObject foot;
     public GameObject bossBody;
+    public GameObject bossCart;
     public ParticleSystem explotion;
 
     private bool isOff = false;
-    
+
     public string GetDescription()
     {
         return "Detach foot";
@@ -30,7 +31,9 @@ public class FootOff : MonoBehaviour, IInteractable
             foot.GetComponent<BoxCollider>().enabled = true;
             foot.GetComponent<Rigidbody>().isKinematic = false;
             foot.GetComponent<Rigidbody>().useGravity = true;
+            foot.transform.position = new Vector3(foot.transform.position.x, foot.transform.position.y + 2, foot.transform.position.z);
             foot.GetComponent<Rigidbody>().AddRelativeForce(foot.transform.up * 10f, ForceMode.Impulse);
+            foot.GetComponent<Rigidbody>().AddRelativeTorque(foot.transform.up * 10f, ForceMode.Impulse);
             gameObject.GetComponent<Collider>().enabled = false;
             isOff = true;
             Invoke("Hide", 2f);

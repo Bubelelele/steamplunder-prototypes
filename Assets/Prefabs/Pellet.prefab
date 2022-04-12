@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aef2fd999b939f41b1d1d4ed07983e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canHurtBoss: 0
   grappleUI: {fileID: 975549475381672603}
   rotatePelletParent: {fileID: 0}
   rotationSpeed: 100
@@ -158,7 +159,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3633704665787202477}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -6158,6 +6159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aef2fd999b939f41b1d1d4ed07983e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canHurtBoss: 0
   grappleUI: {fileID: 975549475381672603}
   rotatePelletParent: {fileID: 0}
   rotationSpeed: 300
@@ -6172,6 +6174,7 @@ GameObject:
   - component: {fileID: 8154781783616380485}
   - component: {fileID: 3861038423572157826}
   - component: {fileID: 8716682958749412442}
+  - component: {fileID: 2070830869695475899}
   m_Layer: 5
   m_Name: GrappleUI
   m_TagString: Untagged
@@ -6218,15 +6221,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: b3f7d479b918ba34b8d62b346d093be1, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: ca4cde3972b294c44aecc80eea2e9154, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6236,6 +6239,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2070830869695475899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686176270812958901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 3, y: 3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8739507324992521178
 GameObject:
   m_ObjectHideFlags: 0
