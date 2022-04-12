@@ -32,17 +32,7 @@ public class SC_Movement : MonoBehaviour
             }
 
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) > closestDistance && walkToPlayer)
-            {
-                if (bossBody.GetComponent<SC_AttackScript>().animationPlaying)
-                {
-                    DontLookAtPlayer();
-                }
-                else
-                {
-                    LookAtPlayer();
-                }
-
-                
+            {                
                 if (step)
                 {
                     //Moving towards the player

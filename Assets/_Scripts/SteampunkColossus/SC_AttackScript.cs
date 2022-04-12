@@ -30,6 +30,7 @@ public class SC_AttackScript : MonoBehaviour
     [SerializeField] private GameObject rightHip;
 
     private bool attackIDChecked = false;
+    private bool footOff = false;
 
     private void Update()
     {
@@ -41,16 +42,20 @@ public class SC_AttackScript : MonoBehaviour
             }
             else
             {
-                
+                int bottom = 0;
                 int attackRange = 2;
-                int attackID = 2;
+                int attackID = 10;
                 if (gameObject.GetComponent<SC_Stats>().secondPhaseDone)
                 {
                     attackRange = 4;
                 }
+                if (footOff)
+                {
+                    bottom = 2;
+                }
                 if (!attackIDChecked)
                 {
-                    attackID = Random.Range(0, attackRange);
+                    attackID = Random.Range(bottom, attackRange);
                     attackIDChecked = true;
                 }
 
@@ -75,6 +80,7 @@ public class SC_AttackScript : MonoBehaviour
     public void CanAttack() { canAttack = true; }
     public void CannotAttack() { canAttack = false; }
     public void NotLeathal() { leathal = false; }
+    public void FootOff() { footOff = true; }
     public void IsLeathal()
     {
         leathal = true;

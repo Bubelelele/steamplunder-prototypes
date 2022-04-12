@@ -10,7 +10,7 @@ public class TriggerForWeapon : MonoBehaviour
         {
             EffectManager.instance.BloodSplat(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(gameObject.transform.position));
             other.GetComponent<PlayerStats>().Damage(bossBody.GetComponent<SC_AttackScript>().attackDamage);
-            bossBody.GetComponent<PushBackPlayer>().PushBack(8);
+            bossBody.GetComponent<PushBackPlayer>().PushBack(5);
             
             int soundNumber = Random.Range(0, 3);
             if (soundNumber == 0)

@@ -4,6 +4,8 @@ public class AnimationEvents : MonoBehaviour
 {
     public GameObject bossBody;
     public GameObject bossCart;
+    public GameObject r_dragOffFoot;
+    public GameObject l_dragOffFoot;
 
     public GameObject projectilePrefab;
     public Transform muzzleTrans;
@@ -51,8 +53,14 @@ public class AnimationEvents : MonoBehaviour
     private void InvokeRaiseUp()
     {
         Invoke("RaiseUp", 3);
-    }private void RaiseUp()
+        r_dragOffFoot.SetActive(true);
+        l_dragOffFoot.SetActive(true);
+
+    }
+    private void RaiseUp()
     {
+        r_dragOffFoot.SetActive(false);
+        l_dragOffFoot.SetActive(false);
         gameObject.GetComponent<Animator>().SetBool("IsDown", false);
     }
 
