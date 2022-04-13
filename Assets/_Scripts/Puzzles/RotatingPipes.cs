@@ -34,10 +34,6 @@ public class RotatingPipes : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed1);
         }
         
-        
-
-
-
 
 
         if (Input.GetKey(KeyCode.I))
@@ -52,14 +48,12 @@ public class RotatingPipes : MonoBehaviour
 
 
 
-
-
         if (Input.GetKey(KeyCode.O))
         {
 
             Pipe3.transform.Rotate(Vector3.forward, speed);
         }
-		if (Input.GetKeyUp(KeyCode.O))
+		else
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed3);
         }
