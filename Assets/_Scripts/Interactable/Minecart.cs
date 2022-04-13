@@ -27,4 +27,6 @@ public class Minecart : MonoBehaviour, IInteractable {
     }
 
     private bool StandStill() => nextCheckpoint == _currentCheckpoint;
+
+    public void Next() => nextCheckpoint++;
 }
