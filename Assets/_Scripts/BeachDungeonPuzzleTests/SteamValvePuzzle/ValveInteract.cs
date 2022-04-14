@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ValveInteract : MonoBehaviour, IInteractable
@@ -5,6 +6,10 @@ public class ValveInteract : MonoBehaviour, IInteractable
     public GameObject[] Steam;
 
     private bool SteamActive;
+
+    private void Awake() {
+        SteamActive = Steam[0].activeSelf;
+    }
 
     private void Update()
     {
