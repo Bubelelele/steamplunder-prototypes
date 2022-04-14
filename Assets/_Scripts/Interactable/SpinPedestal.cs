@@ -24,9 +24,11 @@ public class SpinPedestal : MonoBehaviour, IInteractable {
     }
 
     public string GetDescription() {
-        return CheckSpinActive()
-            ? "Spin with Axe"
-            : "(Spinning Axe required)";
+        string msg = "(Spinning Axe required)";
+        if (_activated) msg = "(Cannot be activated again)";
+        else if (CheckSpinActive()) msg = "Spin with Axe";
+
+        return msg;
     }
 
     private bool CheckSpinActive() => GameManager.instance.player.GetComponent<GearManager>().SpinActive;

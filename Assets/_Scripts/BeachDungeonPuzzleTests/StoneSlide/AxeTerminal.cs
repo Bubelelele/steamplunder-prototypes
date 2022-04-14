@@ -2,24 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AxeTerminal : MonoBehaviour, IInteractable
+public class AxeTerminal : MonoBehaviour
 {
     public Animator[] liftAnim;
-    public string GetDescription()
-    {
-        return "Use axe on terminal";
-    }
-
-    public void Interact()
-    {
-        StartCoroutine(rocks());
-    }
-
-    public void StopInteract()
-    {
-        throw new System.NotImplementedException();
-    }
-
+    
+    public void Init() => StartCoroutine(rocks());
+    
     private IEnumerator rocks()
     {
         for (int i = 0; i < liftAnim.Length; i++)

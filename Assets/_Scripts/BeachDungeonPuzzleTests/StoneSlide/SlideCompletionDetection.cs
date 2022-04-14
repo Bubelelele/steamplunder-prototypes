@@ -6,6 +6,8 @@ public class SlideCompletionDetection : MonoBehaviour
 {
 
     public GameObject rock;
+
+    public GameObject invisWall;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class SlideCompletionDetection : MonoBehaviour
         if (!rock.activeSelf)
         {
             GetComponent<Renderer>().material.color = Color.green;
+            invisWall.SetActive(false);
         }
     }
 }

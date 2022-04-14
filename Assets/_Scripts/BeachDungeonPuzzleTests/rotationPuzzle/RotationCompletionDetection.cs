@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RotationCompletionDetection : MonoBehaviour
 {
 
     [SerializeField] private int[] solution;
     [SerializeField] private RotatingSymbolBlock[] blocks;
+    [SerializeField] private UnityEvent onCompletion;
+    
 
     private void Start()
     {
@@ -25,12 +28,8 @@ public class RotationCompletionDetection : MonoBehaviour
             if (blocks[i].CurrentSymbol != solution[i]) return;
         }
 
-        StartCoroutine(Reward());
+        onCompletion.Invoke();
     }
 
-    private IEnumerator Reward()
-    {
-        GetComponent<Renderer>().material.color = Color.green;
-        yield return new WaitForSeconds(.5f);
-    }
+    
 }
