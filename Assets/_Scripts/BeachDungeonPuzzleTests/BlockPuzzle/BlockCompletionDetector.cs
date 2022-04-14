@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BlockCompletionDetector : MonoBehaviour
 {
     public pressurePlateBool plateOne, plateTwo;
+    [SerializeField] private UnityEvent onCompletion;
+
+    private bool _compelted;
+    
     void Start()
     {
         GetComponent<Renderer>().material.color = Color.red;
@@ -14,8 +19,14 @@ public class BlockCompletionDetector : MonoBehaviour
     {
         if (plateOne.GetPressed() && plateTwo.GetPressed())
         {
-            GetComponent<Renderer>().material.color = Color.green;
+            Completed();
         }
+    }
+
+    private void Completed() {
+        if (_compelted) return;
+        _compelted = true;
+        onCompletion.Invoke();
     }
 
 }

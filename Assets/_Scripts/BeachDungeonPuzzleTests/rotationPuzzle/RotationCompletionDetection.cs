@@ -8,7 +8,8 @@ public class RotationCompletionDetection : MonoBehaviour
     [SerializeField] private int[] solution;
     [SerializeField] private RotatingSymbolBlock[] blocks;
     [SerializeField] private UnityEvent onCompletion;
-    
+    private bool _compelted;
+
 
     private void Start()
     {
@@ -28,8 +29,13 @@ public class RotationCompletionDetection : MonoBehaviour
             if (blocks[i].CurrentSymbol != solution[i]) return;
         }
 
-        onCompletion.Invoke();
+        Completed();
     }
 
+    private void Completed() {
+        if (_compelted) return;
+        _compelted = true;
+        onCompletion.Invoke();
+    }
     
 }
