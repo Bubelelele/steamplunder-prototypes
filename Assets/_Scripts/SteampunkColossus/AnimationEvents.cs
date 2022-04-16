@@ -59,8 +59,14 @@ public class AnimationEvents : MonoBehaviour
     }
     private void RaiseUp()
     {
-        r_dragOffFoot.SetActive(false);
-        l_dragOffFoot.SetActive(false);
+        if (r_dragOffFoot != null)
+        {
+            r_dragOffFoot.SetActive(false);
+        }
+        if (l_dragOffFoot != null)
+        {
+            l_dragOffFoot.SetActive(false);
+        }
         if (bossBody.GetComponent<SC_AttackScript>().footOff < 2)
         {
             gameObject.GetComponent<Animator>().SetBool("IsDown", false);
