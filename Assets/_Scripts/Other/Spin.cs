@@ -1,7 +1,8 @@
 using UnityEngine;
 
 public class Spin : MonoBehaviour {
-    [SerializeField] private float speed = 1f;
+    public float speed = 1f;
+    
     [SerializeField] private bool clockwise = true;
 
     private float _dir;

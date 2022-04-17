@@ -40,12 +40,10 @@ public class ValveCompletionDetector : MonoBehaviour
                 return false;
             }
         }
-        Debug.Log("here");
         return true;
     }
     
     private void Completed() {
-        Debug.Log("br");
         if (_compelted) return;
         _compelted = true;
         onCompletion.Invoke();
