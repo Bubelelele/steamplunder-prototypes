@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     
     [Header("References")] 
     [SerializeField] private Camera cam;
+    [SerializeField] private Animator _animator;
     
     private InputManager _input;
     
@@ -58,6 +59,16 @@ public class PlayerMovement : MonoBehaviour {
     //Move the the player transform by movementVector
     private void Move(Vector3 movementVector) {
         float speed = moveSpeed * Time.deltaTime;
+
+        if (movementVector.magnitude != 0)
+        {
+            _animator.SetBool("Is Moving", true);
+        }
+        else
+        {
+            _animator.SetBool("Is Moving", false);
+        }
+
         Vector3 targetPosition = transform.position + movementVector * speed;
         transform.position = targetPosition;
     }

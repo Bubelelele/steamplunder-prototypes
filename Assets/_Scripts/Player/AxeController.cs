@@ -14,19 +14,16 @@ public class AxeController : MonoBehaviour {
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] private GameObject axeObject;
 
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
     private readonly Collider[] _attackHitboxResults = new Collider[5];
     
     public bool CanAttack { get; private set; } = true;
     public event Action onAttackFinished;
     
-    private void Start() {
-        _animator = GetComponent<Animator>();
-    }
-
     public void Slash() {
+        Debug.Log("Attacked!");
         //Attack visuals
-        _animator.SetTrigger("axe");
+        _animator.SetTrigger("Attack");
         trailRenderer.enabled = true;
 
         AudioManager.instance?.Play("swing");

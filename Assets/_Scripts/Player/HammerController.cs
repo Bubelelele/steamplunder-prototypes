@@ -29,7 +29,7 @@ public class HammerController : MonoBehaviour {
     
     public void Smash() {
         //Attack visuals
-        _animator.SetTrigger("hammer");
+        _animator.SetTrigger("Hammer Smash");
         SetObjectActive(true);
         //Attack cooldown
         CanAttack = false;
