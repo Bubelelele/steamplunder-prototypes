@@ -68,8 +68,4 @@ public class SC_Stats : MonoBehaviour, IDamageable
             secondPhaseDone = true;
         } 
     }
-    private void Update()
-    {
-        Debug.Log(_health);
-    }
 }
