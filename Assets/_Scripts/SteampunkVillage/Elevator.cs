@@ -6,22 +6,18 @@ public class Elevator : MonoBehaviour
     private bool directionBool = true;
 
     public GameObject[] SpinningCogs;
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P) && canUse)
-        {
-            IsUsed();
-        }
-    }
 
-    private void IsUsed()
+    public void IsUsed()
     {
-        gameObject.GetComponent<Animator>().SetBool("Up", directionBool);
-        directionBool = !directionBool;
-        canUse = false;
-        for (int i = 0; i < SpinningCogs.Length; i++)
+        if (canUse)
         {
-            SpinningCogs[i].GetComponent<Spin>().enabled = true;
+            gameObject.GetComponent<Animator>().SetBool("Up", directionBool);
+            directionBool = !directionBool;
+            canUse = false;
+            for (int i = 0; i < SpinningCogs.Length; i++)
+            {
+                SpinningCogs[i].GetComponent<Spin>().enabled = true;
+            }
         }
     }
     private void Done()
