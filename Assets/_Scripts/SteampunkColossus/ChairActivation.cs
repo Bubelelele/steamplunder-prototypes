@@ -8,7 +8,7 @@ public class ChairActivation : MonoBehaviour, IInteractable
 
     public string GetDescription()
     {
-        return "";
+        return "Approach throne";
     }
 
     public void Interact()
