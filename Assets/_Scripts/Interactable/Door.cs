@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable {
 
+    [SerializeField] private bool doorActive = true;
     [SerializeField] private int doorId;
     [SerializeField] private Vector3 positionToPutPlayer;
     [SerializeField] private int sceneBuildIndex;
@@ -14,6 +15,7 @@ public class Door : MonoBehaviour, IInteractable {
     }
 
     public void Interact() {
+        if (!doorActive) return;
         Debug.Log($"Loading Scene: {sceneBuildIndex}");
         GameManager.instance.player.GetComponent<PlayerStats>().SavePlayerState();
         SceneTransfer.instance.doorId = doorId;

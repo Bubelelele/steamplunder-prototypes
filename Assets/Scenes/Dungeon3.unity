@@ -11660,7 +11660,7 @@ PrefabInstance:
     - target: {fileID: 7335057428525350907, guid: 8dd67da0c8123d440b5db14b6a72059c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 16
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 7335057428525350907, guid: 8dd67da0c8123d440b5db14b6a72059c,
         type: 3}
@@ -11675,7 +11675,7 @@ PrefabInstance:
     - target: {fileID: 7335057428525350907, guid: 8dd67da0c8123d440b5db14b6a72059c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.75
+      value: -35.31
       objectReference: {fileID: 0}
     - target: {fileID: 7335057428525350907, guid: 8dd67da0c8123d440b5db14b6a72059c,
         type: 3}
@@ -11685,7 +11685,7 @@ PrefabInstance:
     - target: {fileID: 7335057428525350907, guid: 8dd67da0c8123d440b5db14b6a72059c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.625
+      value: -4.07
       objectReference: {fileID: 0}
     - target: {fileID: 7335057428525350907, guid: 8dd67da0c8123d440b5db14b6a72059c,
         type: 3}
@@ -39511,12 +39511,12 @@ PrefabInstance:
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000026583972
+      value: 0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000134711176
+      value: -0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358466389650, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -39666,12 +39666,12 @@ PrefabInstance:
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000026583972
+      value: 0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000134711176
+      value: -0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 3816176359022198145, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -39681,7 +39681,7 @@ PrefabInstance:
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: grappleActiveOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fc3003de33ee6f4c8d76d4703797507, type: 3}
@@ -79086,10 +79086,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8509977fcf371e458476d08bdeea02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorActive: 0
   doorId: 1
   positionToPutPlayer: {x: 6.202, y: 1.016, z: -1.282}
   sceneBuildIndex: 1
-  descriptionText: Exit to plains
+  descriptionText: Exit (WIP)
 --- !u!64 &1873649722
 MeshCollider:
   m_ObjectHideFlags: 0
