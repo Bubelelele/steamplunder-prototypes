@@ -32,17 +32,7 @@ public class SC_Movement : MonoBehaviour
             }
 
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) > closestDistance && walkToPlayer)
-            {
-                if (bossBody.GetComponent<SC_AttackScript>().animationPlaying)
-                {
-                    DontLookAtPlayer();
-                }
-                else
-                {
-                    LookAtPlayer();
-                }
-
-                
+            {                
                 if (step)
                 {
                     //Moving towards the player
@@ -63,7 +53,7 @@ public class SC_Movement : MonoBehaviour
                 }
 
             }
-            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance)
+            else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > furthestDistance && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
             {
                 WalkToPlayer();
                 bossBody.GetComponent<SC_AttackScript>().CannotAttack();
@@ -76,9 +66,9 @@ public class SC_Movement : MonoBehaviour
 
             if (Vector3.Angle(transform.forward, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position) > 90 && Vector3.Distance(transform.position, player.transform.position) < 3.5f)
             {
-                bossBody.GetComponent<SC_AttackScript>().Slam();
+                bossBody.GetComponent<SC_AttackScript>().CanSlam();
             }
-            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer)
+            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
             {
                 if (playerOnLeftSide)
                 {

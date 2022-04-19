@@ -4,19 +4,23 @@ public class AnimationEvents : MonoBehaviour
 {
     public GameObject bossBody;
     public GameObject bossCart;
-    public GameObject bossCanvas;
+    public GameObject r_dragOffFoot;
+    public GameObject l_dragOffFoot;
+
+    public GameObject projectilePrefab;
+    public Transform muzzleTrans;
 
 
     //Boss body
     private void ActivateBoss()
     {
         bossBody.GetComponent<SC_Stats>().ActivateBoss();
-        bossCanvas.SetActive(true);
+
     }
     private void DeactivateBoss()
     {
         bossBody.GetComponent<SC_Stats>().DeactivateBoss();
-        bossCanvas.SetActive(false);
+
     }
     private void Leathal()
     {
@@ -38,11 +42,37 @@ public class AnimationEvents : MonoBehaviour
     {
         bossBody.GetComponent<SC_AttackScript>().PistonPunchDone();
     }
+    private void Shoot()
+    {
+        Instantiate(projectilePrefab, muzzleTrans.position, muzzleTrans.rotation);
+    }
     private void AnimationDone()
     {
         bossBody.GetComponent<SC_AttackScript>().AnimationDone();
     }
+    private void InvokeRaiseUp()
+    {
+        Invoke("RaiseUp", 3);
+        r_dragOffFoot.SetActive(true);
+        l_dragOffFoot.SetActive(true);
 
+    }
+    private void RaiseUp()
+    {
+        if (r_dragOffFoot != null)
+        {
+            r_dragOffFoot.SetActive(false);
+        }
+        if (l_dragOffFoot != null)
+        {
+            l_dragOffFoot.SetActive(false);
+        }
+        if (bossBody.GetComponent<SC_AttackScript>().footOff < 2)
+        {
+            gameObject.GetComponent<Animator>().SetBool("IsDown", false);
+        }
+        
+    }
 
 
     //Boss cart
@@ -64,3 +94,7 @@ public class AnimationEvents : MonoBehaviour
     }
 
 }
+
+
+
+    
