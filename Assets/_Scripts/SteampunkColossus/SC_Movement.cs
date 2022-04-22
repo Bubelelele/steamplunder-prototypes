@@ -23,7 +23,6 @@ public class SC_Movement : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(walkToPlayer);
         if (bossBody != null && bossBody.GetComponent<SC_Stats>().isActive)
         {
             if (lookAtPlayer && spin)
