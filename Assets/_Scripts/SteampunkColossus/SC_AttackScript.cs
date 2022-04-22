@@ -191,7 +191,6 @@ public class SC_AttackScript : MonoBehaviour
 
         bossAnim.SetBool("PunchLeft", false); //Punch
         bossAnim.SetBool("PunchRight", false);
-
     }
 
 }

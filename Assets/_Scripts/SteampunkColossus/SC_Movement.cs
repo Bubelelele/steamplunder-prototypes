@@ -23,6 +23,7 @@ public class SC_Movement : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(walkToPlayer);
         if (bossBody != null && bossBody.GetComponent<SC_Stats>().isActive)
         {
             if (lookAtPlayer && spin)
@@ -50,6 +51,7 @@ public class SC_Movement : MonoBehaviour
                 if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 7)
                 {
                     DontLookAtPlayer();
+
                 }
 
             }
@@ -68,7 +70,7 @@ public class SC_Movement : MonoBehaviour
             {
                 bossBody.GetComponent<SC_AttackScript>().CanSlam();
             }
-            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV/2 && !walkToPlayer && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
+            else if (Vector3.Angle(transform.forward, player.transform.position - transform.position) > FOV / 2 && !walkToPlayer && !bossBody.GetComponent<SC_AttackScript>().animationPlaying)
             {
                 if (playerOnLeftSide)
                 {
