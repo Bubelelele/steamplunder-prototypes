@@ -1782,10 +1782,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 449595778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8cbaf65d643f9b41972e0bdfd53f9c8, type: 3}
+  m_Script: {fileID: 11500000, guid: df4d8eaee2b5377498d72fa5f3072536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cogMachine: {fileID: 0}
+  cogMachine: {fileID: 2059012702}
 --- !u!65 &449595781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12331,17 +12331,17 @@ PrefabInstance:
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.45201567
+      value: 0.4520157
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015348258
+      value: -0.00000001534827
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000007777551
+      value: 0.000000007777557
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358466389650, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -12456,17 +12456,17 @@ PrefabInstance:
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.45201567
+      value: 0.4520157
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015348258
+      value: -0.00000001534827
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000007777551
+      value: 0.000000007777557
       objectReference: {fileID: 0}
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -19430,7 +19430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonBall: {fileID: 718512102}
   destroyableDoor: {fileID: 5666724885066076069}
-  cannonFire: {fileID: 0}
+  cannonFire: {fileID: 1778121627}
 --- !u!65 &1778121623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20797,6 +20797,7 @@ GameObject:
   - component: {fileID: 2059012701}
   - component: {fileID: 2059012700}
   - component: {fileID: 2059012699}
+  - component: {fileID: 2059012702}
   m_Layer: 0
   m_Name: FindCogMachine
   m_TagString: Untagged
@@ -20890,6 +20891,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059012697}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2059012702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059012697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8e4a17da0c10e4793d7dd03b47aa61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cog: {fileID: 748340302}
+  onActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1107441366}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2085814900
 GameObject:
   m_ObjectHideFlags: 0
@@ -21477,7 +21506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3205660730012844144}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e765fe3be35be64589d23424bf9e4aa, type: 3}
   m_Name: 
@@ -21486,7 +21515,22 @@ MonoBehaviour:
   - {fileID: 9106791373353765738}
   - {fileID: 3205660729994020544}
   - {fileID: 3205660729756722470}
-  isComplete: 
+  isComplete: 000100
+  onActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 664313818}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Lower
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!33 &3205660730012844156
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -21502,7 +21546,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3205660730012844144}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

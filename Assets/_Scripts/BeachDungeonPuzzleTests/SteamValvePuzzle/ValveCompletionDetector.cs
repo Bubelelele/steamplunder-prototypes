@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ValveCompletionDetector : MonoBehaviour
 {
     public ValveInteract[] valveList;
 
     [SerializeField]private bool[] isComplete;
+    [SerializeField] private UnityEvent onActivate;
 
     private void Awake()
     {
@@ -24,6 +26,8 @@ public class ValveCompletionDetector : MonoBehaviour
        if (IsThePuzzleComplete())
         {
             GetComponent<Renderer>().material.color = Color.green;
+            onActivate.Invoke();
+            Debug.Log("lower cage");
         }
         else
         {
