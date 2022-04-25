@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Fire
+    m_ConditionEvent: FireCannon
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 725616795681254647}
@@ -86,7 +86,7 @@ AnimatorController:
   m_Name: Cannon (1)
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Fire
+  - m_Name: FireCannon
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

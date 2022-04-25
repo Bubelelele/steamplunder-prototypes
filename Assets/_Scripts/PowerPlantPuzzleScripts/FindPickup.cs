@@ -14,4 +14,7 @@ public class FindPickup : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
+   
 }
