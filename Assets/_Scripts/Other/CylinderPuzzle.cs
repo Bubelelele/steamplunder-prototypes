@@ -31,7 +31,6 @@ public class CylinderPuzzle : MonoBehaviour
 		if (other.gameObject.CompareTag("MoveBox") && CanCollide)
 		{
            
-           
             speed = -speed;
             _dir = -_dir;
         }
@@ -45,10 +44,7 @@ public class CylinderPuzzle : MonoBehaviour
             speed = 0;
             _dir = 0;
 		}
-        if (other.gameObject.CompareTag("CorrectTile"))
-		{
-
-		}
+       
     }
 
     IEnumerator PuzzleStart()
@@ -57,9 +53,4 @@ public class CylinderPuzzle : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.World);
         yield return new WaitForSeconds(0);
     }
-
-    private void CorrectTile()
-	{
-		
-	}
 }

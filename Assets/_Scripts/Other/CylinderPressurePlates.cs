@@ -8,7 +8,7 @@ public class CylinderPressurePlates : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Bean = GameManager.instance.player.gameObject;
     }
 
     // Update is called once per frame
