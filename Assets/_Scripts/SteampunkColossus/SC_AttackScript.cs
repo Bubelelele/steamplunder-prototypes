@@ -5,7 +5,7 @@ public class SC_AttackScript : MonoBehaviour
 
     [HideInInspector] public int attackDamage;
     [HideInInspector] public bool leathal;
-    [HideInInspector] public bool canAttack = false; 
+    [HideInInspector] public bool canAttack = false;
     [HideInInspector] public bool animationPlaying = false;
     [HideInInspector] public int footOff = 0;
 
@@ -39,7 +39,7 @@ public class SC_AttackScript : MonoBehaviour
         {
             if (slam)
             {
-                Slam();                
+                Slam();
             }
             else
             {
@@ -69,7 +69,7 @@ public class SC_AttackScript : MonoBehaviour
                 {
                     PistonPunch();
                 }
-                else if(attackID == 1)
+                else if (attackID == 1)
                 {
                     Swipe();
                 }
@@ -91,7 +91,7 @@ public class SC_AttackScript : MonoBehaviour
         leathal = true;
         AudioManager.instance.Play("swing");
     }
-    public void Swipe() 
+    public void Swipe()
     {
         animationPlaying = true;
         attackDamage = swipeDamage;
@@ -102,7 +102,7 @@ public class SC_AttackScript : MonoBehaviour
         bossAnim.SetBool("Shoot", true);
         animationPlaying = true;
     }
-    public void CanSlam(){ slam = true; }
+    public void CanSlam() { slam = true; }
     public void Slam()
     {
         if (bossCart.GetComponent<SC_Movement>().playerOnLeftSide)
@@ -191,6 +191,7 @@ public class SC_AttackScript : MonoBehaviour
 
         bossAnim.SetBool("PunchLeft", false); //Punch
         bossAnim.SetBool("PunchRight", false);
+
     }
 
 }

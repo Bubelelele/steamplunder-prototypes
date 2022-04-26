@@ -19,7 +19,7 @@ public class SC_Movement : MonoBehaviour
     private bool lookAtPlayer = true;
     private bool step = false;
     private bool spin = false;
-    
+
 
     private void Update()
     {
@@ -32,7 +32,7 @@ public class SC_Movement : MonoBehaviour
             }
 
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) > closestDistance && walkToPlayer)
-            {                
+            {
                 if (step)
                 {
                     //Moving towards the player
@@ -50,7 +50,6 @@ public class SC_Movement : MonoBehaviour
                 if (Vector3.Angle(transform.forward, player.transform.position - transform.position) <= 7)
                 {
                     DontLookAtPlayer();
-
                 }
 
             }
@@ -61,9 +60,9 @@ public class SC_Movement : MonoBehaviour
             }
 
             //Check which side of the boss the player is on
-            if (Vector3.Angle(transform.right, player.transform.position - transform.position) > 90){ playerOnLeftSide = true;}
+            if (Vector3.Angle(transform.right, player.transform.position - transform.position) > 90) { playerOnLeftSide = true; }
 
-            else{ playerOnLeftSide = false;}
+            else { playerOnLeftSide = false; }
 
             if (Vector3.Angle(transform.forward, new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position) > 90 && Vector3.Distance(transform.position, player.transform.position) < 3.5f)
             {
@@ -93,7 +92,7 @@ public class SC_Movement : MonoBehaviour
                 bossAnim.SetBool("PivotLeft", false);
                 bossAnim.SetBool("PivotRight", false);
             }
-            
+
         }
     }
     public void WalkToPlayer()
@@ -102,26 +101,26 @@ public class SC_Movement : MonoBehaviour
         bossAnim.SetBool("IsWalking", true);
     }
     public void DontWalkToPlayer()
-    { 
+    {
         walkToPlayer = false;
         NoStep();
         bossAnim.SetBool("IsWalking", false);
     }
     public void Step() { step = true; }
     public void NoStep() { step = false; }
-    public void Spin() 
-    { 
+    public void Spin()
+    {
         spin = true;
         LookAtPlayer();
     }
-    public void NoSpin() 
-    { 
+    public void NoSpin()
+    {
         spin = false;
         DontLookAtPlayer();
     }
 
-    public void LookAtPlayer(){ lookAtPlayer = true;}
-    public void DontLookAtPlayer(){ lookAtPlayer = false;}
+    public void LookAtPlayer() { lookAtPlayer = true; }
+    public void DontLookAtPlayer() { lookAtPlayer = false; }
 
     public void SetFOV(float newFOV)
     {
