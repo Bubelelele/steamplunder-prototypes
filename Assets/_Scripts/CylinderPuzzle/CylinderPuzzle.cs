@@ -1,22 +1,24 @@
 using UnityEngine;
 using System.Collections;
 
-public class CylinderPuzzle : MonoBehaviour
+public class CylinderPuzzle : CylinderPressurePlates
 {
 
     [SerializeField] private float rotationSpeed = 1.5f;
     [SerializeField] private bool clockwise = true;
     [SerializeField] private float speed = 0f;
     private float _dir;
+    
+    
+
+    public Vector3 _respawnPos;
    
-
-    public GameObject Bean;
-
-    private bool CanCollide = true;
 
     private void Awake()
     {
         _dir = clockwise ? -1 : 1;
+        
+        _respawnPos = GameObject.Find("Respawn").transform.position;
         
     }
 
@@ -28,9 +30,8 @@ public class CylinderPuzzle : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("MoveBox") && CanCollide)
-		{
-           
+		if (other.gameObject.CompareTag("MoveBox"))
+		{ 
             speed = -speed;
             _dir = -_dir;
         }
@@ -44,6 +45,11 @@ public class CylinderPuzzle : MonoBehaviour
             speed = 0;
             _dir = 0;
 		}
+        if (other.gameObject.CompareTag("Player"))
+		{
+            Bean.transform.position =_respawnPos;
+		}
+	
        
     }
 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CylinderPressurePlates : MonoBehaviour
 {
+    
     public GameObject Bean;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class CylinderPressurePlates : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
+            
+            
             Bean.GetComponent<CapsuleCollider>().isTrigger = true;
             Bean.GetComponent<Rigidbody>().isKinematic = true;
         }
@@ -30,7 +34,10 @@ public class CylinderPressurePlates : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
+            
+
             Bean.GetComponent<CapsuleCollider>().isTrigger = false;
+            
             Bean.GetComponent<Rigidbody>().isKinematic = false;
         }
 	}
