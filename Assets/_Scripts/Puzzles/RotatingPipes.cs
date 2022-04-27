@@ -27,54 +27,26 @@ public class RotatingPipes : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (firstPipe)
-        {
-            Pipe1.transform.Rotate(Vector3.forward, speed);
-        }
-        if (firstPipe == false)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed1);
-        }
-        
+          
+                transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed1);
+                transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed2);
+                transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed3);
+
     }
 
     public void PipeOne()
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-            firstPipe = true;
-        }
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            firstPipe = false;
-        }
-     
+
+            Pipe1.transform.Rotate(Vector3.forward, speed);
     }
 
     public void PipeTwo()
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-
             Pipe2.transform.Rotate(Vector3.back, speed);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed2);
-        }
     }
 
     public void PipeThree()
     {
-
-        if (Input.GetKey(KeyCode.E))
-        {
-
             Pipe3.transform.Rotate(Vector3.forward, speed);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, OriginalRotationValue, Time.deltaTime * RotationResetSpeed3);
-        }
     }
 }
