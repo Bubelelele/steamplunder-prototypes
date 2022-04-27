@@ -19,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour {
 
         if (Physics.Raycast(ray, out var hit, interactionDistance)) {
             var interactable = hit.collider.GetComponent<IInteractable>();
+            var holdInteractable = hit.collider.GetComponent<InteractableBase>();
 
             if (interactable != null) {
                 hitSomething = true;
@@ -29,6 +30,17 @@ public class PlayerInteraction : MonoBehaviour {
                     interactable.Interact();
                     interactionIndicatorUI.SetActive(false);
                     InteractionManager.instance.SetCurrentInteraction(interactable);
+                    return;
+                }
+            }
+            
+            else if (holdInteractable != null) {
+                hitSomething = true;
+                interactionText.text = holdInteractable.GetDescription();
+                interactionIndicatorUI.transform.position = mainCam.WorldToScreenPoint(hit.collider.transform.position);
+
+                if (Input.GetKey(InputManager.instance.InteractBtn)) {
+                    holdInteractable.Interact();
                     return;
                 }
             }
