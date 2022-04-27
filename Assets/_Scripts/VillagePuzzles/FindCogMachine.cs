@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FindCogMachine : MonoBehaviour, IInteractable
 {
     private bool hasCog = false;
-    public GameObject Cog, cube;
+    public GameObject Cog;
+    [SerializeField] private UnityEvent onActivate;
     public string GetDescription()
     {
         if (hasCog)
@@ -17,7 +19,7 @@ public class FindCogMachine : MonoBehaviour, IInteractable
         if (hasCog)
         {
             Cog.SetActive(true);
-            cube.GetComponent<Renderer>().material.color = Color.green;
+            onActivate.Invoke();
         }
         else
         {
@@ -36,8 +38,4 @@ public class FindCogMachine : MonoBehaviour, IInteractable
         hasCog = true;
     }
 
-    private void Start()
-    {
-        cube.GetComponent<Renderer>().material.color = Color.red;
-    }
 }
