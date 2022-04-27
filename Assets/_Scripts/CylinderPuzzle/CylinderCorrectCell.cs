@@ -13,19 +13,19 @@ public class CylinderCorrectCell : CylinderPressurePlates
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.W))
+		if (Input.GetKey(KeyCode.W))
 		{
             Bean.GetComponent<CapsuleCollider>().enabled = true;
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             Bean.GetComponent<CapsuleCollider>().enabled = true;
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             Bean.GetComponent<CapsuleCollider>().enabled = true;
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             Bean.GetComponent<CapsuleCollider>().enabled = true;
         }
