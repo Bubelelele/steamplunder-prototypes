@@ -7,19 +7,26 @@ public abstract class EnemyBase : MonoBehaviour
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public Vector3 homePoint;
 
     private bool playerDetected = false;
     private bool checkedForNerbyEnemies = false;
     private bool calledByNerbyEnemies = false;
 
+    protected virtual void Initialize() { }
+    protected virtual void UpdateSense() { }
+
     private void Start()
     {
         player = GameManager.instance.player.gameObject;
         agent = gameObject.GetComponent<NavMeshAgent>();
+        homePoint = transform.position;
+        Initialize();
     }
 
     private void Update()
     {
+        UpdateSense();
         if (!calledByNerbyEnemies)
         {
             if (Vector3.Distance(player.transform.position, transform.position) < sightRange && Vector3.Angle(transform.forward, player.transform.position - transform.position) < FOV / 2)
@@ -38,12 +45,16 @@ public abstract class EnemyBase : MonoBehaviour
             if (Vector3.Distance(player.transform.position, transform.position) > rangeForStopChasingPlayer)
             {
                 calledByNerbyEnemies = false;
+                playerDetected = false;
+                alertTrigger.transform.localScale = Vector3.one;
+                EnemyOutOfSight();
             }
         }
         
 
         if (playerDetected)
         {
+            EnemyInSight();
             PlayerDetectedCommon();
         }
 
@@ -66,10 +77,9 @@ public abstract class EnemyBase : MonoBehaviour
                 alertTrigger.transform.localScale = Vector3.one;
                 checkedForNerbyEnemies = true;
             }
-            
         }
-        
     }
     public abstract void EnemyInSight();
     public abstract void EnemyOutOfSight();
+    public abstract void InAttackRange();
 }
