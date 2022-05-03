@@ -14,4 +14,8 @@ public class RangedEnemy : EnemyBase
     {
 
     }
+    public override void Attack()
+    {
+
+    }
 }

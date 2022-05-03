@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CloseCombatEnemy : EnemyBase
@@ -5,27 +6,24 @@ public class CloseCombatEnemy : EnemyBase
     private bool chasePlayer = false;
     private bool pivotDirChoosen = false;
     private int moveDir;
+    private bool animationPlaying = false;
     private float distanceToPlayerBeforeStop = 2.5f;
 
-    private bool attacking = false;
+    
 
-    public override void EnemyInSight()
-    {
-        chasePlayer = true;
-    }
-    public override void EnemyOutOfSight()
-    {
-        chasePlayer = false;
-    }
+    public override void EnemyInSight(){chasePlayer = true;}
+    public override void EnemyOutOfSight(){chasePlayer = false;}
     public override void InAttackRange()
     {
-        if (!attacking)
+        
+        if (!animationPlaying)
         {
-            agent.speed = movementSpeed / 5;
+            Invoke("Attack", Random.Range(2f, 3f));
+            agent.speed = movementSpeed / 10;
 
             if (!pivotDirChoosen)
             {
-                moveDir = Random.Range(0, 3);
+                moveDir = Random.Range(0, 2);
                 pivotDirChoosen = true;
             }
             if (moveDir == 0)
@@ -38,9 +36,16 @@ public class CloseCombatEnemy : EnemyBase
             }
         }
     }
+    public override void Attack()
+    {
+        Debug.Log("nop");
+        animationPlaying = true;
+        enemyAnim.SetInteger("Swing", Random.Range(1, 4));
+        agent.SetDestination(transform.position);
+    }
     protected override void UpdateSense()
     {
-        if (chasePlayer)
+        if (chasePlayer && !animationPlaying)
         {
             if (Vector3.Distance(player.transform.position, transform.position) < distanceToPlayerBeforeStop)
             {
@@ -62,5 +67,11 @@ public class CloseCombatEnemy : EnemyBase
             agent.speed = movementSpeed /2;
             agent.SetDestination(homePoint);
         }
+    }
+    public void AnimationDone()
+    {
+        animationPlaying = false;
+        enemyAnim.SetInteger("Swing", 0);
+        agent.SetDestination(transform.position);
     }
 }
