@@ -7,6 +7,7 @@ public class CloseCombatEnemy : EnemyBase
     private bool pivotDirChoosen = false;
     private int moveDir;
     private bool animationPlaying = false;
+    private bool invokedOnce = false;
     private float distanceToPlayerBeforeStop = 2.5f;
 
     
@@ -18,7 +19,12 @@ public class CloseCombatEnemy : EnemyBase
         
         if (!animationPlaying)
         {
-            Invoke("Attack", Random.Range(2f, 3f));
+            if (!invokedOnce)
+            {
+                Invoke("Attack", Random.Range(0.5f, 1.5f));
+                invokedOnce = true;
+            }
+            
             agent.speed = movementSpeed / 10;
 
             if (!pivotDirChoosen)
@@ -38,7 +44,6 @@ public class CloseCombatEnemy : EnemyBase
     }
     public override void Attack()
     {
-        Debug.Log("nop");
         animationPlaying = true;
         enemyAnim.SetInteger("Swing", Random.Range(1, 4));
         agent.SetDestination(transform.position);
@@ -68,9 +73,20 @@ public class CloseCombatEnemy : EnemyBase
             agent.SetDestination(homePoint);
         }
     }
+    public void Lethal()
+    {
+        agent.speed = movementSpeed / 2;
+        agent.SetDestination(player.transform.position);
+    }
+    public void NotLethal()
+    {
+        agent.speed = movementSpeed / 10;
+        agent.SetDestination(transform.position);
+    }
     public void AnimationDone()
     {
         animationPlaying = false;
+        invokedOnce = false;
         enemyAnim.SetInteger("Swing", 0);
         agent.SetDestination(transform.position);
     }
