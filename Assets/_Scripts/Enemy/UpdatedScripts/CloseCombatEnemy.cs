@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CloseCombatEnemy : EnemyBase
 {
+    [HideInInspector] public bool lethal = false;
+
     private bool chasePlayer = false;
     private bool pivotDirChoosen = false;
     private int moveDir;
@@ -44,9 +46,9 @@ public class CloseCombatEnemy : EnemyBase
     }
     public override void Attack()
     {
-        animationPlaying = true;
-        enemyAnim.SetInteger("Swing", Random.Range(1, 4));
-        agent.SetDestination(transform.position);
+            animationPlaying = true;
+            enemyAnim.SetInteger("Swing", Random.Range(1, 4));
+            agent.SetDestination(transform.position);
     }
     protected override void UpdateSense()
     {
@@ -75,11 +77,13 @@ public class CloseCombatEnemy : EnemyBase
     }
     public void Lethal()
     {
+        lethal = true;
         agent.speed = movementSpeed / 2;
         agent.SetDestination(player.transform.position);
     }
     public void NotLethal()
     {
+        lethal = false;
         agent.speed = movementSpeed / 10;
         agent.SetDestination(transform.position);
     }

@@ -3,6 +3,7 @@ using UnityEngine.AI;
 public abstract class EnemyBase : MonoBehaviour 
 {
     public float movementSpeed, rotationSpeed, sightRange, FOV, alertRange, rangeForStopChasingPlayer;
+    public int attackDamage;
     public GameObject alertTrigger;
 
     [HideInInspector] public GameObject player;
