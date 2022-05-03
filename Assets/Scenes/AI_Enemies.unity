@@ -995,7 +995,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887218450}
   m_LocalRotation: {x: -0, y: -0.9995468, z: -0, w: 0.030104686}
-  m_LocalPosition: {x: 8.53125, y: 4.125, z: -0.8125}
+  m_LocalPosition: {x: 8.53, y: 4.125, z: -0.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1619298926}
@@ -1533,17 +1533,17 @@ PrefabInstance:
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4520157
+      value: 0.45201567
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015348267
+      value: -0.000000015348261
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000007777556
+      value: 0.000000007777553
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358466389650, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -1658,17 +1658,17 @@ PrefabInstance:
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4520157
+      value: 0.45201567
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015348267
+      value: -0.000000015348261
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000007777556
+      value: 0.000000007777553
       objectReference: {fileID: 0}
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -2493,6 +2493,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   swipeLeft: {fileID: 1668065901}
   swipeRight: {fileID: 2110037050}
+  swordMat: {fileID: 2100000, guid: f3b1b99db987842e0a837902b587d559, type: 2}
 --- !u!195 &5404856963907968316
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2829,6 +2830,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 7592c63eb57ba437e807f0b4cf8560d8, type: 2}
+    - target: {fileID: 23590843206365624, guid: adcd8e0f993d343d8bd27434f15383b1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f3b1b99db987842e0a837902b587d559, type: 2}
     m_RemovedComponents:
     - {fileID: 64914186676935026, guid: adcd8e0f993d343d8bd27434f15383b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: adcd8e0f993d343d8bd27434f15383b1, type: 3}

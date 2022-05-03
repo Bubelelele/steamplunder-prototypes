@@ -7,6 +7,7 @@ public class CloseCombatEnemy : EnemyBase
     [HideInInspector] public Vector3 targetPos;
 
     public Transform swipeLeft, swipeRight;
+    public Material swordMat;
 
     private bool chasePlayer = false;
     private bool pivotDirChoosen = false;
@@ -14,6 +15,8 @@ public class CloseCombatEnemy : EnemyBase
     private bool animationPlaying = false;
     private bool invokedOnce = false;
     private bool pivot = true;
+    private bool isStunned = false;
+    private bool canBeStunned = false;
     private int side;
     private float distanceToPlayerBeforeStop = 2.5f;
 
@@ -24,16 +27,7 @@ public class CloseCombatEnemy : EnemyBase
     public override void EnemyOutOfSight(){chasePlayer = false;}
     public override void InAttackRange()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (lethal)
-            {
-                Debug.Log("Yip");
-            }
-        }
-
-
-            if (!animationPlaying)
+        if (!animationPlaying)
         {
             agent.speed = movementSpeed / 10;
             if (!invokedOnce)
@@ -43,7 +37,6 @@ public class CloseCombatEnemy : EnemyBase
             }
             else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
             {
-                Debug.Log("lol");
                 agent.speed = movementSpeed*5;
                 pivot = false;
                 CancelInvoke();
@@ -81,6 +74,23 @@ public class CloseCombatEnemy : EnemyBase
     }
     protected override void UpdateSense()
     {
+        //Blocking
+        if (canBeStunned)
+        {
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!isStunned)
+                {
+                    lethal = false;
+                    isStunned = true;
+                    enemyAnim.SetTrigger("Stunned");
+                    swordMat.DisableKeyword("_EMISSION");
+                    agent.SetDestination(transform.position);
+                }
+                
+            }
+        }
 
         if (chasePlayer && !animationPlaying)
         {
@@ -105,9 +115,20 @@ public class CloseCombatEnemy : EnemyBase
             agent.SetDestination(homePoint);
         }
     }
+    public void CanBeStunned()
+    {
+        canBeStunned = true;
+        swordMat.EnableKeyword("_EMISSION");
+    }
+    public void CannnotBeStunned()
+    {
+        canBeStunned = false;
+        swordMat.DisableKeyword("_EMISSION");
+    }
     public void Lethal()
     {
         lethal = true;
+        
         agent.speed = movementSpeed / 2;
         agent.SetDestination(player.transform.position);
     }
@@ -122,6 +143,7 @@ public class CloseCombatEnemy : EnemyBase
         animationPlaying = false;
         invokedOnce = false;
         pivot = true;
+        isStunned = false;
         enemyAnim.SetInteger("Swing", 0);
         agent.SetDestination(transform.position);
     }
