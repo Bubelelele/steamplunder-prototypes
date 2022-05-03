@@ -11,14 +11,18 @@ public class CloseCombatEnemy : EnemyBase
     public Material swordMat, swordMatLight;
 
     //Movement
-    public Transform swipeLeft, swipeRight;
+    public Transform swipeLeft, swipeRight, swipeBack;
 
 
     private bool chasePlayer = false;
+    private bool rushPlayer = false;
+    private bool canRush = false;
     
     //Waiting to attack
     private bool animationPlaying = false;
     private bool invokedOnce = false;
+    private float  timeSinceLastAttack = 0;
+
 
     //Pivoting around the player
     private bool pivot = true;
@@ -34,6 +38,12 @@ public class CloseCombatEnemy : EnemyBase
 
     protected override void UpdateSense()
     {
+        if (canRush)
+        {
+            timeSinceLastAttack += Time.deltaTime;
+        }
+        
+
         if (canBeStunned)
         {
 
@@ -53,16 +63,33 @@ public class CloseCombatEnemy : EnemyBase
 
         if (chasePlayer && !animationPlaying)
         {
+            
+
             if (Vector3.Distance(player.transform.position, transform.position) < distanceToPlayerBeforeStop)
             {
                 agent.speed = movementSpeed;
                 agent.SetDestination(transform.position);
                 distanceToPlayerBeforeStop = 4f;
                 InAttackRange();
+                canRush = true;
             }
             else if (Vector3.Distance(player.transform.position, transform.position) > distanceToPlayerBeforeStop)
             {
-                agent.speed = movementSpeed;
+                if (timeSinceLastAttack > 5f)
+                {
+                    enemyAnim.SetInteger("Swing", 1);
+                    agent.acceleration = 60f;
+                    agent.speed = 100f;
+                    agent.SetDestination(player.transform.position);
+                    animationPlaying = true;
+                    pivot = false;
+                    rushPlayer = true;
+                }
+                else
+                {
+                    agent.speed = movementSpeed;
+                }
+
                 agent.SetDestination(player.transform.position);
                 distanceToPlayerBeforeStop = 3f;
                 pivotDirChoosen = false;
@@ -70,7 +97,7 @@ public class CloseCombatEnemy : EnemyBase
         }
         else if (!chasePlayer)
         {
-            agent.speed = movementSpeed / 2;
+            agent.speed = movementSpeed / 4;
             agent.SetDestination(homePoint);
         }
     }
@@ -79,27 +106,43 @@ public class CloseCombatEnemy : EnemyBase
     public override void EnemyOutOfSight(){chasePlayer = false;}
     public override void InAttackRange()
     {
+        
+
         if (!animationPlaying)
         {
-            agent.speed = movementSpeed / 2;
-            if (!invokedOnce)
+            if (!rushPlayer)
             {
-                Invoke("Attack", Random.Range(0.5f, 2.5f));
-                invokedOnce = true;
+                if (timeSinceLastAttack > 4.5f)
+                {
+                    Debug.Log("lol");
+                    Attack();
+                    agent.acceleration = 60;
+                    animationPlaying = true;
+                    pivot = false;
+                }
+                else if (timeSinceLastAttack <= 4.5f)
+                {
+                    agent.speed = movementSpeed / 4;
+                    if (!invokedOnce)
+                    {
+                        Invoke("Attack", Random.Range(1.5f, 4.5f));
+                        invokedOnce = true;
+                    }
+                    else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
+                    {
+                        agent.speed = movementSpeed * 5;
+                        pivot = false;
+                        CancelInvoke();
+                        Invoke("Attack", 0.3f);
+                        side = Random.Range(0, 3);
+                        animationPlaying = true;
+                        if (side == 0) { agent.SetDestination(swipeLeft.position); }
+                        else if (side == 1) { agent.SetDestination(swipeRight.position); }
+                        else if (side == 2) { agent.SetDestination(swipeBack.position); }
+                    }
+                }
             }
-            else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
-            {
-                agent.speed = movementSpeed*5;
-                pivot = false;
-                CancelInvoke();
-                Invoke("Attack", 0.3f);
-                side = Random.Range(0, 2);
-                animationPlaying = true;
-                if (side == 0) { agent.SetDestination(swipeLeft.position);}
-                else if (side == 1) { agent.SetDestination(swipeRight.position);}
-            }
-
-
+            
             if (pivot)
             {
                 if (!pivotDirChoosen)
@@ -120,9 +163,8 @@ public class CloseCombatEnemy : EnemyBase
     }
     public override void Attack()
     {
-            animationPlaying = true;
-            enemyAnim.SetInteger("Swing", Random.Range(1, 4));
-            agent.SetDestination(transform.position);
+        enemyAnim.SetInteger("Swing", Random.Range(1, 4));
+        agent.SetDestination(transform.position);
     }
     
     public void CanBeStunned()
@@ -139,7 +181,7 @@ public class CloseCombatEnemy : EnemyBase
     {
         lethal = true;
         
-        agent.speed = movementSpeed / 2;
+        agent.speed = movementSpeed;
         agent.SetDestination(player.transform.position);
     }
     public void NotLethal()
@@ -150,12 +192,16 @@ public class CloseCombatEnemy : EnemyBase
     }
     public void AnimationDone()
     {
+        timeSinceLastAttack = 0;
         animationPlaying = false;
         invokedOnce = false;
         pivot = true;
         isStunned = false;
+        rushPlayer = false;
         enemyAnim.SetInteger("Swing", 0);
         agent.SetDestination(transform.position);
+        agent.speed = movementSpeed;
+        agent.acceleration = 15;
     }
     public void ChangeSwordMat(Material newMat)
     {
