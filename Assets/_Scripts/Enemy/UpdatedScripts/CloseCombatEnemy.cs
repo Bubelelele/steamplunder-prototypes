@@ -4,15 +4,21 @@ using UnityEngine;
 public class CloseCombatEnemy : EnemyBase
 {
     [HideInInspector] public bool lethal = false;
+    [HideInInspector] public Vector3 targetPos;
+
+    public Transform swipeLeft, swipeRight;
 
     private bool chasePlayer = false;
     private bool pivotDirChoosen = false;
     private int moveDir;
     private bool animationPlaying = false;
     private bool invokedOnce = false;
+    private bool pivot = true;
+    private int side;
     private float distanceToPlayerBeforeStop = 2.5f;
 
-    
+
+
 
     public override void EnemyInSight(){chasePlayer = true;}
     public override void EnemyOutOfSight(){chasePlayer = false;}
@@ -21,26 +27,41 @@ public class CloseCombatEnemy : EnemyBase
         
         if (!animationPlaying)
         {
+            agent.speed = movementSpeed / 10;
             if (!invokedOnce)
             {
                 Invoke("Attack", Random.Range(0.5f, 1.5f));
                 invokedOnce = true;
             }
-            
-            agent.speed = movementSpeed / 10;
+            else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
+            {
+                Debug.Log("lol");
+                agent.speed = movementSpeed*5;
+                pivot = false;
+                CancelInvoke();
+                side = Random.Range(0, 2);
+                animationPlaying = true;
+                if (side == 0) { agent.SetDestination(swipeLeft.position); Debug.Log("left"); }
+                else if (side == 1) { agent.SetDestination(swipeRight.position); Debug.Log("right"); }
+                Invoke("Attack", 0.3f);
+            }
 
-            if (!pivotDirChoosen)
+
+            if (pivot)
             {
-                moveDir = Random.Range(0, 2);
-                pivotDirChoosen = true;
-            }
-            if (moveDir == 0)
-            {
-                agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, Vector3.up));
-            }
-            else if (moveDir == 1)
-            {
-                agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, -Vector3.up));
+                if (!pivotDirChoosen)
+                {
+                    moveDir = Random.Range(0, 2);
+                    pivotDirChoosen = true;
+                }
+                if (moveDir == 0)
+                {
+                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, Vector3.up));
+                }
+                else if (moveDir == 1)
+                {
+                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, -Vector3.up));
+                }
             }
         }
     }
@@ -52,6 +73,7 @@ public class CloseCombatEnemy : EnemyBase
     }
     protected override void UpdateSense()
     {
+
         if (chasePlayer && !animationPlaying)
         {
             if (Vector3.Distance(player.transform.position, transform.position) < distanceToPlayerBeforeStop)
@@ -91,6 +113,7 @@ public class CloseCombatEnemy : EnemyBase
     {
         animationPlaying = false;
         invokedOnce = false;
+        pivot = true;
         enemyAnim.SetInteger("Swing", 0);
         agent.SetDestination(transform.position);
     }
