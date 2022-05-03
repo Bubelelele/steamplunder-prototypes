@@ -24,8 +24,16 @@ public class CloseCombatEnemy : EnemyBase
     public override void EnemyOutOfSight(){chasePlayer = false;}
     public override void InAttackRange()
     {
-        
-        if (!animationPlaying)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (lethal)
+            {
+                Debug.Log("Yip");
+            }
+        }
+
+
+            if (!animationPlaying)
         {
             agent.speed = movementSpeed / 10;
             if (!invokedOnce)
