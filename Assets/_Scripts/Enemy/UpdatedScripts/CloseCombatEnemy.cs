@@ -112,34 +112,23 @@ public class CloseCombatEnemy : EnemyBase
         {
             if (!rushPlayer)
             {
-                if (timeSinceLastAttack > 4.5f)
+
+                agent.speed = movementSpeed / 4;
+                if (!invokedOnce)
                 {
-                    Debug.Log("lol");
-                    Attack();
-                    agent.acceleration = 60;
-                    animationPlaying = true;
-                    pivot = false;
+                    Invoke("Attack", Random.Range(1.5f, 7.5f));
+                    invokedOnce = true;
                 }
-                else if (timeSinceLastAttack <= 4.5f)
+                else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
                 {
-                    agent.speed = movementSpeed / 4;
-                    if (!invokedOnce)
-                    {
-                        Invoke("Attack", Random.Range(1.5f, 4.5f));
-                        invokedOnce = true;
-                    }
-                    else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
-                    {
-                        agent.speed = movementSpeed * 5;
-                        pivot = false;
-                        CancelInvoke();
-                        Invoke("Attack", 0.3f);
-                        side = Random.Range(0, 3);
-                        animationPlaying = true;
-                        if (side == 0) { agent.SetDestination(swipeLeft.position); }
-                        else if (side == 1) { agent.SetDestination(swipeRight.position); }
-                        else if (side == 2) { agent.SetDestination(swipeBack.position); }
-                    }
+                    agent.speed = movementSpeed * 100;
+                    Invoke("AnimationDone", 2f);
+                    pivot = false;
+                    side = Random.Range(0, 3);
+                    animationPlaying = true;
+                    if (side == 0) { agent.SetDestination(swipeLeft.position); }
+                    else if (side == 1) { agent.SetDestination(swipeRight.position); }
+                    else if (side == 2) { agent.SetDestination(swipeBack.position); }
                 }
             }
             
@@ -152,11 +141,11 @@ public class CloseCombatEnemy : EnemyBase
                 }
                 if (moveDir == 0)
                 {
-                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, Vector3.up));
+                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, 1.5f * Vector3.up));
                 }
                 else if (moveDir == 1)
                 {
-                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, -Vector3.up));
+                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, -1.5f * Vector3.up));
                 }
             }
         }
@@ -164,7 +153,8 @@ public class CloseCombatEnemy : EnemyBase
     public override void Attack()
     {
         enemyAnim.SetInteger("Swing", Random.Range(1, 4));
-        agent.SetDestination(transform.position);
+        agent.SetDestination(player.transform.position);
+        pivot = false;
     }
     
     public void CanBeStunned()

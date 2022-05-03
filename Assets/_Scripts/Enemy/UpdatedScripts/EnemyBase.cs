@@ -37,6 +37,11 @@ public abstract class EnemyBase : MonoBehaviour
                 EnemyInSight();
                 playerDetected = true;
             }
+            else if(Vector3.Distance(player.transform.position, transform.position) < 2f)
+            {
+                EnemyInSight();
+                playerDetected = true;
+            }
             else
             {
                 playerDetected = false;
