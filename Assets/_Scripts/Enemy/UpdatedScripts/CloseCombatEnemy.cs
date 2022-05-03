@@ -7,7 +7,8 @@ public class CloseCombatEnemy : EnemyBase
     [HideInInspector] public Vector3 targetPos;
 
     public Transform swipeLeft, swipeRight;
-    public Material swordMat;
+    public Renderer swordRenderer;
+    public Material swordMat, swordMatLight;
 
     private bool chasePlayer = false;
     private bool pivotDirChoosen = false;
@@ -17,8 +18,9 @@ public class CloseCombatEnemy : EnemyBase
     private bool pivot = true;
     private bool isStunned = false;
     private bool canBeStunned = false;
+    private bool blockStun = false;
     private int side;
-    private float distanceToPlayerBeforeStop = 2.5f;
+    private float distanceToPlayerBeforeStop = 3f;
 
 
 
@@ -29,7 +31,7 @@ public class CloseCombatEnemy : EnemyBase
     {
         if (!animationPlaying)
         {
-            agent.speed = movementSpeed / 10;
+            agent.speed = movementSpeed / 2;
             if (!invokedOnce)
             {
                 Invoke("Attack", Random.Range(0.5f, 1.5f));
@@ -37,14 +39,14 @@ public class CloseCombatEnemy : EnemyBase
             }
             else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
             {
+                Invoke("Attack", 0.3f);
                 agent.speed = movementSpeed*5;
                 pivot = false;
                 CancelInvoke();
                 side = Random.Range(0, 2);
                 animationPlaying = true;
-                if (side == 0) { agent.SetDestination(swipeLeft.position); Debug.Log("left"); }
-                else if (side == 1) { agent.SetDestination(swipeRight.position); Debug.Log("right"); }
-                Invoke("Attack", 0.3f);
+                if (side == 0) { agent.SetDestination(swipeLeft.position);}
+                else if (side == 1) { agent.SetDestination(swipeRight.position);}
             }
 
 
@@ -77,7 +79,6 @@ public class CloseCombatEnemy : EnemyBase
         //Blocking
         if (canBeStunned)
         {
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (!isStunned)
@@ -85,10 +86,17 @@ public class CloseCombatEnemy : EnemyBase
                     lethal = false;
                     isStunned = true;
                     enemyAnim.SetTrigger("Stunned");
-                    swordMat.DisableKeyword("_EMISSION");
+                    ChangeSwordMat(swordMat);
                     agent.SetDestination(transform.position);
                 }
-                
+
+            }
+        }
+        else if (!canBeStunned)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                blockStun = true;
             }
         }
 
@@ -98,14 +106,14 @@ public class CloseCombatEnemy : EnemyBase
             {
                 agent.speed = movementSpeed;
                 agent.SetDestination(transform.position);
-                distanceToPlayerBeforeStop = 3f;
+                distanceToPlayerBeforeStop = 4f;
                 InAttackRange();
             }
             else if(Vector3.Distance(player.transform.position, transform.position) > distanceToPlayerBeforeStop)
             {
                 agent.speed = movementSpeed;
                 agent.SetDestination(player.transform.position);
-                distanceToPlayerBeforeStop = 2.5f;
+                distanceToPlayerBeforeStop = 3f;
                 pivotDirChoosen = false;
             }
         }
@@ -117,13 +125,17 @@ public class CloseCombatEnemy : EnemyBase
     }
     public void CanBeStunned()
     {
-        canBeStunned = true;
-        swordMat.EnableKeyword("_EMISSION");
+        if (!blockStun)
+        {
+            canBeStunned = true;
+            ChangeSwordMat(swordMatLight);
+        }
+        
     }
     public void CannnotBeStunned()
     {
         canBeStunned = false;
-        swordMat.DisableKeyword("_EMISSION");
+        ChangeSwordMat(swordMat);
     }
     public void Lethal()
     {
@@ -140,11 +152,18 @@ public class CloseCombatEnemy : EnemyBase
     }
     public void AnimationDone()
     {
+        blockStun = false;
         animationPlaying = false;
         invokedOnce = false;
         pivot = true;
         isStunned = false;
         enemyAnim.SetInteger("Swing", 0);
         agent.SetDestination(transform.position);
+    }
+    public void ChangeSwordMat(Material newMat)
+    {
+        var tempMaterials = swordRenderer.materials;
+        tempMaterials[2] = newMat;
+        swordRenderer.materials = tempMaterials;
     }
 }
