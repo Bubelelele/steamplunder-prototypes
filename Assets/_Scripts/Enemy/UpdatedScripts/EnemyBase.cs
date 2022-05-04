@@ -94,4 +94,5 @@ public abstract class EnemyBase : MonoBehaviour
     public abstract void EnemyOutOfSight();
     public abstract void InAttackRange();
     public abstract void Attack();
+    public abstract void Idle();
 }

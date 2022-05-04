@@ -18,4 +18,8 @@ public class RangedEnemy : EnemyBase
     {
 
     }
+    public override void Idle()
+    {
+
+    }
 }

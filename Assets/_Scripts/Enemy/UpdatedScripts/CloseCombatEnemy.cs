@@ -136,6 +136,10 @@ public class CloseCombatEnemy : EnemyBase
     }
     public override void EnemyInSight() { chasePlayer = true; }
     public override void EnemyOutOfSight() { chasePlayer = false; }
+    public override void Idle() 
+    {
+
+    }
 
 
     //Other functions
