@@ -39,7 +39,7 @@ public abstract class EnemyBase : MonoBehaviour
                 EnemyInSight();
                 playerDetected = true;
             }
-            else if(Vector3.Distance(player.transform.position, transform.position) < 2f)
+            else if(Vector3.Distance(player.transform.position, transform.position) < 3f)
             {
                 EnemyInSight();
                 playerDetected = true;
@@ -88,7 +88,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (!checkedForNerbyEnemies)
         {
-            alertTrigger.transform.localScale = Vector3.Slerp(alertTrigger.transform.localScale, Vector3.one * alertRange, 0.4f * Time.deltaTime);
+            alertTrigger.transform.localScale = Vector3.Slerp(alertTrigger.transform.localScale, Vector3.one * alertRange, 1.2f * Time.deltaTime);
             if (alertTrigger.transform.localScale.magnitude >= alertRange)
             {
                 alertTrigger.transform.localScale = Vector3.one;

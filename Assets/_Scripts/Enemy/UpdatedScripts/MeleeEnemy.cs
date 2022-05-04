@@ -7,7 +7,17 @@ public class MeleeEnemy : EnemyBase
     [HideInInspector] public Vector3 targetPos;
 
     //Other
+    
+
     private bool inAttackRange;
+
+    //Idle
+    public float idleTurn = 50f;
+
+    private bool canIdleTurn = false;
+    private bool idleTurnedOnce = false;
+    private bool idleTurnedtwice = false;
+    private bool idleTurnedDone = true;
 
     //Sword
     public Renderer swordRenderer;
@@ -43,6 +53,11 @@ public class MeleeEnemy : EnemyBase
     //Overrides
     protected override void UpdateSense()
     {
+        //Idle turn
+        if (canIdleTurn)
+        {
+            transform.Rotate(Vector3.up * idleTurn * Time.deltaTime);
+        }
         //Moving towards the player
         if (chasePlayer && !animationPlaying)
         {
@@ -83,6 +98,7 @@ public class MeleeEnemy : EnemyBase
             if (!animationPlaying)
             {
                 agent.speed = slowWalkingSpeed;
+
                 //Pivoting around the player
                 if (pivot)
                 {
@@ -91,6 +107,7 @@ public class MeleeEnemy : EnemyBase
                         pivotTrans.position = player.transform.position;
                         pivotDirection = Random.Range(0, 2);
                         positionChecked = true;
+                        Invoke("ChangePivotDirection", Random.Range(minWaitBeforeAttack, maxWaitBeforeAttack - 2.5f));
                     }
 
                     pivotTrans.parent = null;
@@ -111,13 +128,11 @@ public class MeleeEnemy : EnemyBase
                     Invoke("Attack", Random.Range(minWaitBeforeAttack, maxWaitBeforeAttack));
                     attackInvoked = true;
                 }
-
-                if(Vector3.Distance(transform.position, player.transform.position) < distanceBeforeImidiateAttack)
+                else if(Vector3.Distance(transform.position, player.transform.position) < distanceBeforeImidiateAttack)
                 {
                     CancelInvoke();
                     Attack();
                 }
-
             }
         }
 
@@ -142,12 +157,16 @@ public class MeleeEnemy : EnemyBase
     {
         if (idle)
         {
-            Debug.Log("Idle");
             enemyAnim.SetBool("Idle", true);
+            if (idleTurnedDone)
+            {
+                Invoke("TurnWhileIdle", Random.Range(4, 10));
+                idleTurnedDone = false;
+            }
+            
         }
         else if (!idle)
         {
-            Debug.Log("NoIdle");
             enemyAnim.SetBool("Idle", false);
         }
     }
@@ -197,10 +216,32 @@ public class MeleeEnemy : EnemyBase
         pivotTrans.parent = transform;
         positionChecked = false;
     }
-    private void StopMovingBack()
+    private void ChangePivotDirection()
     {
-        moveBack = false;
+        pivotSpeed = - pivotSpeed;
     }
+    private void TurnWhileIdle()
+    {
+        int chooseDir = Random.Range(0,2);
+        if(chooseDir == 0)
+        {
+            idleTurn = -Random.Range(30, 180);
+        }
+        else
+        {
+            idleTurn = Random.Range(30, 180);
+        }
+        
+        canIdleTurn = true;
+        Invoke("CannotIdleTurn", 0.7f);
+    }
+    private void CannotIdleTurn()
+    {
+        canIdleTurn = false;
+        idleTurnedDone = true;
+    }
+
+    private void StopMovingBack(){ moveBack = false;}
     public void AnimationDone()
     {
         animationPlaying = false;
