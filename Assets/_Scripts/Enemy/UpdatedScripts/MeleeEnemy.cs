@@ -33,6 +33,9 @@ public class MeleeEnemy : EnemyBase
     public float stepBackSpeed = 5f;
     public float slowWalkingSpeed = 5f;
 
+    public Transform zigZagForward;
+    public Transform zigZagBackward;
+    private bool forwardZigZag = false;
     private float distanceChase;
     private bool chasePlayer = false;
     private bool pivot;
@@ -44,7 +47,7 @@ public class MeleeEnemy : EnemyBase
     //Waiting to attack
     public float minWaitBeforeAttack = 1.5f;
     public float maxWaitBeforeAttack = 6.5f;
-    public float distanceBeforeImidiateAttack = 2f;
+    public float distanceBeforeImidiateAttack = 1.3f;
 
     private bool attackInvoked = false;
     private bool animationPlaying = false;
@@ -56,6 +59,7 @@ public class MeleeEnemy : EnemyBase
     //Overrides
     protected override void UpdateSense()
     {
+        //Debug.Log(Vector3.Distance(player.transform.position, transform.position));
         //Distance control
         distanceChase = distanceAttack + 1.5f;
 
@@ -129,9 +133,22 @@ public class MeleeEnemy : EnemyBase
                         pivotTrans.Rotate(-Vector3.up * pivotSpeed * Time.deltaTime);
                     }
 
-                    
+                    //ZigZag
+                    if (Vector3.Distance(player.transform.position, transform.position) < distanceAttack - 1) { forwardZigZag = false;}
+                    else if (Vector3.Distance(player.transform.position, transform.position) > distanceAttack + 1){ forwardZigZag = true; }
+
+                    if (!forwardZigZag)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, zigZagBackward.position, backAndForwardSpeed * Time.deltaTime);
+                    }
+                    else if (forwardZigZag)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, zigZagForward.position, backAndForwardSpeed * Time.deltaTime);
+                    }
+
 
                 }
+
 
                 //Attacking the player
                 if (!attackInvoked)
