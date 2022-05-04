@@ -13,10 +13,12 @@ public class MeleeEnemy : EnemyBase
 
     //Idle
     public float idleTurn = 50f;
+    public bool patrol;
+    public Transform[] patrolDestinations;
 
+    private int numberOfMoves = 0;
+    private bool moveToPatrolDestination = false;
     private bool canIdleTurn = false;
-    private bool idleTurnedOnce = false;
-    private bool idleTurnedtwice = false;
     private bool idleTurnedDone = true;
 
     //Sword
@@ -26,11 +28,12 @@ public class MeleeEnemy : EnemyBase
     //Movement
     public Transform pivotTrans;
     public float distanceAttack = 3f;
-    public float distanceChase = 5f;
     public float pivotSpeed = 20f;
+    public float backAndForwardSpeed = 2f;
     public float stepBackSpeed = 5f;
     public float slowWalkingSpeed = 5f;
 
+    private float distanceChase;
     private bool chasePlayer = false;
     private bool pivot;
     private bool positionChecked;
@@ -53,6 +56,10 @@ public class MeleeEnemy : EnemyBase
     //Overrides
     protected override void UpdateSense()
     {
+        //Distance control
+        distanceChase = distanceAttack + 1.5f;
+
+
         //Idle turn
         if (canIdleTurn)
         {
@@ -81,7 +88,7 @@ public class MeleeEnemy : EnemyBase
         }
 
         //Stunning the enemy
-        if (Input.GetKeyDown(KeyCode.Space) && canBeStunned)
+        if (Input.GetKeyDown(KeyCode.Space) && canBeStunned && Vector3.Angle(player.transform.forward, player.transform.position - player.transform.position) < 60f && Vector3.Distance(player.transform.position, transform.position) < 2f)
         {
             if (!isStunned)
             {
@@ -108,6 +115,7 @@ public class MeleeEnemy : EnemyBase
                         pivotDirection = Random.Range(0, 2);
                         positionChecked = true;
                         Invoke("ChangePivotDirection", Random.Range(minWaitBeforeAttack, maxWaitBeforeAttack - 2.5f));
+                        Invoke("ChangePivotDirection", Random.Range(minWaitBeforeAttack + 2.5f, maxWaitBeforeAttack));
                     }
 
                     pivotTrans.parent = null;
@@ -120,6 +128,9 @@ public class MeleeEnemy : EnemyBase
                     {
                         pivotTrans.Rotate(-Vector3.up * pivotSpeed * Time.deltaTime);
                     }
+
+                    
+
                 }
 
                 //Attacking the player
@@ -157,13 +168,35 @@ public class MeleeEnemy : EnemyBase
     {
         if (idle)
         {
-            enemyAnim.SetBool("Idle", true);
-            if (idleTurnedDone)
+            if (!patrol)
             {
-                Invoke("TurnWhileIdle", Random.Range(4, 10));
-                idleTurnedDone = false;
+                enemyAnim.SetBool("Idle", true);
+                if (idleTurnedDone)
+                {
+                    Invoke("TurnWhileIdle", Random.Range(4, 10));
+                    idleTurnedDone = false;
+                }
             }
-            
+            else if (patrol)
+            {
+                Debug.Log("Yes");
+                if(numberOfMoves < patrolDestinations.Length && !moveToPatrolDestination)
+                {
+                    agent.SetDestination(patrolDestinations[numberOfMoves].position);
+                    Debug.Log("Nope");
+                    moveToPatrolDestination = true;
+                }
+                else if(moveToPatrolDestination && Vector3.Distance(patrolDestinations[numberOfMoves].position, transform.position) < 0.2f)
+                {
+                    Debug.Log("Arrived");
+                    moveToPatrolDestination = false;
+                    numberOfMoves++;
+                }
+                else if(numberOfMoves >= patrolDestinations.Length)
+                {
+                    numberOfMoves = 0;
+                }
+            }
         }
         else if (!idle)
         {
@@ -240,15 +273,21 @@ public class MeleeEnemy : EnemyBase
         canIdleTurn = false;
         idleTurnedDone = true;
     }
-
-    private void StopMovingBack(){ moveBack = false;}
+    private void MovingBack() 
+    { 
+        moveBack = true;
+        Invoke("StopMovingBack", 0.2f);
+    }
+    private void StopMovingBack()
+    {
+        moveBack = false;
+    }
     public void AnimationDone()
     {
         animationPlaying = false;
         isStunned = false;
         attackInvoked = false;
         enemyAnim.SetInteger("Swing", 0);
-        moveBack = true;
-        Invoke("StopMovingBack", 0.2f);
+        MovingBack();
     }
 }
