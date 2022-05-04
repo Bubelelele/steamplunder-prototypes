@@ -15,9 +15,9 @@ public class AlertTrigger : MonoBehaviour
             {
                 other.gameObject.GetComponent<RangedEnemy>().AwareOfPlayer();
             }
-            else if (other.gameObject.GetComponent<CloseCombatEnemy>() != null)
+            else if (other.gameObject.GetComponent<MeleeEnemy>() != null)
             {
-                other.gameObject.GetComponent<CloseCombatEnemy>().AwareOfPlayer();
+                other.gameObject.GetComponent<MeleeEnemy>().AwareOfPlayer();
             } 
         }
     }

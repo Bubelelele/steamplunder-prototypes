@@ -10,6 +10,7 @@ public abstract class EnemyBase : MonoBehaviour
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator enemyAnim;
     [HideInInspector] public Vector3 homePoint;
+    [HideInInspector] public bool idle;
 
     private bool playerDetected = false;
     private bool checkedForNerbyEnemies = false;
@@ -30,6 +31,7 @@ public abstract class EnemyBase : MonoBehaviour
     private void Update()
     {
         UpdateSense();
+        Idle();
         if (!calledByNerbyEnemies)
         {
             if (Vector3.Distance(player.transform.position, transform.position) < sightRange && Vector3.Angle(transform.forward, player.transform.position - transform.position) < FOV / 2)
@@ -44,6 +46,8 @@ public abstract class EnemyBase : MonoBehaviour
             }
             else
             {
+                EnemyOutOfSight();
+                idle = true;
                 playerDetected = false;
                 checkedForNerbyEnemies = false;
             }
@@ -55,6 +59,7 @@ public abstract class EnemyBase : MonoBehaviour
                 calledByNerbyEnemies = false;
                 playerDetected = false;
                 alertTrigger.transform.localScale = Vector3.one;
+                idle = true;
                 EnemyOutOfSight();
             }
         }
@@ -63,7 +68,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (playerDetected)
         {
             PlayerDetectedCommon();
-            if (Vector3.Angle(transform.forward, player.transform.position - transform.position) < FOV / 2)
+            if (Vector3.Distance(player.transform.position, transform.position) < sightRange && Vector3.Angle(transform.forward, player.transform.position - transform.position) < FOV / 2)
             {
                 EnemyInSight();
             }
@@ -77,6 +82,7 @@ public abstract class EnemyBase : MonoBehaviour
     }
     public void PlayerDetectedCommon()
     {
+        idle = false;
         var targetRotation = Quaternion.LookRotation(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
 

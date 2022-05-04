@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CloseCombatEnemy : EnemyBase
+public class MeleeEnemy : EnemyBase
 {
     //Paramaters to other scripts
     [HideInInspector] public bool lethal = false;
@@ -43,7 +43,6 @@ public class CloseCombatEnemy : EnemyBase
     //Overrides
     protected override void UpdateSense()
     {
-
         //Moving towards the player
         if (chasePlayer && !animationPlaying)
         {
@@ -59,6 +58,11 @@ public class CloseCombatEnemy : EnemyBase
                 CanMoveToDestination();
                 CannotPivot();
             }
+        }
+        else if (!chasePlayer && !animationPlaying)
+        {
+            agent.speed = slowWalkingSpeed;
+            agent.SetDestination(homePoint);
         }
 
         //Stunning the enemy
@@ -123,8 +127,6 @@ public class CloseCombatEnemy : EnemyBase
             var backedUpPos = transform.position - transform.forward;
             transform.position = Vector3.MoveTowards(transform.position ,backedUpPos, stepBackSpeed * Time.deltaTime);
         }
-
-
     }
     public override void InAttackRange() { inAttackRange = true;}
     public override void Attack()
@@ -135,11 +137,21 @@ public class CloseCombatEnemy : EnemyBase
         CannotPivot();
     }
     public override void EnemyInSight() { chasePlayer = true; }
-    public override void EnemyOutOfSight() { chasePlayer = false; }
+    public override void EnemyOutOfSight() { chasePlayer = false; idle = true; }
     public override void Idle() 
     {
-
+        if (idle)
+        {
+            Debug.Log("Idle");
+            enemyAnim.SetBool("Idle", true);
+        }
+        else if (!idle)
+        {
+            Debug.Log("NoIdle");
+            enemyAnim.SetBool("Idle", false);
+        }
     }
+    
 
 
     //Other functions

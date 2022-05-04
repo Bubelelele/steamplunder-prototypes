@@ -6,10 +6,10 @@ public class SwordTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && enemy.GetComponent<CloseCombatEnemy>().lethal)
+        if (other.gameObject.tag == "Player" && enemy.GetComponent<MeleeEnemy>().lethal)
         {
             EffectManager.instance.BloodSplat(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(gameObject.transform.position));
-            other.GetComponent<PlayerStats>().Damage(enemy.GetComponent<CloseCombatEnemy>().attackDamage);
+            other.GetComponent<PlayerStats>().Damage(enemy.GetComponent<MeleeEnemy>().attackDamage);
             enemy.GetComponent<PushBackPlayer>().PushBack(3);
 
             int soundNumber = Random.Range(0, 3);
