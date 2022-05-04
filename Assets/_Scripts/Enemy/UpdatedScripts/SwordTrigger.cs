@@ -10,7 +10,7 @@ public class SwordTrigger : MonoBehaviour
         {
             EffectManager.instance.BloodSplat(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(gameObject.transform.position));
             other.GetComponent<PlayerStats>().Damage(enemy.GetComponent<CloseCombatEnemy>().attackDamage);
-            enemy.GetComponent<PushBackPlayer>().PushBack(2);
+            enemy.GetComponent<PushBackPlayer>().PushBack(3);
 
             int soundNumber = Random.Range(0, 3);
             if (soundNumber == 0)

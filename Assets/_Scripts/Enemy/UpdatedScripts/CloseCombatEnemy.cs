@@ -1,164 +1,147 @@
-using System.Collections;
 using UnityEngine;
 
 public class CloseCombatEnemy : EnemyBase
 {
+    //Paramaters to other scripts
     [HideInInspector] public bool lethal = false;
     [HideInInspector] public Vector3 targetPos;
+
+    //Other
+    private bool inAttackRange;
 
     //Sword
     public Renderer swordRenderer;
     public Material swordMat, swordMatLight;
 
     //Movement
-    public Transform swipeLeft, swipeRight, swipeBack;
-
+    public Transform pivotTrans;
+    public float distanceAttack = 3f;
+    public float distanceChase = 5f;
+    public float pivotSpeed = 20f;
+    public float stepBackSpeed = 5f;
+    public float slowWalkingSpeed = 5f;
 
     private bool chasePlayer = false;
-    private bool rushPlayer = false;
-    private bool canRush = false;
-    
+    private bool pivot;
+    private bool positionChecked;
+    private bool moveBack;
+    private int pivotDirection;
+
+
     //Waiting to attack
+    public float minWaitBeforeAttack = 1.5f;
+    public float maxWaitBeforeAttack = 6.5f;
+    public float distanceBeforeImidiateAttack = 2f;
+
+    private bool attackInvoked = false;
     private bool animationPlaying = false;
-    private bool invokedOnce = false;
-    private float  timeSinceLastAttack = 0;
 
-
-    //Pivoting around the player
-    private bool pivot = true;
-    private int moveDir;
-    private bool pivotDirChoosen = false;
-
-    //Stunning
+    //Stunning parameters
     private bool isStunned = false;
     private bool canBeStunned = false;
-    private int side;
-    private float distanceToPlayerBeforeStop = 3f;
 
-
+    //Overrides
     protected override void UpdateSense()
     {
-        if (canRush)
-        {
-            timeSinceLastAttack += Time.deltaTime;
-        }
-        
 
-        if (canBeStunned)
-        {
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (!isStunned)
-                {
-                    lethal = false;
-                    isStunned = true;
-                    enemyAnim.SetTrigger("Stunned");
-                    swordRenderer.materials[2] = swordMat;
-                    agent.SetDestination(transform.position);
-                }
-
-            }
-        }
-
+        //Moving towards the player
         if (chasePlayer && !animationPlaying)
         {
-            
-
-            if (Vector3.Distance(player.transform.position, transform.position) < distanceToPlayerBeforeStop)
+            agent.SetDestination(player.transform.position);
+            if (Vector3.Distance(player.transform.position, transform.position) < distanceAttack)
             {
-                agent.speed = movementSpeed;
-                agent.SetDestination(transform.position);
-                distanceToPlayerBeforeStop = 4f;
                 InAttackRange();
-                canRush = true;
+                StopMovingToDestination();
+                CanPivot();
             }
-            else if (Vector3.Distance(player.transform.position, transform.position) > distanceToPlayerBeforeStop)
+            else if (Vector3.Distance(player.transform.position, transform.position) > distanceChase)
             {
-                if (timeSinceLastAttack > 5f)
-                {
-                    enemyAnim.SetInteger("Swing", 1);
-                    agent.acceleration = 60f;
-                    agent.speed = 100f;
-                    agent.SetDestination(player.transform.position);
-                    animationPlaying = true;
-                    pivot = false;
-                    rushPlayer = true;
-                }
-                else
-                {
-                    agent.speed = movementSpeed;
-                }
-
-                agent.SetDestination(player.transform.position);
-                distanceToPlayerBeforeStop = 3f;
-                pivotDirChoosen = false;
+                CanMoveToDestination();
+                CannotPivot();
             }
         }
-        else if (!chasePlayer)
+
+        //Stunning the enemy
+        if (Input.GetKeyDown(KeyCode.Space) && canBeStunned)
         {
-            agent.speed = movementSpeed / 4;
-            agent.SetDestination(homePoint);
+            if (!isStunned)
+            {
+                lethal = false;
+                isStunned = true;
+                enemyAnim.SetTrigger("Stunned");
+                swordRenderer.materials[2] = swordMat;
+            }
         }
-    }
 
-    public override void EnemyInSight(){chasePlayer = true;}
-    public override void EnemyOutOfSight(){chasePlayer = false;}
-    public override void InAttackRange()
-    {
-        
-
-        if (!animationPlaying)
+        //In attack range
+        if (inAttackRange && !moveBack)
         {
-            if (!rushPlayer)
+            if (!animationPlaying)
             {
+                agent.speed = slowWalkingSpeed;
+                //Pivoting around the player
+                if (pivot)
+                {
+                    if (!positionChecked)
+                    {
+                        pivotTrans.position = player.transform.position;
+                        pivotDirection = Random.Range(0, 2);
+                        positionChecked = true;
+                    }
 
-                agent.speed = movementSpeed / 4;
-                if (!invokedOnce)
-                {
-                    Invoke("Attack", Random.Range(1.5f, 7.5f));
-                    invokedOnce = true;
+                    pivotTrans.parent = null;
+                    transform.parent = pivotTrans;
+                    if (pivotDirection == 0)
+                    {
+                        pivotTrans.Rotate(Vector3.up * pivotSpeed * Time.deltaTime);
+                    }
+                    else if (pivotDirection == 1)
+                    {
+                        pivotTrans.Rotate(-Vector3.up * pivotSpeed * Time.deltaTime);
+                    }
                 }
-                else if (Input.GetMouseButtonDown(InputManager.instance.AxeMouseBtn))
+
+                //Attacking the player
+                if (!attackInvoked)
                 {
-                    agent.speed = movementSpeed * 100;
-                    Invoke("AnimationDone", 2f);
-                    pivot = false;
-                    side = Random.Range(0, 3);
-                    animationPlaying = true;
-                    if (side == 0) { agent.SetDestination(swipeLeft.position); }
-                    else if (side == 1) { agent.SetDestination(swipeRight.position); }
-                    else if (side == 2) { agent.SetDestination(swipeBack.position); }
+                    Invoke("Attack", Random.Range(minWaitBeforeAttack, maxWaitBeforeAttack));
+                    attackInvoked = true;
                 }
-            }
-            
-            if (pivot)
-            {
-                if (!pivotDirChoosen)
+
+                if(Vector3.Distance(transform.position, player.transform.position) < distanceBeforeImidiateAttack)
                 {
-                    moveDir = Random.Range(0, 2);
-                    pivotDirChoosen = true;
+                    CancelInvoke();
+                    Attack();
                 }
-                if (moveDir == 0)
-                {
-                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, 1.5f * Vector3.up));
-                }
-                else if (moveDir == 1)
-                {
-                    agent.SetDestination(transform.position + Vector3.Cross(player.transform.position - transform.position, -1.5f * Vector3.up));
-                }
+
             }
         }
+
+        //Move back after an attack
+        if (moveBack)
+        {
+            var backedUpPos = transform.position - transform.forward;
+            transform.position = Vector3.MoveTowards(transform.position ,backedUpPos, stepBackSpeed * Time.deltaTime);
+        }
+
+
     }
+    public override void InAttackRange() { inAttackRange = true;}
     public override void Attack()
     {
+        animationPlaying = true;
         enemyAnim.SetInteger("Swing", Random.Range(1, 4));
-        agent.SetDestination(player.transform.position);
-        pivot = false;
+        CanMoveToDestination();
+        CannotPivot();
     }
-    
+    public override void EnemyInSight() { chasePlayer = true; }
+    public override void EnemyOutOfSight() { chasePlayer = false; }
+
+
+    //Other functions
     public void CanBeStunned()
     {
+        agent.SetDestination(player.transform.position);
         canBeStunned = true;
         ChangeSwordMat(swordMatLight);
     }
@@ -170,33 +153,45 @@ public class CloseCombatEnemy : EnemyBase
     public void Lethal()
     {
         lethal = true;
-        
-        agent.speed = movementSpeed;
-        agent.SetDestination(player.transform.position);
     }
     public void NotLethal()
     {
         lethal = false;
-        agent.speed = movementSpeed / 10;
-        agent.SetDestination(transform.position);
-    }
-    public void AnimationDone()
-    {
-        timeSinceLastAttack = 0;
-        animationPlaying = false;
-        invokedOnce = false;
-        pivot = true;
-        isStunned = false;
-        rushPlayer = false;
-        enemyAnim.SetInteger("Swing", 0);
-        agent.SetDestination(transform.position);
-        agent.speed = movementSpeed;
-        agent.acceleration = 15;
     }
     public void ChangeSwordMat(Material newMat)
     {
         var tempMaterials = swordRenderer.materials;
         tempMaterials[2] = newMat;
         swordRenderer.materials = tempMaterials;
+    }
+    private void StopMovingToDestination() { agent.isStopped = true; }
+    private void CanMoveToDestination() 
+    { 
+        agent.isStopped = false;
+        inAttackRange = false;
+        agent.speed = movementSpeed;
+    }
+    private void CanPivot() { pivot = true; }
+    private void CannotPivot()
+    {
+        pivot = false;
+        positionChecked = false;
+        transform.parent = null;
+        pivotTrans.position = transform.position;
+        pivotTrans.parent = transform;
+        positionChecked = false;
+    }
+    private void StopMovingBack()
+    {
+        moveBack = false;
+    }
+    public void AnimationDone()
+    {
+        animationPlaying = false;
+        isStunned = false;
+        attackInvoked = false;
+        enemyAnim.SetInteger("Swing", 0);
+        moveBack = true;
+        Invoke("StopMovingBack", 0.2f);
     }
 }
