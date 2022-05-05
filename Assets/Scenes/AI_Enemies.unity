@@ -1421,8 +1421,6 @@ MonoBehaviour:
   rotationSpeed: 5
   sightRange: 8
   FOV: 80
-  alertRange: 30
-  rangeForStopChasingPlayer: 20
   attackDamage: 0
   alertTrigger: {fileID: 1059934628}
   player: {fileID: 0}
@@ -2422,8 +2420,6 @@ MonoBehaviour:
   rotationSpeed: 10
   sightRange: 8
   FOV: 80
-  alertRange: 20
-  rangeForStopChasingPlayer: 20
   attackDamage: 7
   alertTrigger: {fileID: 889711961}
   player: {fileID: 0}
@@ -2433,27 +2429,18 @@ MonoBehaviour:
   idle: 0
   lethal: 0
   targetPos: {x: 0, y: 0, z: 0}
-  ground:
-    serializedVersion: 2
-    m_Bits: 64
-  idleTurn: 40
-  patrolRange: 10
-  patrolDestinations: []
   patrol: 0
+  patrolRange: 10
+  idleTurn: 40
+  slowWalkingSpeed: 5
+  pivotSpeed: 60
+  zigZagSpeed: 2
+  pivotTrans: {fileID: 1216503155}
+  zigZagForward: {fileID: 1740885345}
+  zigZagBackward: {fileID: 965007701}
   swordRenderer: {fileID: 1367922384}
   swordMat: {fileID: 2100000, guid: f3b1b99db987842e0a837902b587d559, type: 2}
   swordMatLight: {fileID: 2100000, guid: 8a3644a057862e14ea3a9ff7fac21609, type: 2}
-  pivotTrans: {fileID: 1216503155}
-  distanceAttack: 3
-  pivotSpeed: 60
-  backAndForwardSpeed: 1.5
-  stepBackSpeed: 2
-  slowWalkingSpeed: 5
-  zigZagForward: {fileID: 1740885345}
-  zigZagBackward: {fileID: 965007701}
-  minWaitBeforeAttack: 1.5
-  maxWaitBeforeAttack: 6.5
-  distanceBeforeImidiateAttack: 1.5
 --- !u!54 &1317859970
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2603,7 +2590,7 @@ Transform:
   - {fileID: 1740885345}
   - {fileID: 965007701}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1322720273
 PrefabInstance:
@@ -2851,17 +2838,17 @@ PrefabInstance:
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.45201567
+      value: 0.4520157
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000026583972
+      value: -7.6731534e-16
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000134711176
+      value: -5.472295e-16
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358466389650, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -2986,17 +2973,17 @@ PrefabInstance:
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.45201567
+      value: 0.4520157
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000026583972
+      value: -7.6731534e-16
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000134711176
+      value: -5.472295e-16
       objectReference: {fileID: 0}
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -3042,7 +3029,7 @@ Transform:
   - {fileID: 1766682804}
   - {fileID: 274414983}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1440742476 stripped
 GameObject:
@@ -3236,8 +3223,6 @@ MonoBehaviour:
   rotationSpeed: 10
   sightRange: 8
   FOV: 80
-  alertRange: 20
-  rangeForStopChasingPlayer: 20
   attackDamage: 7
   alertTrigger: {fileID: 202321953}
   player: {fileID: 0}
@@ -3247,27 +3232,18 @@ MonoBehaviour:
   idle: 0
   lethal: 0
   targetPos: {x: 0, y: 0, z: 0}
-  ground:
-    serializedVersion: 2
-    m_Bits: 64
-  idleTurn: 40
-  patrolRange: 10
-  patrolDestinations: []
   patrol: 0
+  patrolRange: 10
+  idleTurn: 40
+  slowWalkingSpeed: 5
+  pivotSpeed: 60
+  zigZagSpeed: 2
+  pivotTrans: {fileID: 297766096}
+  zigZagForward: {fileID: 785700948}
+  zigZagBackward: {fileID: 1750947699}
   swordRenderer: {fileID: 1440742477}
   swordMat: {fileID: 2100000, guid: f3b1b99db987842e0a837902b587d559, type: 2}
   swordMatLight: {fileID: 2100000, guid: 8a3644a057862e14ea3a9ff7fac21609, type: 2}
-  pivotTrans: {fileID: 297766096}
-  distanceAttack: 3
-  pivotSpeed: 60
-  backAndForwardSpeed: 1.5
-  stepBackSpeed: 2
-  slowWalkingSpeed: 5
-  zigZagForward: {fileID: 785700948}
-  zigZagBackward: {fileID: 1750947699}
-  minWaitBeforeAttack: 1.5
-  maxWaitBeforeAttack: 6.5
-  distanceBeforeImidiateAttack: 1.5
 --- !u!54 &1508735540
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3417,7 +3393,7 @@ Transform:
   - {fileID: 785700948}
   - {fileID: 1750947699}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1515756157 stripped
 MeshRenderer:
@@ -3607,8 +3583,6 @@ MonoBehaviour:
   rotationSpeed: 5
   sightRange: 8
   FOV: 80
-  alertRange: 20
-  rangeForStopChasingPlayer: 20
   attackDamage: 0
   alertTrigger: {fileID: 1774557432}
   player: {fileID: 0}
@@ -4555,8 +4529,6 @@ MonoBehaviour:
   rotationSpeed: 10
   sightRange: 8
   FOV: 80
-  alertRange: 20
-  rangeForStopChasingPlayer: 20
   attackDamage: 7
   alertTrigger: {fileID: 606094725}
   player: {fileID: 0}
@@ -4566,27 +4538,18 @@ MonoBehaviour:
   idle: 0
   lethal: 0
   targetPos: {x: 0, y: 0, z: 0}
-  ground:
-    serializedVersion: 2
-    m_Bits: 64
-  idleTurn: 40
-  patrolRange: 10
-  patrolDestinations: []
   patrol: 1
+  patrolRange: 10
+  idleTurn: 40
+  slowWalkingSpeed: 5
+  pivotSpeed: 60
+  zigZagSpeed: 2
+  pivotTrans: {fileID: 1668065901}
+  zigZagForward: {fileID: 335498633}
+  zigZagBackward: {fileID: 356079983}
   swordRenderer: {fileID: 1028979534}
   swordMat: {fileID: 2100000, guid: f3b1b99db987842e0a837902b587d559, type: 2}
   swordMatLight: {fileID: 2100000, guid: 8a3644a057862e14ea3a9ff7fac21609, type: 2}
-  pivotTrans: {fileID: 1668065901}
-  distanceAttack: 3
-  pivotSpeed: 60
-  backAndForwardSpeed: 1.5
-  stepBackSpeed: 2
-  slowWalkingSpeed: 5
-  zigZagForward: {fileID: 335498633}
-  zigZagBackward: {fileID: 356079983}
-  minWaitBeforeAttack: 1.5
-  maxWaitBeforeAttack: 6.5
-  distanceBeforeImidiateAttack: 1.5
 --- !u!195 &5404856963907968316
 NavMeshAgent:
   m_ObjectHideFlags: 0
