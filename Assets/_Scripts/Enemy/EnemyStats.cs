@@ -6,8 +6,6 @@ public class EnemyStats : MonoBehaviour, IDamageable {
     [SerializeField] private int maxHealth = 50;
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DamageFlash damageFlash;
-
-    private bool canBeHarmed = true;
     
     private int _health;
 

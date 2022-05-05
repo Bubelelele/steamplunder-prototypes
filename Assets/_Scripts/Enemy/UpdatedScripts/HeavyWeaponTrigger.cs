@@ -8,7 +8,6 @@ public class HeavyWeaponTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && enemy.GetComponent<HeavyEnemy>().lethal)
         {
-            Debug.Log("yes");
             EffectManager.instance.BloodSplat(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(gameObject.transform.position));
             other.GetComponent<PlayerStats>().Damage(enemy.GetComponent<HeavyEnemy>().attackDamage);
             enemy.GetComponent<PushBackPlayer>().PushBack(5);
