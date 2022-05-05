@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657862, g: 0.49641514, b: 0.5748183, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641502, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2433,8 +2433,8 @@ MonoBehaviour:
   patrolRange: 10
   idleTurn: 40
   slowWalkingSpeed: 5
-  pivotSpeed: 60
-  zigZagSpeed: 2
+  pivotSpeed: 30
+  zigZagSpeed: 1
   pivotTrans: {fileID: 1216503155}
   zigZagForward: {fileID: 1740885345}
   zigZagBackward: {fileID: 965007701}
@@ -2843,12 +2843,12 @@ PrefabInstance:
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000026583972
+      value: 0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000134711176
+      value: -0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358466389650, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -2978,12 +2978,12 @@ PrefabInstance:
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000026583972
+      value: 0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000134711176
+      value: -0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -3246,8 +3246,8 @@ MonoBehaviour:
   patrolRange: 10
   idleTurn: 40
   slowWalkingSpeed: 5
-  pivotSpeed: 60
-  zigZagSpeed: 2
+  pivotSpeed: 30
+  zigZagSpeed: 1
   pivotTrans: {fileID: 297766096}
   zigZagForward: {fileID: 785700948}
   zigZagBackward: {fileID: 1750947699}
@@ -4552,8 +4552,8 @@ MonoBehaviour:
   patrolRange: 10
   idleTurn: 40
   slowWalkingSpeed: 5
-  pivotSpeed: 60
-  zigZagSpeed: 2
+  pivotSpeed: 30
+  zigZagSpeed: 1
   pivotTrans: {fileID: 1668065901}
   zigZagForward: {fileID: 335498633}
   zigZagBackward: {fileID: 356079983}

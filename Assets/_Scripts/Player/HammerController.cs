@@ -67,7 +67,11 @@ public class HammerController : MonoBehaviour {
             //Add knockback if entity has a rigidbody
             var rb = _attackHitboxResults[i].transform.GetComponent<Rigidbody>();
             if (rb != null) {
-                if (rb.GetComponent<NavMeshAgent>()) rb.GetComponent<MeleeEnemy>().Stun();//Do this differently
+                MeleeEnemy meleeEnemy = rb.GetComponent<MeleeEnemy>();
+                if (meleeEnemy != null) 
+                {
+                    meleeEnemy.Stun();
+                }
                 
                 Vector3 colliderHitPosition = _attackHitboxResults[i].ClosestPointOnBounds(impactPosition);
                 float distance = Vector3.Distance(impactPosition, colliderHitPosition);

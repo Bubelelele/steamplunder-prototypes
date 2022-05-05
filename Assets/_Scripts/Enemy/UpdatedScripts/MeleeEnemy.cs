@@ -40,6 +40,7 @@ public class MeleeEnemy : EnemyBase
     private float distanceChase;
     private float stepBackSpeed = 5f;
     private int pivotDirection;
+    private int forwardOrBackwards;
     private bool forwardZigZag = false;
     private bool chasePlayer = false;
     private bool pivot;
@@ -107,9 +108,7 @@ public class MeleeEnemy : EnemyBase
         {
             if (!isStunned)
             {
-                lethal = false;
                 Stun();
-                swordRenderer.materials[2] = swordMat;
             }
         }
 
@@ -127,6 +126,7 @@ public class MeleeEnemy : EnemyBase
                     {
                         pivotTrans.position = player.transform.position;
                         pivotDirection = Random.Range(0, 2);
+                        forwardOrBackwards = Random.Range(0, 2);
                         positionChecked = true;
                         Invoke("ChangePivotDirection", Random.Range(minWaitBeforeAttack, maxWaitBeforeAttack - 2.5f));
                         Invoke("ChangePivotDirection", Random.Range(minWaitBeforeAttack + 2.5f, maxWaitBeforeAttack));
@@ -257,6 +257,8 @@ public class MeleeEnemy : EnemyBase
     {
         enemyAnim.SetTrigger("Stunned");
         isStunned = true;
+        swordRenderer.materials[2] = swordMat;
+        lethal = false;
     }
     public void CanBeStunned()
     {
