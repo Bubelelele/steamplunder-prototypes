@@ -14,6 +14,7 @@ public class RangedEnemy : EnemyBase
     private float distanceRunAway;
     private float distanceRunTowards;
     private bool isShooting;
+    private bool isAttacking;
     protected override void UpdateSense()
     {
         distanceRunAway = distanceAttack - 2.5f;
@@ -54,9 +55,14 @@ public class RangedEnemy : EnemyBase
     }
     public override void Attack()
     {
-        enemyAnim.SetBool("Shoot", true);
-        StopMovingToDestination();
-        isShooting = true;
+        if (!isAttacking)
+        {
+            enemyAnim.SetBool("Shoot", true);
+            enemyAnim.SetInteger("ShootNum", Random.Range(1, 4));
+            StopMovingToDestination();
+            isShooting = true;
+            isAttacking = true;
+        }
     }
     private void Shoot()
     {
@@ -66,8 +72,10 @@ public class RangedEnemy : EnemyBase
     }
     private void AnimationDone()
     {
+        enemyAnim.SetInteger("ShootNum", 0);
         enemyAnim.SetBool("Shoot", false);
         isShooting = false;
+        isAttacking = false;
         CanMoveToDestination(movementSpeed);
         animationPlaying = false;
     }
