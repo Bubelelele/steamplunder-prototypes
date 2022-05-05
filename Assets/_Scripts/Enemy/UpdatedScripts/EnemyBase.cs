@@ -207,6 +207,10 @@ public abstract class EnemyBase : MonoBehaviour
         inAttackRange = false;
         agent.speed = speed;
     }
+    public void ChangeSpeed(float speed)
+    {
+        agent.speed = speed;
+    }
 
     private void NextDestination()
     {
