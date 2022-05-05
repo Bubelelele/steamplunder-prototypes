@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class HeavyEnemy : EnemyBase
 {
+    [HideInInspector] public bool lethal = false;
+
     private float distanceAttack = 3f;
     private float distanceChase;
     private bool canStun;
@@ -39,18 +41,19 @@ public class HeavyEnemy : EnemyBase
     }
     public override void Attack()
     {
-        
-        //animationPlaying = true;
+
+        enemyAnim.SetInteger("Punch", Random.Range(1, 3));
+        animationPlaying = true;
 
     }
     public void Stun()
     {
         if (canStun)
         {
+            NotLethal();
             rotationSpeed = 0;
             enemyAnim.SetBool("Fall", true);
-            Debug.Log("Hi");
-            Invoke("RiseUp", Random.Range(1, 4));
+            Invoke("RiseUp", Random.Range(0.1f, 1.5f));
             animationPlaying = true;
         }
     }
@@ -62,17 +65,23 @@ public class HeavyEnemy : EnemyBase
     private void CanStun()
     {
         canStun = true;
-        GetComponent<EnemyStats>().CannotBeHarmed();
     }
     private void CannotStun()
     {
         canStun = false;
-        GetComponent<EnemyStats>().CanBeHarmed();
     }
     private void AnimationDone()
     {
         animationPlaying = false;
         rotationSpeed = 10;
+    }
+    public void Lethal()
+    {
+        lethal = true;
+    }
+    public void NotLethal()
+    {
+        lethal = false;
     }
 
 }

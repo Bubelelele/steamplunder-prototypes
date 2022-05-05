@@ -32,18 +32,18 @@ public abstract class EnemyBase : MonoBehaviour
     //Idle
     public bool patrol;
     public float patrolRange = 10f;
-    //public Transform[] patrolDestinations;
 
     private Vector3 randomPos;
     private float timeSinceLastMoved;
-    
-    //private int numberOfMoves;
-    private bool moveToPatrolDestination = true;
+
     private float idleTurn;
+    private float distanceBeforeImidiateDetection = 3;
+    private bool moveToPatrolDestination = true;
     private bool randomCheck = false;
     private bool canIdleTurn = false;
     private bool idleTurnedDone = true;
     private bool changeDestinationNumber = true;
+    
 
 
 
@@ -81,7 +81,7 @@ public abstract class EnemyBase : MonoBehaviour
                 EnemyInSight();
                 playerDetected = true;
             }
-            else if(Vector3.Distance(player.transform.position, transform.position) < 3f)
+            else if(Vector3.Distance(player.transform.position, transform.position) < distanceBeforeImidiateDetection)
             {
                 EnemyInSight();
                 playerDetected = true;
@@ -178,14 +178,6 @@ public abstract class EnemyBase : MonoBehaviour
                     if (changeDestinationNumber)
                     {
                         Invoke("NextDestination", Random.Range(5, 15));
-                        //if (numberOfMoves < patrolDestinations.Length -1)
-                        //{
-                        //    numberOfMoves++;
-                        //}
-                        //else
-                        //{
-                        //    numberOfMoves = 0;
-                        //}
                         changeDestinationNumber = false;
                     }
                 }
@@ -196,8 +188,8 @@ public abstract class EnemyBase : MonoBehaviour
             enemyAnim.SetBool("Idle", false);
         }
     }
-    public void EnemyInSight() { chasePlayer = true; }
-    public void EnemyOutOfSight() { chasePlayer = false; idle = true; }
+    public void EnemyInSight() { chasePlayer = true; distanceBeforeImidiateDetection = rangeForStopChasingPlayer; }
+    public void EnemyOutOfSight() { chasePlayer = false; idle = true; distanceBeforeImidiateDetection = 3; }
     public abstract void Attack();
     public void InAttackRange() { inAttackRange = true; }
     public void StopMovingToDestination() { agent.isStopped = true; }

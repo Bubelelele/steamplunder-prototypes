@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class HeavyWeaponTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject heavyEnemyCart;
-    [SerializeField] private GameObject heavyEnemy;
+    public GameObject enemy;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && heavyEnemy.GetComponent<HeavyEnemyStats>().leathal)
+        if (other.gameObject.tag == "Player" && enemy.GetComponent<HeavyEnemy>().lethal)
         {
+            Debug.Log("yes");
             EffectManager.instance.BloodSplat(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(gameObject.transform.position));
-            other.GetComponent<PlayerStats>().Damage(heavyEnemyCart.GetComponent<AIHeavy>().attackDamage);
-            
+            other.GetComponent<PlayerStats>().Damage(enemy.GetComponent<HeavyEnemy>().attackDamage);
+            enemy.GetComponent<PushBackPlayer>().PushBack(5);
+
             int soundNumber = Random.Range(0, 3);
             if (soundNumber == 0)
             {
