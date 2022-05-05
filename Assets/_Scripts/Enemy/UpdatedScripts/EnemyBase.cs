@@ -2,7 +2,11 @@ using UnityEngine;
 using UnityEngine.AI;
 public abstract class EnemyBase : MonoBehaviour 
 {
-    public float movementSpeed, rotationSpeed, sightRange, FOV, alertRange, rangeForStopChasingPlayer;
+    [Header("Common enemy paramaters")]
+    public float movementSpeed;
+    public float rotationSpeed;
+    public float sightRange;
+    public float FOV;
     public int attackDamage;
     public GameObject alertTrigger;
 
@@ -12,6 +16,8 @@ public abstract class EnemyBase : MonoBehaviour
     [HideInInspector] public Vector3 homePoint;
     [HideInInspector] public bool idle;
 
+    private float alertRange = 20;
+    private float rangeForStopChasingPlayer = 20;
     private bool playerDetected = false;
     private bool checkedForNerbyEnemies = false;
     private bool calledByNerbyEnemies = false;
@@ -61,6 +67,7 @@ public abstract class EnemyBase : MonoBehaviour
                 alertTrigger.transform.localScale = Vector3.one;
                 idle = true;
                 EnemyOutOfSight();
+                
             }
         }
         

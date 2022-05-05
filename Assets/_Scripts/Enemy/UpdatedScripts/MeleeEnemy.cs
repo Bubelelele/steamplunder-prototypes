@@ -7,54 +7,56 @@ public class MeleeEnemy : EnemyBase
     [HideInInspector] public bool lethal = false;
     [HideInInspector] public Vector3 targetPos;
 
-    //Other
-    public LayerMask ground;
-
-    private bool inAttackRange;
-
+    [Header("Melee paramaters")]
     //Idle
-    public float idleTurn = 50f;
+    public bool patrol;
     public float patrolRange = 10f;
-    public Transform[] patrolDestinations;
+    //public Transform[] patrolDestinations;
 
-    [SerializeField] private bool patrol;
     private Vector3 randomPos;
-    private int numberOfMoves;
+    public float idleTurn = 40f;
     private float timeSinceLastMoved;
+    //private int numberOfMoves;
     private bool moveToPatrolDestination = true;
     private bool randomCheck = false;
     private bool canIdleTurn = false;
     private bool idleTurnedDone = true;
     private bool changeDestinationNumber = true;
 
-    //Sword
-    public Renderer swordRenderer;
-    public Material swordMat, swordMatLight;
+
 
     //Movement
-    public Transform pivotTrans;
-    public float distanceAttack = 3f;
-    public float pivotSpeed = 20f;
-    public float backAndForwardSpeed = 2f;
-    public float stepBackSpeed = 5f;
     public float slowWalkingSpeed = 5f;
+    public float pivotSpeed = 20f;
+    public float zigZagSpeed = 2f;
 
+    [Header("References")]
+    public Transform pivotTrans;
     public Transform zigZagForward;
     public Transform zigZagBackward;
-    private bool forwardZigZag = false;
+
+
+    private float distanceAttack = 3f;
     private float distanceChase;
+    private float stepBackSpeed = 5f;
+    private int pivotDirection;
+    private bool forwardZigZag = false;
     private bool chasePlayer = false;
     private bool pivot;
     private bool positionChecked;
     private bool moveBack;
-    private int pivotDirection;
+
+    //Sword
+    public Renderer swordRenderer;
+    public Material swordMat, swordMatLight;
 
 
     //Waiting to attack
-    public float minWaitBeforeAttack = 1.5f;
-    public float maxWaitBeforeAttack = 6.5f;
-    public float distanceBeforeImidiateAttack = 1.3f;
+    private float minWaitBeforeAttack = 1.5f;
+    private float maxWaitBeforeAttack = 6.5f;
+    private float distanceBeforeImidiateAttack = 1.3f;
 
+    private bool inAttackRange;
     private bool attackInvoked = false;
     private bool animationPlaying = false;
 
@@ -147,11 +149,11 @@ public class MeleeEnemy : EnemyBase
 
                     if (!forwardZigZag)
                     {
-                        transform.position = Vector3.MoveTowards(transform.position, zigZagBackward.position, backAndForwardSpeed * Time.deltaTime);
+                        transform.position = Vector3.MoveTowards(transform.position, zigZagBackward.position, zigZagSpeed * Time.deltaTime);
                     }
                     else if (forwardZigZag)
                     {
-                        transform.position = Vector3.MoveTowards(transform.position, zigZagForward.position, backAndForwardSpeed * Time.deltaTime);
+                        transform.position = Vector3.MoveTowards(transform.position, zigZagForward.position, zigZagSpeed * Time.deltaTime);
                     }
 
 
