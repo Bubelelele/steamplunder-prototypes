@@ -4,6 +4,7 @@ public class HeavyEnemy : EnemyBase
 {
     private float distanceAttack = 3f;
     private float distanceChase;
+    private bool canStun;
 
     protected override void UpdateSense()
     {
@@ -42,4 +43,36 @@ public class HeavyEnemy : EnemyBase
         //animationPlaying = true;
 
     }
+    public void Stun()
+    {
+        if (canStun)
+        {
+            rotationSpeed = 0;
+            enemyAnim.SetBool("Fall", true);
+            Debug.Log("Hi");
+            Invoke("RiseUp", Random.Range(1, 4));
+            animationPlaying = true;
+        }
+    }
+
+    private void RiseUp()
+    {
+        enemyAnim.SetBool("Fall", false);
+    }
+    private void CanStun()
+    {
+        canStun = true;
+        GetComponent<EnemyStats>().CannotBeHarmed();
+    }
+    private void CannotStun()
+    {
+        canStun = false;
+        GetComponent<EnemyStats>().CanBeHarmed();
+    }
+    private void AnimationDone()
+    {
+        animationPlaying = false;
+        rotationSpeed = 10;
+    }
+
 }

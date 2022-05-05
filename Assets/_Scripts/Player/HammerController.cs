@@ -56,10 +56,6 @@ public class HammerController : MonoBehaviour {
             {
                 boss.GetComponent<AttackScript>().Stunned();
             }
-            else if(_attackHitboxResults[i].gameObject.tag == "IsBlocking")
-            {
-                _attackHitboxResults[i].gameObject.transform.parent.GetComponent<AIHeavy>().Stunned();
-            }
             else
             {
                 damageable?.Damage(attackDamage);
@@ -72,7 +68,12 @@ public class HammerController : MonoBehaviour {
                 {
                     meleeEnemy.Stun();
                 }
-                
+                HeavyEnemy heavyEnemy = rb.GetComponent<HeavyEnemy>();
+                if (heavyEnemy != null)
+                {
+                    heavyEnemy.Stun();
+                }
+
                 Vector3 colliderHitPosition = _attackHitboxResults[i].ClosestPointOnBounds(impactPosition);
                 float distance = Vector3.Distance(impactPosition, colliderHitPosition);
                 float multiplier = 1f - Mathf.Clamp01(distance / impactRadius);

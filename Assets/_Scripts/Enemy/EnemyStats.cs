@@ -6,6 +6,8 @@ public class EnemyStats : MonoBehaviour, IDamageable {
     [SerializeField] private int maxHealth = 50;
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DamageFlash damageFlash;
+
+    private bool canBeHarmed = true;
     
     private int _health;
 
@@ -15,11 +17,15 @@ public class EnemyStats : MonoBehaviour, IDamageable {
     }
 
     public void Damage(int amount) {
-        _health -= amount;
-        if (_health <= 0) Die();
-        
-        damageFlash?.Flash();
-        healthbar.UpdateHealthbar(_health, maxHealth);
+        if (canBeHarmed)
+        {
+            _health -= amount;
+            if (_health <= 0) Die();
+
+            damageFlash?.Flash();
+            healthbar.UpdateHealthbar(_health, maxHealth);
+        }
+
     }
 
     private void Die() {
@@ -27,5 +33,13 @@ public class EnemyStats : MonoBehaviour, IDamageable {
         EffectManager.instance.DeathEffect(position);
         Destroy(gameObject);
         EffectManager.instance.CogPickup(position);
+    }
+    public void CannotBeHarmed()
+    {
+        canBeHarmed = false;
+    }
+    public void CanBeHarmed()
+    {
+        canBeHarmed = true;
     }
 }
