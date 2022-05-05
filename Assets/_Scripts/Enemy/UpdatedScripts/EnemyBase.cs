@@ -31,9 +31,10 @@ public abstract class EnemyBase : MonoBehaviour
 
     private Vector3 randomPos;
     private float timeSinceLastMoved;
-    public float idleTurn = 40f;
+    
     //private int numberOfMoves;
     private bool moveToPatrolDestination = true;
+    private float idleTurn;
     private bool randomCheck = false;
     private bool canIdleTurn = false;
     private bool idleTurnedDone = true;

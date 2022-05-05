@@ -172,9 +172,10 @@ public class MeleeEnemy : EnemyBase
     //Other functions
     public void Stun()
     {
+        animationPlaying = true;
         enemyAnim.SetTrigger("Stunned");
         isStunned = true;
-        swordRenderer.materials[2] = swordMat;
+        ChangeSwordMat(swordMat);
         lethal = false;
     }
     public void CanBeStunned()
