@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MeleeEnemy : EnemyBase
 {
@@ -9,24 +8,14 @@ public class MeleeEnemy : EnemyBase
 
     [Header("Melee paramaters")]
     //Idle
-    public bool patrol;
-    public float patrolRange = 10f;
-    //public Transform[] patrolDestinations;
 
-    private Vector3 randomPos;
-    public float idleTurn = 40f;
-    private float timeSinceLastMoved;
-    //private int numberOfMoves;
-    private bool moveToPatrolDestination = true;
-    private bool randomCheck = false;
-    private bool canIdleTurn = false;
-    private bool idleTurnedDone = true;
-    private bool changeDestinationNumber = true;
+
+
+
 
 
 
     //Movement
-    public float slowWalkingSpeed = 5f;
     public float pivotSpeed = 20f;
     public float zigZagSpeed = 2f;
 
@@ -40,7 +29,6 @@ public class MeleeEnemy : EnemyBase
     private float distanceChase;
     private float stepBackSpeed = 5f;
     private int pivotDirection;
-    private int forwardOrBackwards;
     private bool forwardZigZag = false;
     private bool chasePlayer = false;
     private bool pivot;
@@ -57,7 +45,6 @@ public class MeleeEnemy : EnemyBase
     private float maxWaitBeforeAttack = 6.5f;
     private float distanceBeforeImidiateAttack = 1.3f;
 
-    private bool inAttackRange;
     private bool attackInvoked = false;
     private bool animationPlaying = false;
 
@@ -72,15 +59,6 @@ public class MeleeEnemy : EnemyBase
         //Distance control
         distanceChase = distanceAttack + 1.5f;
 
-        //For the idle movement
-        timeSinceLastMoved += Time.deltaTime;
-
-
-        //Idle turn
-        if (canIdleTurn)
-        {
-            transform.Rotate(Vector3.up * idleTurn * Time.deltaTime);
-        }
         //Moving towards the player
         if (chasePlayer && !animationPlaying)
         {
@@ -126,7 +104,6 @@ public class MeleeEnemy : EnemyBase
                     {
                         pivotTrans.position = player.transform.position;
                         pivotDirection = Random.Range(0, 2);
-                        forwardOrBackwards = Random.Range(0, 2);
                         positionChecked = true;
                         Invoke("ChangePivotDirection", Random.Range(minWaitBeforeAttack, maxWaitBeforeAttack - 2.5f));
                         Invoke("ChangePivotDirection", Random.Range(minWaitBeforeAttack + 2.5f, maxWaitBeforeAttack));
@@ -191,66 +168,6 @@ public class MeleeEnemy : EnemyBase
     }
     public override void EnemyInSight() { chasePlayer = true; }
     public override void EnemyOutOfSight() { chasePlayer = false; idle = true; }
-    public override void Idle() 
-    {
-        if (idle)
-        {
-            if (!patrol)
-            {
-                enemyAnim.SetBool("Idle", true);
-                if (idleTurnedDone)
-                {
-                    Invoke("TurnWhileIdle", Random.Range(4, 10));
-                    idleTurnedDone = false;
-                }
-            }
-            else if (patrol)
-            {
-                
-                if (moveToPatrolDestination)
-                {
-                    if (!randomCheck)
-                    {
-                        timeSinceLastMoved = 0;
-                        Vector3 randomDestination = Random.insideUnitSphere * patrolRange;
-                        randomDestination += homePoint;
-                        NavMeshHit hit;
-                        NavMesh.SamplePosition(randomDestination, out hit, patrolRange, 1);
-                        randomPos = hit.position;
-                        randomCheck = true;
-                    }
-                    CanMoveToDestination(slowWalkingSpeed);
-                    agent.SetDestination(randomPos);
-                    if (Vector3.Distance(transform.position, randomPos) < 1 || timeSinceLastMoved > 4){  moveToPatrolDestination = false;}
-                }
-                else if (!moveToPatrolDestination)
-                {
-                    
-                    StopMovingToDestination();
-                    enemyAnim.SetBool("Idle", true);
-                    if (changeDestinationNumber)
-                    {
-                        Invoke("NextDestination", Random.Range(5, 15));
-                        //if (numberOfMoves < patrolDestinations.Length -1)
-                        //{
-                        //    numberOfMoves++;
-                        //}
-                        //else
-                        //{
-                        //    numberOfMoves = 0;
-                        //}
-                        changeDestinationNumber = false;
-                    }
-                }
-            }
-        }
-        else if (!idle)
-        {
-            enemyAnim.SetBool("Idle", false);
-        }
-    }
-
-
 
     //Other functions
     public void Stun()
@@ -285,19 +202,6 @@ public class MeleeEnemy : EnemyBase
         tempMaterials[2] = newMat;
         swordRenderer.materials = tempMaterials;
     }
-    private void NextDestination() 
-    { 
-        moveToPatrolDestination = true;
-        randomCheck = false;
-        changeDestinationNumber = true;
-    }
-    private void StopMovingToDestination() { agent.isStopped = true; }
-    private void CanMoveToDestination(float speed) 
-    { 
-        agent.isStopped = false;
-        inAttackRange = false;
-        agent.speed = speed;
-    }
     private void CanPivot() { pivot = true; }
     private void CannotPivot()
     {
@@ -311,26 +215,6 @@ public class MeleeEnemy : EnemyBase
     private void ChangePivotDirection()
     {
         pivotSpeed = - pivotSpeed;
-    }
-    private void TurnWhileIdle()
-    {
-        int chooseDir = Random.Range(0,2);
-        if(chooseDir == 0)
-        {
-            idleTurn = -Random.Range(30, 180);
-        }
-        else
-        {
-            idleTurn = Random.Range(30, 180);
-        }
-        
-        canIdleTurn = true;
-        Invoke("CannotIdleTurn", 0.7f);
-    }
-    private void CannotIdleTurn()
-    {
-        canIdleTurn = false;
-        idleTurnedDone = true;
     }
     private void MovingBack() 
     { 

@@ -18,8 +18,4 @@ public class HeavyEnemy : EnemyBase
     {
 
     }
-    public override void Idle()
-    {
-
-    }
 }
