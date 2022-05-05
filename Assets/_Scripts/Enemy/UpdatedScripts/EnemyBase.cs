@@ -9,7 +9,7 @@ public abstract class EnemyBase : MonoBehaviour
     public float sightRange;
     public float FOV;
     public int attackDamage;
-    public GameObject alertTrigger;
+    
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public NavMeshAgent agent;
@@ -17,13 +17,18 @@ public abstract class EnemyBase : MonoBehaviour
     [HideInInspector] public Vector3 homePoint;
     [HideInInspector] public bool idle;
     [HideInInspector] public bool inAttackRange;
+    [HideInInspector] public bool chasePlayer;
+    [HideInInspector] public bool animationPlaying;
 
     private float alertRange = 20;
     private float rangeForStopChasingPlayer = 20;
     private bool playerDetected = false;
     private bool checkedForNerbyEnemies = false;
     private bool calledByNerbyEnemies = false;
+    private GameObject alertTrigger;
 
+
+    [Header("Idle patroling")]
     //Idle
     public bool patrol;
     public float patrolRange = 10f;
@@ -51,6 +56,7 @@ public abstract class EnemyBase : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
         enemyAnim = gameObject.GetComponent<Animator>();
         homePoint = transform.position;
+        alertTrigger = transform.GetComponentInChildren<AlertTrigger>().gameObject;
         Initialize();
     }
 
@@ -190,11 +196,10 @@ public abstract class EnemyBase : MonoBehaviour
             enemyAnim.SetBool("Idle", false);
         }
     }
-    public abstract void EnemyInSight();
-    public abstract void EnemyOutOfSight();
-    public abstract void InAttackRange();
+    public void EnemyInSight() { chasePlayer = true; }
+    public void EnemyOutOfSight() { chasePlayer = false; idle = true; }
     public abstract void Attack();
-
+    public void InAttackRange() { inAttackRange = true; }
     public void StopMovingToDestination() { agent.isStopped = true; }
     public void CanMoveToDestination(float speed)
     {

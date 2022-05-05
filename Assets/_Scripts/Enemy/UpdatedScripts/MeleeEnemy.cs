@@ -7,14 +7,6 @@ public class MeleeEnemy : EnemyBase
     [HideInInspector] public Vector3 targetPos;
 
     [Header("Melee paramaters")]
-    //Idle
-
-
-
-
-
-
-
     //Movement
     public float pivotSpeed = 20f;
     public float zigZagSpeed = 2f;
@@ -30,7 +22,6 @@ public class MeleeEnemy : EnemyBase
     private float stepBackSpeed = 5f;
     private int pivotDirection;
     private bool forwardZigZag = false;
-    private bool chasePlayer = false;
     private bool pivot;
     private bool positionChecked;
     private bool moveBack;
@@ -46,7 +37,7 @@ public class MeleeEnemy : EnemyBase
     private float distanceBeforeImidiateAttack = 1.3f;
 
     private bool attackInvoked = false;
-    private bool animationPlaying = false;
+    
 
     //Stunning parameters
     private bool isStunned = false;
@@ -158,7 +149,6 @@ public class MeleeEnemy : EnemyBase
             transform.position = Vector3.MoveTowards(transform.position ,backedUpPos, stepBackSpeed * Time.deltaTime);
         }
     }
-    public override void InAttackRange() { inAttackRange = true;}
     public override void Attack()
     {
         animationPlaying = true;
@@ -166,8 +156,6 @@ public class MeleeEnemy : EnemyBase
         CanMoveToDestination(movementSpeed);
         CannotPivot();
     }
-    public override void EnemyInSight() { chasePlayer = true; }
-    public override void EnemyOutOfSight() { chasePlayer = false; idle = true; }
 
     //Other functions
     public void Stun()
@@ -226,7 +214,7 @@ public class MeleeEnemy : EnemyBase
     {
         moveBack = false;
     }
-    public void AnimationDone()
+    private void AnimationDone()
     {
         animationPlaying = false;
         isStunned = false;

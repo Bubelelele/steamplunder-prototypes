@@ -859,6 +859,8 @@ MonoBehaviour:
   homePoint: {x: 0, y: 0, z: 0}
   idle: 0
   inAttackRange: 0
+  chasePlayer: 0
+  animationPlaying: 0
   patrol: 1
   patrolRange: 10
 --- !u!54 &887218452
@@ -2780,8 +2782,14 @@ MonoBehaviour:
   homePoint: {x: 0, y: 0, z: 0}
   idle: 0
   inAttackRange: 0
+  chasePlayer: 0
+  animationPlaying: 0
   patrol: 0
   patrolRange: 10
+  bulletSpeed: 0.5
+  bulletPrefab: {fileID: 8582253703909987413, guid: c4594258401c3d448bf719a49bd5d9a8,
+    type: 3}
+  muzzle: {fileID: 1106495416}
 --- !u!54 &1697082230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2939,7 +2947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697082228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.125, y: 4.125, z: 4.125}
+  m_LocalPosition: {x: -10.54, y: 4.125, z: 4.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 972915737}
@@ -3964,7 +3972,7 @@ Transform:
   m_GameObject: {fileID: 1920398888}
   m_LocalRotation: {x: 0.7070979, y: -0.003603672, z: 0.0036036745, w: 0.70709735}
   m_LocalPosition: {x: 0.58400136, y: 0.85599995, z: 0.10095753}
-  m_LocalScale: {x: 0.13644001, y: 0.13644, z: 0.13644}
+  m_LocalScale: {x: 0.19068857, y: 0.19068855, z: 0.19068855}
   m_Children:
   - {fileID: 907967551}
   m_Father: {fileID: 921525018}
