@@ -63,6 +63,7 @@ public class MeleeEnemy : EnemyBase
     //Stunning parameters
     private bool isStunned = false;
     private bool canBeStunned = false;
+    
 
     //Overrides
     protected override void UpdateSense()
@@ -107,8 +108,7 @@ public class MeleeEnemy : EnemyBase
             if (!isStunned)
             {
                 lethal = false;
-                isStunned = true;
-                enemyAnim.SetTrigger("Stunned");
+                Stun();
                 swordRenderer.materials[2] = swordMat;
             }
         }
@@ -249,10 +249,15 @@ public class MeleeEnemy : EnemyBase
             enemyAnim.SetBool("Idle", false);
         }
     }
-    
+
 
 
     //Other functions
+    public void Stun()
+    {
+        enemyAnim.SetTrigger("Stunned");
+        isStunned = true;
+    }
     public void CanBeStunned()
     {
         agent.SetDestination(player.transform.position);

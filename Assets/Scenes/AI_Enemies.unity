@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 202321956}
   - component: {fileID: 202321955}
   - component: {fileID: 202321954}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AlertTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1144,7 @@ GameObject:
   - component: {fileID: 606094728}
   - component: {fileID: 606094727}
   - component: {fileID: 606094726}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AlertTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1608,7 +1608,7 @@ GameObject:
   - component: {fileID: 889711964}
   - component: {fileID: 889711963}
   - component: {fileID: 889711962}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AlertTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2075,7 +2075,7 @@ GameObject:
   - component: {fileID: 1059934632}
   - component: {fileID: 1059934631}
   - component: {fileID: 1059934630}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AlertTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2838,17 +2838,17 @@ PrefabInstance:
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4520157
+      value: 0.45201567
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -7.6731534e-16
+      value: -0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.472295e-16
+      value: 0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358466389650, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -2973,27 +2973,37 @@ PrefabInstance:
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4520157
+      value: 0.45201567
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -7.6731534e-16
+      value: -0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.472295e-16
+      value: 0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: gunActiveOnStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: hammerActiveOnStart
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
+        type: 3}
+      propertyPath: grappleActiveOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
+        type: 3}
+      propertyPath: steamerActiveOnStart
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fc3003de33ee6f4c8d76d4703797507, type: 3}
@@ -3940,7 +3950,7 @@ GameObject:
   - component: {fileID: 1774557435}
   - component: {fileID: 1774557434}
   - component: {fileID: 1774557433}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AlertTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
