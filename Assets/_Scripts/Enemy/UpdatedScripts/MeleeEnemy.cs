@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MeleeEnemy : EnemyBase
 {
@@ -7,19 +8,24 @@ public class MeleeEnemy : EnemyBase
     [HideInInspector] public Vector3 targetPos;
 
     //Other
-    
+    public LayerMask ground;
 
     private bool inAttackRange;
 
     //Idle
     public float idleTurn = 50f;
-    public bool patrol;
+    public float patrolRange = 10f;
     public Transform[] patrolDestinations;
 
-    private int numberOfMoves = 0;
-    private bool moveToPatrolDestination = false;
+    [SerializeField] private bool patrol;
+    private Vector3 randomPos;
+    private int numberOfMoves;
+    private float timeSinceLastMoved;
+    private bool moveToPatrolDestination = true;
+    private bool randomCheck = false;
     private bool canIdleTurn = false;
     private bool idleTurnedDone = true;
+    private bool changeDestinationNumber = true;
 
     //Sword
     public Renderer swordRenderer;
@@ -59,9 +65,11 @@ public class MeleeEnemy : EnemyBase
     //Overrides
     protected override void UpdateSense()
     {
-        //Debug.Log(Vector3.Distance(player.transform.position, transform.position));
         //Distance control
         distanceChase = distanceAttack + 1.5f;
+
+        //For the idle movement
+        timeSinceLastMoved += Time.deltaTime;
 
 
         //Idle turn
@@ -79,9 +87,9 @@ public class MeleeEnemy : EnemyBase
                 StopMovingToDestination();
                 CanPivot();
             }
-            else if (Vector3.Distance(player.transform.position, transform.position) > distanceChase)
+            else if (Vector3.Distance(player.transform.position, transform.position) > distanceChase && !idle)
             {
-                CanMoveToDestination();
+                CanMoveToDestination(movementSpeed);
                 CannotPivot();
             }
         }
@@ -176,7 +184,7 @@ public class MeleeEnemy : EnemyBase
     {
         animationPlaying = true;
         enemyAnim.SetInteger("Swing", Random.Range(1, 4));
-        CanMoveToDestination();
+        CanMoveToDestination(movementSpeed);
         CannotPivot();
     }
     public override void EnemyInSight() { chasePlayer = true; }
@@ -196,22 +204,41 @@ public class MeleeEnemy : EnemyBase
             }
             else if (patrol)
             {
-                Debug.Log("Yes");
-                if(numberOfMoves < patrolDestinations.Length && !moveToPatrolDestination)
+                
+                if (moveToPatrolDestination)
                 {
-                    agent.SetDestination(patrolDestinations[numberOfMoves].position);
-                    Debug.Log("Nope");
-                    moveToPatrolDestination = true;
+                    if (!randomCheck)
+                    {
+                        timeSinceLastMoved = 0;
+                        Vector3 randomDestination = Random.insideUnitSphere * patrolRange;
+                        randomDestination += homePoint;
+                        NavMeshHit hit;
+                        NavMesh.SamplePosition(randomDestination, out hit, patrolRange, 1);
+                        randomPos = hit.position;
+                        randomCheck = true;
+                    }
+                    CanMoveToDestination(slowWalkingSpeed);
+                    agent.SetDestination(randomPos);
+                    if (Vector3.Distance(transform.position, randomPos) < 1 || timeSinceLastMoved > 4){  moveToPatrolDestination = false;}
                 }
-                else if(moveToPatrolDestination && Vector3.Distance(patrolDestinations[numberOfMoves].position, transform.position) < 0.2f)
+                else if (!moveToPatrolDestination)
                 {
-                    Debug.Log("Arrived");
-                    moveToPatrolDestination = false;
-                    numberOfMoves++;
-                }
-                else if(numberOfMoves >= patrolDestinations.Length)
-                {
-                    numberOfMoves = 0;
+                    
+                    StopMovingToDestination();
+                    enemyAnim.SetBool("Idle", true);
+                    if (changeDestinationNumber)
+                    {
+                        Invoke("NextDestination", Random.Range(5, 15));
+                        //if (numberOfMoves < patrolDestinations.Length -1)
+                        //{
+                        //    numberOfMoves++;
+                        //}
+                        //else
+                        //{
+                        //    numberOfMoves = 0;
+                        //}
+                        changeDestinationNumber = false;
+                    }
                 }
             }
         }
@@ -249,12 +276,18 @@ public class MeleeEnemy : EnemyBase
         tempMaterials[2] = newMat;
         swordRenderer.materials = tempMaterials;
     }
+    private void NextDestination() 
+    { 
+        moveToPatrolDestination = true;
+        randomCheck = false;
+        changeDestinationNumber = true;
+    }
     private void StopMovingToDestination() { agent.isStopped = true; }
-    private void CanMoveToDestination() 
+    private void CanMoveToDestination(float speed) 
     { 
         agent.isStopped = false;
         inAttackRange = false;
-        agent.speed = movementSpeed;
+        agent.speed = speed;
     }
     private void CanPivot() { pivot = true; }
     private void CannotPivot()

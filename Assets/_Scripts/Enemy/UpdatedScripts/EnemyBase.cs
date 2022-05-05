@@ -88,7 +88,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (!checkedForNerbyEnemies)
         {
-            alertTrigger.transform.localScale = Vector3.Slerp(alertTrigger.transform.localScale, Vector3.one * alertRange, 1.2f * Time.deltaTime);
+            alertTrigger.transform.localScale = Vector3.Slerp(alertTrigger.transform.localScale, Vector3.one * alertRange, 0.6f * Time.deltaTime);
             if (alertTrigger.transform.localScale.magnitude >= alertRange)
             {
                 checkedForNerbyEnemies = true;
