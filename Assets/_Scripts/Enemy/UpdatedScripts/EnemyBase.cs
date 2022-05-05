@@ -7,6 +7,7 @@ public abstract class EnemyBase : MonoBehaviour
     public float slowWalkingSpeed;
     public float rotationSpeed;
     public float sightRange;
+    public float rangeForStopChasingPlayer;
     public float FOV;
     public int attackDamage;
     
@@ -21,7 +22,6 @@ public abstract class EnemyBase : MonoBehaviour
     [HideInInspector] public bool animationPlaying;
 
     private float alertRange = 20;
-    private float rangeForStopChasingPlayer = 20;
     private bool playerDetected = false;
     private bool checkedForNerbyEnemies = false;
     private bool calledByNerbyEnemies = false;

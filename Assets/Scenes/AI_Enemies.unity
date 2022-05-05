@@ -556,7 +556,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d258360d3f768044d912cab3541ce63c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d258360d3f768044d912cab3541ce63c,
         type: 3}
@@ -850,9 +850,9 @@ MonoBehaviour:
   slowWalkingSpeed: 5
   rotationSpeed: 10
   sightRange: 8
+  rangeForStopChasingPlayer: 20
   FOV: 80
   attackDamage: 18
-  alertTrigger: {fileID: 1059934628}
   player: {fileID: 0}
   agent: {fileID: 887218456}
   enemyAnim: {fileID: 0}
@@ -1042,7 +1042,6 @@ GameObject:
   - component: {fileID: 907967555}
   - component: {fileID: 907967554}
   - component: {fileID: 907967553}
-  - component: {fileID: 907967552}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -1065,20 +1064,6 @@ Transform:
   m_Father: {fileID: 1920398893}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &907967552
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907967550}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 588122576}
 --- !u!33 &907967553
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -1903,7 +1888,7 @@ RectTransform:
   m_Children:
   - {fileID: 1922672503}
   m_Father: {fileID: 1697082238}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2482,17 +2467,17 @@ PrefabInstance:
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4520157
+      value: 0.45201567
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -7.6731534e-16
+      value: -0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358196905675, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.472295e-16
+      value: 0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358466389650, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -2617,17 +2602,17 @@ PrefabInstance:
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4520157
+      value: 0.45201567
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -7.6731534e-16
+      value: -0.000000026583972
       objectReference: {fileID: 0}
     - target: {fileID: 3816176358701589100, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.472295e-16
+      value: 0.0000000134711176
       objectReference: {fileID: 0}
     - target: {fileID: 7920519774684146704, guid: 5fc3003de33ee6f4c8d76d4703797507,
         type: 3}
@@ -2772,10 +2757,10 @@ MonoBehaviour:
   movementSpeed: 7
   slowWalkingSpeed: 5
   rotationSpeed: 10
-  sightRange: 8
+  sightRange: 16
+  rangeForStopChasingPlayer: 20
   FOV: 80
   attackDamage: 7
-  alertTrigger: {fileID: 1774557432}
   player: {fileID: 0}
   agent: {fileID: 0}
   enemyAnim: {fileID: 0}
@@ -2787,6 +2772,7 @@ MonoBehaviour:
   patrol: 0
   patrolRange: 10
   bulletSpeed: 0.5
+  backingUpSpeed: 2
   bulletPrefab: {fileID: 8582253703909987413, guid: c4594258401c3d448bf719a49bd5d9a8,
     type: 3}
   muzzle: {fileID: 1106495416}
@@ -2950,9 +2936,9 @@ Transform:
   m_LocalPosition: {x: -10.54, y: 4.125, z: 4.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1774557437}
   - {fileID: 972915737}
   - {fileID: 921525018}
-  - {fileID: 1774557437}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3062,7 +3048,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1697082238}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920398888
 GameObject:
@@ -3076,7 +3062,6 @@ GameObject:
   - component: {fileID: 1920398892}
   - component: {fileID: 1920398891}
   - component: {fileID: 1920398890}
-  - component: {fileID: 1920398889}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -3084,20 +3069,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1920398889
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920398888}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 987466627}
 --- !u!33 &1920398890
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -4121,6 +4092,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4244073288599871316, guid: 90d6367b408ae7945b3ea930e4b730dc,
+        type: 3}
+      propertyPath: rangeForStopChasingPlayer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4244073288599871317, guid: 90d6367b408ae7945b3ea930e4b730dc,
         type: 3}
       propertyPath: m_Name
