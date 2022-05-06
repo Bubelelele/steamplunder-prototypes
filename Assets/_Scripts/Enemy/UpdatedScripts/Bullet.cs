@@ -20,11 +20,21 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             EffectManager.instance.BloodSplat(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(gameObject.transform.position));
+            other.GetComponent<PlayerStats>().Damage(damage);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Enemy")
         {
-            other.GetComponent<EnemyStats>().Damage(damage);
+            if(other.GetComponent<EnemyStats>().canBeHarmed == false)
+            {
+                other.GetComponent<EnemyStats>().CanBeHarmed();
+                other.GetComponent<EnemyStats>().Damage(damage);
+                other.GetComponent<EnemyStats>().CannotBeHarmed();
+            }
+            else
+            {
+                other.GetComponent<EnemyStats>().Damage(damage);
+            }
             EffectManager.instance.BloodSplat(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(gameObject.transform.position));
             Destroy (gameObject);
         }

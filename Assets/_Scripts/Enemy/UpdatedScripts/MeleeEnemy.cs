@@ -47,6 +47,7 @@ public class MeleeEnemy : EnemyBase
     //Overrides
     protected override void UpdateSense()
     {
+
         //Distance control
         distanceChase = distanceAttack + 1.5f;
 

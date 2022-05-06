@@ -1,11 +1,15 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour, IDamageable {
+
+    [HideInInspector]public bool canBeHarmed = true;
+
 
     [SerializeField] private int maxHealth = 50;
     [SerializeField] private Healthbar healthbar;
     [SerializeField] private DamageFlash damageFlash;
+
+
     
     private int _health;
 
@@ -15,11 +19,14 @@ public class EnemyStats : MonoBehaviour, IDamageable {
     }
 
     public void Damage(int amount) {
+        if (canBeHarmed)
+        {
             _health -= amount;
             if (_health <= 0) Die();
 
             damageFlash?.Flash();
             healthbar.UpdateHealthbar(_health, maxHealth);
+        }
     }
 
     private void Die() {
@@ -27,5 +34,13 @@ public class EnemyStats : MonoBehaviour, IDamageable {
         EffectManager.instance.DeathEffect(position);
         Destroy(gameObject);
         EffectManager.instance.CogPickup(position);
+    }
+    public void CanBeHarmed()
+    {
+        canBeHarmed = true;
+    }
+    public void CannotBeHarmed()
+    {
+        canBeHarmed = false;
     }
 }

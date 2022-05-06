@@ -7,6 +7,7 @@ public class HeavyEnemy : EnemyBase
     private float distanceAttack = 3f;
     private float distanceChase;
     private bool canStun;
+    private bool attackInvoked;
 
     protected override void UpdateSense()
     {
@@ -35,13 +36,16 @@ public class HeavyEnemy : EnemyBase
         }
         if (inAttackRange)
         {
-            Attack();
+            if (!attackInvoked)
+            {
+                Invoke("Attack", Random.Range(0.1f, 1f));
+                attackInvoked = true;
+            }
         }
 
     }
     public override void Attack()
     {
-
         enemyAnim.SetInteger("Punch", Random.Range(1, 3));
         animationPlaying = true;
 
@@ -65,15 +69,12 @@ public class HeavyEnemy : EnemyBase
     private void CanStun()
     {
         canStun = true;
+        GetComponent<EnemyStats>().CannotBeHarmed();
     }
     private void CannotStun()
     {
         canStun = false;
-    }
-    private void AnimationDone()
-    {
-        animationPlaying = false;
-        rotationSpeed = 10;
+        GetComponent<EnemyStats>().CanBeHarmed();
     }
     public void Lethal()
     {
@@ -82,6 +83,13 @@ public class HeavyEnemy : EnemyBase
     public void NotLethal()
     {
         lethal = false;
+    }
+    private void AnimationDone()
+    {
+        enemyAnim.SetInteger("Punch", 0);
+        animationPlaying = false;
+        rotationSpeed = 10;
+        attackInvoked = false;
     }
 
 }
