@@ -16,7 +16,6 @@ public class HammerController : MonoBehaviour {
     [SerializeField] private GameObject hammerObject;
     [SerializeField] private GameObject boss;
 
-
     private Animator _animator;
     private readonly Collider[] _attackHitboxResults = new Collider[5];
     

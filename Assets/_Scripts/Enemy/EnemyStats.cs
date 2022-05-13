@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour, IDamageable {
 
@@ -19,7 +18,7 @@ public class EnemyStats : MonoBehaviour, IDamageable {
         if (_health <= 0) Die();
         
         damageFlash?.Flash();
-        healthbar.UpdateHealthbar(_health, maxHealth);
+        healthbar?.UpdateHealthbar(_health, maxHealth);
     }
 
     private void Die() {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GearManager : MonoBehaviour {
@@ -16,7 +17,7 @@ public class GearManager : MonoBehaviour {
     public bool SteamerActive { get; private set; }
     public bool GrappleActive { get; private set; }
     public bool SpinActive { get; private set; }
-
+    
     private AxeController _axeController;
     private HammerController _hammerController;
     private GunController _gunController;
