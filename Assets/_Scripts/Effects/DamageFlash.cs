@@ -4,7 +4,7 @@ using UnityEngine;
 public class DamageFlash : MonoBehaviour {
 
     [SerializeField] private float flashTime = .15f;
-    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Renderer meshRenderer;
     
     private Color _origColor;
 

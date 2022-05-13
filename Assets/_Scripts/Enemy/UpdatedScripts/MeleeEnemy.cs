@@ -4,9 +4,8 @@ public class MeleeEnemy : EnemyBase
 {
     //Paramaters to other scripts
     [HideInInspector] public bool lethal = false;
-    [HideInInspector] public Vector3 targetPos;
 
-    [Header("Melee paramaters")]
+    [Header("Melee parameters")]
     //Movement
     public float pivotSpeed = 20f;
     public float zigZagSpeed = 2f;
@@ -186,11 +185,9 @@ public class MeleeEnemy : EnemyBase
     {
         lethal = false;
     }
-    public void ChangeSwordMat(Material newMat)
-    {
-        var tempMaterials = swordRenderer.materials;
-        tempMaterials[2] = newMat;
-        swordRenderer.materials = tempMaterials;
+
+    private void ChangeSwordMat(Material newMat) {
+        swordRenderer.material = newMat;
     }
     private void CanPivot() { pivot = true; }
     private void CannotPivot()
@@ -209,7 +206,7 @@ public class MeleeEnemy : EnemyBase
     private void MovingBack() 
     { 
         moveBack = true;
-        Invoke("StopMovingBack", 0.2f);
+        Invoke(nameof(StopMovingBack), 0.2f);
     }
     private void StopMovingBack()
     {

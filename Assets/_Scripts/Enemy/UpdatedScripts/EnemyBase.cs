@@ -183,7 +183,7 @@ public abstract class EnemyBase : MonoBehaviour
                 }
             }
         }
-        else if (!idle)
+        else
         {
             enemyAnim.SetBool("Idle", false);
         }
